@@ -11,7 +11,15 @@ def sortResults
   end
 
   date = Time.new
-  fname = Dir.pwd + "/logs/#{date.year}-#{date.month}-#{date.day}.txt"
+  day = date.day.to_s
+  month = date.month.to_s
+  if day.length == 1
+    then day = "0" + day
+  end
+  if month.length == 1
+    then month = "0" + month
+  end
+  fname = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
   # Obfuscated and unreadable to make it seem that I know hax
   # Writes the sorted results to final.txt
   File.open(fname, "w") do |f|
