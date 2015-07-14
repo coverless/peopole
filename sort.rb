@@ -9,12 +9,15 @@ def sortResults
   File.open("clean.txt", "w") do |c|
     File.foreach("results.txt") { |line| x = line.gsub(",", ""); c.write(x) }
   end
+
+  date = Time.new
+  fname = Dir.pwd + "/logs/#{date.year}-#{date.month}-#{date.day}.txt"
   # Obfuscated and unreadable to make it seem that I know hax
   # Writes the sorted results to final.txt
-  File.open("final.txt", "w") do |f|
+  File.open(fname, "w") do |f|
     File.read("clean.txt")
       .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
-      .each{ |entry| f.write(entry+"\n") }
+      .first(101).each{ |entry| f.write(entry+"\n") }
   end
 end
 
