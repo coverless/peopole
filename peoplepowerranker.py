@@ -42,3 +42,6 @@ with open("results.txt", "w") as results:
 
 # Browser is quit when all searches are complete
 browser.quit()
+
+# Runs sort.rb to sort the results and place in logs folder
+os.system('ruby sort.rb -t')
