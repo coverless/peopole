@@ -1,9 +1,2 @@
-Amber Rose:6,708
-Amumu:149
-Angelina Jolie:6,217
-Ashton Kutcher:2,131
-Barack Obama:6,604
-Ben Affleck:6,637
-Beyonce:38,197
-Bill Gates:4,168
-Brad Pitt:3,413
+Amber Rose:8,584
+Amumu:161
