@@ -10,15 +10,11 @@ def sortResults
     File.foreach("results.txt") { |line| x = line.gsub(",", ""); c.write(x) }
   end
 
+  # Format date to YYYY-MM-DD
   date = Time.new
-  day = date.day.to_s
-  month = date.month.to_s
-  if day.length == 1
-    then day = "0" + day
-  end
-  if month.length == 1
-    then month = "0" + month
-  end
+  day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
+  month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
+
   fname = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
   # Obfuscated and unreadable to make it seem that I know hax
   # Writes the sorted results to final.txt
@@ -27,6 +23,13 @@ def sortResults
       .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
       .first(101).each{ |entry| f.write(entry+"\n") }
   end
+
+  # Push the results to the repo
+  # Using this would cause commit errors until we take 'logs/' out of the .gitignore
+  # TODO - Need to automate providing uname/pwd
+  # system("git add #{fname}")
+  # system("git commit -m '#{fname}'")
+  # system("git push origin master")
 end
 
 # Sort people.txt alphabetically
