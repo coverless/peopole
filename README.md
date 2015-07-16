@@ -23,4 +23,6 @@ Every day when a new list of people is generated the user will see thier ranking
 
 #### Implementation:
 
+Site is currently hosted at [coverless.github.io](http://coverless.github.io/)
+
 (Not finalized)
