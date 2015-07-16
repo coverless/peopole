@@ -2,3 +2,7 @@ config.yml
 logs/
 clean.txt
 results.txt
+
+# Alchemy API tools
+alchemyapi_ruby/
+api_key.txt
