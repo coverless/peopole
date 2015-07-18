@@ -2,8 +2,8 @@ config.yml
 logs/
 clean.txt
 results.txt
-reddit.py
 
 # Alchemy API tools
 alchemyapi_ruby/
-api_key.txt
+cacert.pem
+trouble.rb

@@ -3,52 +3,62 @@
 
 # Using the Redd API wrapper for reddit
 require 'redd'
-
-# May not be needed
-require 'yaml'
-require 'net/http'
-require 'open-uri'
 require 'json'
-require 'openssl'
+require 'yaml'
+
+sslpath = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
+ENV['SSL_CERT_FILE'] = sslpath
 
 # Writes to results.txt
 def getResults
+  clientId = File.open("config.yml") { |f| YAML.load(f)["REDDITCLIENTID"]}
+  secret = File.open("config.yml") { |f| YAML.load(f)["REDDITSECRET"]}
+  username = File.open("config.yml") { |f| YAML.load(f)["REDDITUSERNAME"]}
+  password = File.open("config.yml") { |f| YAML.load(f)["REDDITPASSWORD"]}
+
+  r = Redd.it(:script, clientId, secret, username, password, :user_agent => "peopole v1.0.0" )
+  r.authorize!
+  puts "Redd is authenticated!"
+
   f = File.open("results.txt", "w")
   people = getPeople()
 
+  # Hacky way to make sure we don't do > 30 requests per minute
+  # Might not be needed now that we are using the API
+  start = Time.now; reqCount = 0
   for person in people do
     begin
-      uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&restrict_sr=&sort=new&t=day"
-      # This takes the longest
-      buffer = open(uri).read
-      res = JSON.parse(buffer)
-      counter = res["data"]["children"].count
+      res = JSON.parse(r.search(person, :limit => 100, :sort => "new", :t => "day").to_json)
+      counter = res.count
+      reqCount += 1
 
       # If there is more than one page
       repeat = 1
       while counter == (repeat * 100)
-        aft = res["data"]["children"][99]["data"]["name"]
-        uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&after=#{aft}&restrict_sr=&sort=new&t=day"
-        res = JSON.parse(open(uri).read)
-        counter += res["data"]["children"].count
+        after = res[99]["name"]
+        res = JSON.parse(r.search(person, :limit => 100, :sort => "new", :t => "day", :after => after).to_json)
+        reqCount += 1
+        counter += res.count
         repeat = repeat + 1
       end
       # Write the results
-      f.write("#{person.gsub("%20", " ")}:#{counter}\n")
+      f.write("#{person}:#{counter}\n")
       puts "#{person}\n"
+      endTime = Time.now
 
-      # TODO -> If there are more than 30 in minute, wait a bit
+      # HACK -> THIS MAY NOT BE NEEDED
+      if reqCount == 60
+        puts "Waiting #{(start + 60) - endTime} seconds"
+        sleep((start + 60) - endTime); reqCount = 0; start = Time.now
+      end
     rescue
       puts "Presumably 503 Error"
       puts "\t#{person}"
     end
-
   end
   f.close()
-
   # Sort it next
   # system(ruby sort.rb -t)
-
 end
 
 # Returns an array of all the people we are searching for
@@ -58,7 +68,6 @@ def getPeople()
   people = []
   peeps = File.open("people.txt").read
   peeps.each_line do |line|
-    line.gsub!(" ", "%20")
     people.push(line.gsub!("\n", ""))
   end
   # This is ugly
@@ -80,7 +89,7 @@ def sortResults
   month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
 
   resultsFile = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
-  newsLinkFile = "newsLink.txt"
+  # newsLinkFile = "newsLink.txt"
   # Obfuscated and unreadable to make it seem that I know hax
   # Writes the sorted results to final.txt
   File.open(resultsFile, "w") do |f|
