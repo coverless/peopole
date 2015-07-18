@@ -1,6 +1,7 @@
+A$AP Rocky
 A.J Langer
 A.J. McLean
-A$AP Rocky
+ASAP Rocky
 Aaliyah
 Aaron Carter
 Aaron Paul
@@ -193,10 +194,10 @@ Anna Piaggi
 Anna Popplewell
 Anna Torv
 Anna Wintour
-Annabelle Dexter-Jones
-Annabelle Wallis
 AnnaLynne McCord
 AnnaSophia Robb
+Annabelle Dexter-Jones
+Annabelle Wallis
 Anne Archer
 Anne Hathaway
 Anne Heche
@@ -215,7 +216,6 @@ Ariana Grande
 Armie Hammer
 Arnold Schwarzenegger
 Asa Butterfield
-ASAP Rocky
 Ashanti
 Ashlee Keating
 Ashlee Simpson
@@ -432,7 +432,6 @@ Cate Blanchett
 Catherine Hardwicke
 Catherine Zeta Jones
 Catt Sadler
-Céline Dion
 Chace Crawford
 Chad Kroeger
 Chad L. Coleman
@@ -535,8 +534,8 @@ Clementine Ford
 Cleopatra
 Clint Eastwood
 Clive Owen
-Cobie Smulders
 CoCo
+Cobie Smulders
 Coco Jones
 Coco Rocha
 Cody Longo
@@ -577,6 +576,9 @@ Cuba Gooding Jr.
 Cybill Shepherd
 Cyndi Lauper
 Cynthia Nixon
+Céline Dion
+DJ AM
+DJ Virman
 Daisy Fuentes
 Daisy Lowe
 Dakota Fanning
@@ -690,8 +692,6 @@ Dina Manzo
 Dionne Bromfield
 Diplo
 Dita Von Teese
-DJ AM
-DJ Virman
 Djimon Hounsou
 Doda
 Dolly Parton
@@ -849,6 +849,7 @@ Evander Holyfield
 Evangeline Lilly
 Ewan McGregor
 Ezra Miller
+FKA twigs
 Faith Hill
 Famke Janssen
 Fan Bingbing
@@ -858,7 +859,6 @@ Felicity Jones
 Fergie
 Fernando Torres
 Filippa Hamilton
-FKA twigs
 Flavio Briatore
 Flo Rida
 Florence Brudenell-Bruce
@@ -877,12 +877,12 @@ Frankie Sandford
 Fred Durst
 Freddie Highmore
 Freddie Prinze Jr
-Frédérique Bel
 Fredrik Eklund
 Fredrik Ljungberg
 Freida Pinto
 Freja Beha
 Frida Giannini
+Frédérique Bel
 Gabby Douglas
 Gabourey Sidibe
 Gabriel Aubry
@@ -943,7 +943,6 @@ Gustav Schafer
 Guy Ritchie
 Gwen Stefani
 Gwyneth Paltrow
-Harry Judd
 Hailee Steinfeld
 Haley Webb
 Halle Bailey
@@ -954,6 +953,7 @@ Hank Baskett
 Harley Viera Newton
 Harlow Madden
 Harrison Ford
+Harry Judd
 Harry Shum Jr.
 Harry Styles
 Havana Brown
@@ -1039,10 +1039,11 @@ Iwan Rheon
 Izabel Goulart
 Izabella Miko
 Izabella Scorupco
-Jesey Nelson
 J-Splif
 J. Alexander
 J. R. Rotem
+JC Chasez
+JJ Hamblett
 Jack Black
 Jack Johnson
 Jack Lemmon
@@ -1142,7 +1143,6 @@ Jay-Z
 Jayden James Federline
 Jayma Mays
 Jaymi Hensley
-JC Chasez
 Jean Dujardin
 Jean Paul Gaultier
 Jean-Claude Van Damme
@@ -1197,6 +1197,7 @@ Jerry O'Connell
 Jerry Seinfeld
 Jerry Springer
 Jerry Trainor
+Jesey Nelson
 Jessalyn Gilsig
 Jesse Bradford
 Jesse Eisenberg
@@ -1242,11 +1243,10 @@ Jim Sturgess
 Jimmy Fallon
 Jimmy Kimmel
 Jionni LaValle
-JJ Hamblett
 Jo De La Rosa
 Jo-Emma Larvin
-Joan Rivers
 JoAnna Garcia
+Joan Rivers
 Joanna Hillman
 Joanna Krupa
 Joanne Froggatt
@@ -1529,8 +1529,10 @@ Kylie Minogue
 Kym Johnson
 Kyra Sedgwick
 L'Wren Scott
+LL Cool J
 La La Vasquez
 La Toya Jackson
+LaLa Vazquez
 Labrinth
 Lacey Chabert
 Lady Gaga
@@ -1538,7 +1540,6 @@ Lady Starlight
 Lady Victoria Hervey
 Laetitia Casta
 Lake Bell
-LaLa Vazquez
 Lamar Odom
 Lana Del Rey
 Lana Parrilla
@@ -1576,11 +1577,11 @@ Lauri Peterson
 Lauryn Hill
 Lawson
 Le Call
+LeAnn Rimes
 Lea Michele
 Leah LaBelle
 Leah Remini
 Leah Wood
-LeAnn Rimes
 Lebron James
 Lee Mead
 Lee Ryan
@@ -1644,7 +1645,6 @@ Liv Tyler
 Liya Kebede
 Liz Hurley
 Lizzy Caplan
-LL Cool J
 Logan Lerman
 Logan Marshall Green
 Lorenzo Lamas
@@ -1694,7 +1694,6 @@ Maggie Smith
 Magnus Samuelsson
 Maika Monroe
 Maisie Williams
-Maïwenn Le Besco
 Malaika Firth
 Malin Akerman
 Mallika Sherawat
@@ -1780,6 +1779,7 @@ Max Perlich
 Max Thieriot
 May Andersen
 Mayim Bialik
+Maïwenn Le Besco
 Meagan Good
 Meek Mill
 Meg Ryan
@@ -1977,8 +1977,8 @@ Olly Murs
 Oona Castilla Chaplin
 Oprah Winfrey
 Orlando Bloom
-Oscar de la Renta
 Oscar Pistorius
+Oscar de la Renta
 Outlawz
 Owen Wilson
 Ozzy Osbourne
@@ -2022,8 +2022,8 @@ Pauley Perrette
 Paulina Porizkova
 Paulo Melim Andersson
 Pax Thien Jolie-Pitt
-Paz de la Huerta
 Paz Vega
+Paz de la Huerta
 Peaches Geldof
 Pearl Osbourne
 Pedro Almodovar
@@ -2211,10 +2211,10 @@ Roshon Fegan
 Rosie Huntington-Whiteley
 Ross McCall
 Roxane Mesquida
+RuPaul
 Ruby Jerins
 Ruby Stewart
 Rumer Willis
-RuPaul
 Rupert Everett
 Rupert Friend
 Rupert Grint

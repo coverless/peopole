@@ -1,65 +1,69 @@
 # Sorts the file by the most results
 # Done in Ruby, because we aren't bad
 
-require 'yaml'
+# Using the Redd API wrapper for reddit
+require 'redd'
 
 # May not be needed
+require 'yaml'
 require 'net/http'
 require 'open-uri'
 require 'json'
-# Can be prettier
+require 'openssl'
 
 # Writes to results.txt
 def getResults
   f = File.open("results.txt", "w")
-  people = []
-  peeps = File.open("people.txt").read
-  peeps.each_line do |line|
-    line.gsub!(" ", "%20")
-    # May not need to sub out this new line
-    people.push(line.gsub!("\n", ""))
-  end
+  people = getPeople()
 
   for person in people do
-    counter = 0 # This isn't needed
-    uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&restrict_sr=&sort=new&t=day"
-    buffer = open(uri).read
-    res = JSON.parse(buffer)
-    counter = res["data"]["children"].count
-    # If there is a second page
+    begin
+      uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&restrict_sr=&sort=new&t=day"
+      # This takes the longest
+      buffer = open(uri).read
+      res = JSON.parse(buffer)
+      counter = res["data"]["children"].count
 
-    # repeat = 1
-    # while counter == (repeat * 100)
-    if counter > 99
-      aft = res["data"]["children"][99]["data"]["name"]
-      uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&after=#{aft}&restrict_sr=&sort=new&t=day"
-      res = JSON.parse(open(uri).read)
-      counter = counter + res["data"]["children"].count
-      # repeat = repeat + 1
-    end
+      # If there is more than one page
+      repeat = 1
+      while counter == (repeat * 100)
+        aft = res["data"]["children"][99]["data"]["name"]
+        uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&after=#{aft}&restrict_sr=&sort=new&t=day"
+        res = JSON.parse(open(uri).read)
+        counter += res["data"]["children"].count
+        repeat = repeat + 1
+      end
       # Write the results
-      f.write("#{person.gsub!("%20", " ")}:#{counter}\n")
+      f.write("#{person.gsub("%20", " ")}:#{counter}\n")
       puts "#{person}\n"
-      # if counter == 0
-      #   sleep(1)
-      # end
+
+      # TODO -> If there are more than 30 in minute, wait a bit
+    rescue
+      puts "Presumably 503 Error"
+      puts "\t#{person}"
+    end
+
   end
+  f.close()
+
+  # Sort it next
+  # system(ruby sort.rb -t)
 
 end
 
 # Returns an array of all the people we are searching for
 # TODO -> get rid of the spacing in this method?
 # For use in getResults
-def getPeople
+def getPeople()
   people = []
-  text = File.open("people.txt").read
-  text.each_line do |line|
-    people.push(line)
+  peeps = File.open("people.txt").read
+  peeps.each_line do |line|
+    line.gsub!(" ", "%20")
+    people.push(line.gsub!("\n", ""))
   end
-  # Might be implicitly returned...
-  people
+  # This is ugly
+  return people
 end
-
 
 
 # Sorts the results by # of hits
