@@ -6,47 +6,49 @@ require 'yaml'
 # May not be needed
 require 'net/http'
 require 'open-uri'
-require 'openssl'
 require 'json'
 # Can be prettier
-require "./alchemyapi_ruby/alchemyapi.rb"
 
-
-# Queries Alchemy and returns the # of articles for each person
 # Writes to results.txt
 def getResults
-  apikey = File.open("config.yml") { |f| YAML.load(f)['ALCHEMYKEY'] }
-  alchemyapi = AlchemyAPI.new()
-  puts "Created AlchemyAPI"
-
-  # TODO -> MAKE THE MAGIC HAPPEN!
-
   f = File.open("results.txt", "w")
-  # This file will be for the related news article for each person?
-  n = File.open("newsLink.txt", "w")
-
-  for people in getPeople
-    people.gsub!(" ", "%20")
-    # Alchemy API call for all the news results for the individual
-    # (According to documentation) will return all results in last 24 hours
-    # Should give results where title includes the persons name
-    # => TODO -> optional title/body inclusion of the search term...
-    url = "https://access.alchemyapi.com/calls/data/GetNews?apikey=#{apikey}" +
-      "&q.enriched.url.title=#{people}&outputMode=json&start=now-24h&end=now"
-    # count = ....
-
-    # Faroo API to get the relevant news link
-    # link = ....
-
-    f.write("#{people}:#{count}")
-    n.write("#{people}:#{link}")
+  people = []
+  peeps = File.open("people.txt").read
+  peeps.each_line do |line|
+    line.gsub!(" ", "%20")
+    # May not need to sub out this new line
+    people.push(line.gsub!("\n", ""))
   end
 
-  # Sorts the results and sends file to repo
-  # sortResults
+  for person in people do
+    counter = 0 # This isn't needed
+    uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&restrict_sr=&sort=new&t=day"
+    buffer = open(uri).read
+    res = JSON.parse(buffer)
+    counter = res["data"]["children"].count
+    # If there is a second page
+
+    # repeat = 1
+    # while counter == (repeat * 100)
+    if counter > 99
+      aft = res["data"]["children"][99]["data"]["name"]
+      uri = "http://www.reddit.com/r/all/search.json?q=%22#{person}%22&limit=100&after=#{aft}&restrict_sr=&sort=new&t=day"
+      res = JSON.parse(open(uri).read)
+      counter = counter + res["data"]["children"].count
+      # repeat = repeat + 1
+    end
+      # Write the results
+      f.write("#{person.gsub!("%20", " ")}:#{counter}\n")
+      puts "#{person}\n"
+      # if counter == 0
+      #   sleep(1)
+      # end
+  end
+
 end
 
 # Returns an array of all the people we are searching for
+# TODO -> get rid of the spacing in this method?
 # For use in getResults
 def getPeople
   people = []
