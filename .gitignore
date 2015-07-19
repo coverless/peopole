@@ -1,9 +1,5 @@
 config.yml
-logs/
 clean.txt
 results.txt
-
-# Alchemy API tools
-alchemyapi_ruby/
 cacert.pem
-trouble.rb
+logs/

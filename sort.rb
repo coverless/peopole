@@ -11,6 +11,7 @@ ENV['SSL_CERT_FILE'] = sslpath
 
 # Writes to results.txt
 def getResults
+  File.delete("results.txt") if File.exists?("results.txt")
   clientId = File.open("config.yml") { |f| YAML.load(f)["REDDITCLIENTID"]}
   username = File.open("config.yml") { |f| YAML.load(f)["REDDITUSERNAME"]}
   password = File.open("config.yml") { |f| YAML.load(f)["REDDITPASSWORD"]}
@@ -20,11 +21,26 @@ def getResults
   r.authorize!
   puts "Redd is authenticated!"
 
-  f = File.open("results.txt", "w")
   people = getPeople()
+  missed = []
 
-  # Hacky way to make sure we don't do > 30 requests per minute
-  # Might not be needed now that we are using the API
+  missed = performSearch(r, people)
+  puts "Finished first round!"
+  while missed.count > 0
+    missed = performSearch(r, missed)
+  end
+
+  # Sort it next
+  system(ruby sort.rb -t)
+end
+
+# Does the searching
+# Returns an array of people who erred
+# => r - the Reddit API wrapper
+# => people - the array of people to search
+def performSearch(r, people)
+  missed = []
+  f = File.open("results.txt", "a")
   start = Time.now; reqCount = 0
   for person in people do
     begin
@@ -34,9 +50,8 @@ def getResults
       reqCount += 1
 
       # If they are most likely in the top 100
-      if counter > 10
-        articleLink = res[0]["url"]
-      end
+      # TODO -> this news link might not be legit
+      if counter > 10 then articleLink = res[0]["url"] end
 
       # If there is more than one page
       repeat = 1
@@ -52,23 +67,31 @@ def getResults
       puts "#{person}\n"
       endTime = Time.now
 
-      # HACK -> THIS MAY NOT BE NEEDED
+      # Make sure we do not do > 60 requests per minute
+      # TODO -> check mod or reset to 0?
       if reqCount == 60
-        puts "Waiting #{(start + 60) - endTime} seconds"
-        sleep((start + 60) - endTime); reqCount = 0; start = Time.now
+        if ((endTime - start) < 60) # Less than 60 seconds have passed
+          puts "Waiting #{(start + 60) - endTime} seconds"
+          sleep((start + 60) - endTime)
+        end
+        reqCount = 0
+        start = Time.now
       end
     rescue
-      puts "Presumably 503 Error"
-      puts "\t#{person}"
+      puts "Presumably 503 Error on #{person}"
+      # need to push person with new line?
+      missed.push(person)
+      puts "\n#{missed}\n"
     end
   end
   f.close()
-  # Sort it next
-  # system(ruby sort.rb -t)
+  # Return the array of people who erred out
+  return missed
 end
 
 # Returns an array of all the people we are searching for
 # TODO -> get rid of the spacing in this method?
+# => Make this into a for loop
 # For use in getResults
 def getPeople()
   people = []
@@ -80,9 +103,8 @@ def getPeople()
   return people
 end
 
-
 # Sorts the results by # of hits
-# Uploads both news link file and the daily results file to the repo
+# Uploads the daily results file to the repo
 def sortResults
   # Replace numbers like 51,969 with 51969 (so that we can compare them)
   File.open("clean.txt", "w") do |c|
@@ -95,7 +117,6 @@ def sortResults
   month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
 
   resultsFile = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
-  # newsLinkFile = "newsLink.txt"
   # Obfuscated and unreadable to make it seem that I know hax
   # Writes the sorted results to final.txt
   File.open(resultsFile, "w") do |f|
@@ -107,8 +128,8 @@ def sortResults
   # Push the results to the repo
   # Using this would cause commit errors until we take 'logs/' out of the .gitignore
   # TODO - Need to automate providing uname/pwd
-  # system("git add #{resultsFile} #{newsLinkFile}")
-  # system("git commit -m '#{resultsFile} #{newsLinkFile}'")
+  # system("git add #{resultsFile}")
+  # system("git commit -m '#{resultsFile}'")
   # system("git push origin master")
 end
 
@@ -130,7 +151,7 @@ elsif ARGV[0] == "-g"
   getResults
 else
   puts "\nUSAGE: run 'ruby sort' with one of the following parameters"
+  puts "\t-g (get the results)"
   puts "\t-t (sort the results by # of tweets)"
   puts "\t-p (sort people.txt alphabetically)"
-  puts "\t-g (get the results)"
 end
