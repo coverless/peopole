@@ -12,9 +12,9 @@ ENV['SSL_CERT_FILE'] = sslpath
 # Writes to results.txt
 def getResults
   clientId = File.open("config.yml") { |f| YAML.load(f)["REDDITCLIENTID"]}
-  secret = File.open("config.yml") { |f| YAML.load(f)["REDDITSECRET"]}
   username = File.open("config.yml") { |f| YAML.load(f)["REDDITUSERNAME"]}
   password = File.open("config.yml") { |f| YAML.load(f)["REDDITPASSWORD"]}
+  secret = File.open("config.yml") { |f| YAML.load(f)["REDDITSECRET"]}
 
   r = Redd.it(:script, clientId, secret, username, password, :user_agent => "peopole v1.0.0" )
   r.authorize!
@@ -28,21 +28,27 @@ def getResults
   start = Time.now; reqCount = 0
   for person in people do
     begin
-      res = JSON.parse(r.search(person, :limit => 100, :sort => "new", :t => "day").to_json)
+      articleLink = ""
+      res = JSON.parse(r.search(person, :limit => 100, :sort => "top", :t => "day").to_json)
       counter = res.count
       reqCount += 1
+
+      # If they are most likely in the top 100
+      if counter > 10
+        articleLink = res[0]["url"]
+      end
 
       # If there is more than one page
       repeat = 1
       while counter == (repeat * 100)
         after = res[99]["name"]
-        res = JSON.parse(r.search(person, :limit => 100, :sort => "new", :t => "day", :after => after).to_json)
+        res = JSON.parse(r.search(person, :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
         reqCount += 1
         counter += res.count
         repeat = repeat + 1
       end
       # Write the results
-      f.write("#{person}:#{counter}\n")
+      f.write("#{person}:#{counter};#{articleLink}\n")
       puts "#{person}\n"
       endTime = Time.now
 
@@ -94,7 +100,7 @@ def sortResults
   # Writes the sorted results to final.txt
   File.open(resultsFile, "w") do |f|
     File.read("clean.txt")
-      .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
+      .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split(";")[0].to_i }  # -both so it is descending, split so that article is disregarded
       .first(101).each{ |entry| f.write(entry+"\n") }
   end
 
