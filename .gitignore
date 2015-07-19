@@ -1,5 +1,6 @@
 config.yml
 clean.txt
 results.txt
+withArticles.txt
 cacert.pem
 logs/

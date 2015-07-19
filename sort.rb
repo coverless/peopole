@@ -1,4 +1,4 @@
-# Sorts the file by the most results
+# Contains the functionality of peopole
 # Done in Ruby, because we aren't bad
 
 # Using the Redd API wrapper for reddit
@@ -9,51 +9,54 @@ require 'yaml'
 sslpath = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
 ENV['SSL_CERT_FILE'] = sslpath
 
-# Writes to results.txt
-def getResults
-  File.delete("results.txt") if File.exists?("results.txt")
+# Returns an authorized Reddit API
+def getRedditAPI
   clientId = File.open("config.yml") { |f| YAML.load(f)["REDDITCLIENTID"]}
   username = File.open("config.yml") { |f| YAML.load(f)["REDDITUSERNAME"]}
   password = File.open("config.yml") { |f| YAML.load(f)["REDDITPASSWORD"]}
   secret = File.open("config.yml") { |f| YAML.load(f)["REDDITSECRET"]}
-
   r = Redd.it(:script, clientId, secret, username, password, :user_agent => "peopole v1.0.0" )
   r.authorize!
   puts "Redd is authenticated!"
+  return r
+end
 
-  people = getPeople()
-  missed = []
-
-  missed = performSearch(r, people)
-  puts "Finished first round!"
-  while missed.count > 0
-    missed = performSearch(r, missed)
+# Makes sure that we are not exceeding 60 requests per minute
+# Sleeps if we are going over
+def checkRequests(start, endTime)
+  if ((endTime - start) < 60)
+    puts "Waiting #{(start + 60) - endTime} seconds"
+    sleep((start + 60) - endTime)
   end
+end
 
-  # Sort it next
-  system("ruby sort.rb -t")
+# Returns an array (without \n) of all the people we are searching for
+# Used in getResults
+def getPeople()
+  people = []
+  peeps = File.open("people.txt").read
+  peeps.each_line do |line|
+    people.push(line.gsub!("\n", ""))
+  end
+  # This is ugly
+  return people
 end
 
 # Does the searching
 # Returns an array of people who erred
 # => r - the Reddit API wrapper
 # => people - the array of people to search
+# Writes to results.txt
 def performSearch(r, people)
   missed = []
   f = File.open("results.txt", "a")
   start = Time.now; reqCount = 0
   for person in people do
     begin
-      articleLink = ""
       # Quotes around the person so that M.I.A isn't top
       res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
       counter = res.count
       reqCount += 1
-
-      # If they are most likely in the top 100
-      # TODO -> this news link might not be legit
-      if counter > 10 then articleLink = res[0]["url"] end
-
       # If there is more than one page
       repeat = 1
       while counter == (repeat * 100)
@@ -64,17 +67,14 @@ def performSearch(r, people)
         repeat = repeat + 1
       end
       # Write the results
-      f.write("#{person}:#{counter};#{articleLink}\n")
+      f.write("#{person}:#{counter}\n")
       puts "#{person}\n"
       endTime = Time.now
 
       # Make sure we do not do > 60 requests per minute
-      # TODO -> check mod or reset to 0?
       if reqCount == 60
-        if ((endTime - start) < 60) # Less than 60 seconds have passed
-          puts "Waiting #{(start + 60) - endTime} seconds"
-          sleep((start + 60) - endTime)
-        end
+        # checkRequests will sleep if need be
+        checkRequests(start, endTime)
         reqCount = 0
         start = Time.now
       end
@@ -90,18 +90,22 @@ def performSearch(r, people)
   return missed
 end
 
-# Returns an array of all the people we are searching for
-# TODO -> get rid of the spacing in this method?
-# => Make this into a for loop
-# For use in getResults
-def getPeople()
-  people = []
-  peeps = File.open("people.txt").read
-  peeps.each_line do |line|
-    people.push(line.gsub!("\n", ""))
+# Calls performSearch which writes to results.txt
+# AFTER -> Results is full with # of hits, but is not sorted at all
+def getResults
+  File.delete("results.txt") if File.exists?("results.txt")
+  File.delete("withArticles.txt") if File.exists?("withArticles.txt")
+  r = getRedditAPI()
+
+  people = getPeople()
+  missed = []
+  missed = performSearch(r, people)
+  puts "Finished first round!"
+  while missed.count > 0
+    missed = performSearch(r, missed)
   end
-  # This is ugly
-  return people
+  # Sort the results
+  system("ruby sort.rb -t")
 end
 
 # Sorts the results by # of hits
@@ -112,18 +116,32 @@ def sortResults
     File.foreach("results.txt") { |line| x = line.gsub(",", ""); c.write(x) }
   end
 
+  # The array of the top 100 people
+  top100 = []
+
+  # Obfuscated and unreadable to make it seem that I know hax
+  # Sorts the name by the number of occurences
+  File.read("clean.txt")
+    .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending, split so that article is disregarded
+    .first(101).each{ |entry| top100.push(entry) }
+
+  # Get the articles for the top 100 links
+  r = getRedditAPI()
+  # This makes a file with the person and articles
+  missed = getArticle(r, top100)
+  while missed.count > 0
+    missed = getArticle(r, missed)
+  end
+
   # Format date to YYYY-MM-DD
   date = Time.new
   day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
   month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
-
   resultsFile = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
-  # Obfuscated and unreadable to make it seem that I know hax
-  # Writes the sorted results to final.txt
   File.open(resultsFile, "w") do |f|
-    File.read("clean.txt")
-      .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split(";")[0].to_i }  # -both so it is descending, split so that article is disregarded
-      .first(101).each{ |entry| f.write(entry+"\n") }
+    File.read("withArticles.txt")
+      .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split(";")[0].to_i }
+      .first(101).each { |entry| f.write(entry + "\n") }
   end
 
   # Push the results to the repo
@@ -132,6 +150,39 @@ def sortResults
   # system("git add #{resultsFile}")
   # system("git commit -m '#{resultsFile}'")
   # system("git push origin master")
+end
+
+# Get the most relevant news article for the Top 100
+# Returns a list of people erred (similar logic to getResults)
+def getArticle(r, top100)
+  f = File.open("withArticles.txt", "a")
+  missed = []
+  start = Time.now; reqCount = 0
+  for person in top100 do
+    begin
+      search = person.split(":")[0]
+      res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
+      reqCount += 1
+      puts "Have searched the URL... Checking link"
+      puts res[0]
+      url = res[0]["url"]
+
+      f.write("#{person};#{url}\n")
+      endTime = Time.now
+      # Make sure we do not do > 60 requests per minute
+      if reqCount == 60
+        # checkRequests will sleep if need be
+        checkRequests(start, endTime)
+        reqCount = 0
+        start = Time.now
+      end
+    rescue
+      puts "503 on #{search}"
+      missed.push(person)
+    end
+  end
+  f.close()
+  return missed
 end
 
 # Sort people.txt alphabetically
@@ -143,6 +194,11 @@ def sortPeople
     end
   end
 end
+
+
+######################
+######## MAIN ########
+######################
 
 if ARGV[0] == "-p"
   sortPeople
