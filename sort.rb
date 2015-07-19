@@ -31,7 +31,7 @@ def getResults
   end
 
   # Sort it next
-  system(ruby sort.rb -t)
+  system("ruby sort.rb -t")
 end
 
 # Does the searching
@@ -45,7 +45,8 @@ def performSearch(r, people)
   for person in people do
     begin
       articleLink = ""
-      res = JSON.parse(r.search(person, :limit => 100, :sort => "top", :t => "day").to_json)
+      # Quotes around the person so that M.I.A isn't top
+      res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
       counter = res.count
       reqCount += 1
 
@@ -57,7 +58,7 @@ def performSearch(r, people)
       repeat = 1
       while counter == (repeat * 100)
         after = res[99]["name"]
-        res = JSON.parse(r.search(person, :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
+        res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
         reqCount += 1
         counter += res.count
         repeat = repeat + 1
@@ -81,7 +82,7 @@ def performSearch(r, people)
       puts "Presumably 503 Error on #{person}"
       # need to push person with new line?
       missed.push(person)
-      puts "\n#{missed}\n"
+      puts "\n#{missed}\n\n"
     end
   end
   f.close()
