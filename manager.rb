@@ -31,7 +31,7 @@ def addPeople
   people.uniq!
   people.sort!
   File.open("people.txt", "w") do |f|
-    people.each { |x| f.write(x) }
+    people.each { |x| puts "added #{person}"; f.write(x) }
   end
 end
 
@@ -104,6 +104,33 @@ end
 
 # Reads from the text file of names to delete
 def deletePeople
+
+  del = []
+
+  File.open("toDelete.txt", "r") do |f|
+    f.each_line do |line|
+      del.push(line.strip)
+    end
+  end
+
+  people = getPeople()
+
+  # The people who should not be deleted
+  updated = []
+
+  people.each do |entry|
+    if del.include? (entry)
+      # They should be deleted
+      puts "Deleting #{entry}"
+      next
+    else
+      updated.push(entry)
+    end
+  end
+
+  File.open("people.txt", "w") do |f|
+    updated.each { |x| f.write("#{x}\n")}
+  end
 
 end
 
