@@ -42,6 +42,17 @@ def getPeople()
   return people
 end
 
+def countTitles(json, person)
+  c = 0
+  for i in 0..(json.count - 1)
+    # puts json[i]["title"]
+    if json[i]["title"].include?(person)
+      c += 1
+    end
+  end
+  return c
+end
+
 # Does the searching
 # Returns an array of people who erred
 # => r - the Reddit API wrapper
@@ -53,10 +64,17 @@ def performSearch(r, people)
   start = Time.now; reqCount = 0
   for person in people do
     begin
+      totalCount = 0
       # Quotes around the person so that M.I.A isn't top
       res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
       counter = res.count
       reqCount += 1
+      # Check how many there actually are
+      # Don't even check if they don't have results
+      # TODO -> Find a better threshold
+      if res.count > 0
+        totalCount += countTitles(res, person)
+      end
       # If there is more than one page
       repeat = 1
       while counter == (repeat * 100)
@@ -65,10 +83,13 @@ def performSearch(r, people)
         reqCount += 1
         counter += res.count
         repeat = repeat + 1
+        # Count the titles
+        totalCount += countTitles(res, person)
       end
+
       # Write the results
-      f.write("#{person}:#{counter}\n")
-      puts "#{person}\n"
+      f.write("#{person}:#{totalCount}\n")
+      puts "#{person} #{totalCount}\n"
       endTime = Time.now
 
       # Make sure we do not do > 60 requests per minute
@@ -96,7 +117,6 @@ def getResults
   File.delete("results.txt") if File.exists?("results.txt")
   File.delete("withArticles.txt") if File.exists?("withArticles.txt")
   r = getRedditAPI()
-
   people = getPeople()
   missed = []
   missed = performSearch(r, people)
@@ -209,6 +229,6 @@ elsif ARGV[0] == "-g"
 else
   puts "\nUSAGE: run 'ruby sort' with one of the following parameters"
   puts "\t-g (get the results)"
-  puts "\t-t (sort the results by # of tweets)"
+  puts "\t-t (sort the results by # of tweets and get the related article)"
   puts "\t-p (sort people.txt alphabetically)"
 end
