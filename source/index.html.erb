@@ -21,6 +21,16 @@ title: peopole
 
 <div id="box">
 
+  <!-- For each thing in the list add an entry -->
+  <%
+    # f = File.open("#{File.expand_path("..", Dir.pwd)}/withArticles.txt", "r");
+    f = File.open("#{Dir.pwd}/logs/2015-07-31.txt", "r");
+    a = f.read().split("\n");
+    for entry in a do %>
+      <p> <%= entry %> </p>
+  <% end %>
+
+
 
 
 </div> <!-- End the 'box' div -->
