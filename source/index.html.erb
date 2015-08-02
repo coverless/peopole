@@ -13,13 +13,15 @@ title: peopole
 <div id="box">
 
   <!-- For each thing in the list add an entry -->
+  <!-- TODO -> change the file name -->
   <%
-    # f = File.open("#{File.expand_path("..", Dir.pwd)}/withArticles.txt", "r");
     f = File.open("#{Dir.pwd}/logs/2015-07-31.txt", "r");
     a = f.read().split("\n");
     count = 0;
-    for entry in a do count += 1;
-      clean = entry.split(":", 2); name = clean[0]; link = clean[1].split(";")[1];  %>
+    for entry in a do
+      count += 1;
+      clean = entry.split(":", 2); name = clean[0]; link = clean[1].split(";")[1];
+  %>
       <div class="list-element">
         <span class="list-name"> <%= count %> <%= name %> </span>
         <div class="list-bottom-line"><span class="list-change">(▲7)</span>
