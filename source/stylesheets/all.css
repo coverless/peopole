@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+/* THE DEFAULT MIDDLEMAN CSS
 body {
   background: #d4d4d4 url("../images/background.png");
   text-align: center;
@@ -52,4 +53,173 @@ h1 {
   to {
     -webkit-transform: scale(1);
   }
-}
+} */
+
+/* CURTIS' CSS CODE */
+html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+    }
+
+    body {
+      width: 100%;
+      background-image: none;
+      background-color: rgb(2, 164, 125);
+    }
+
+    #logo {
+      position: absolute;
+      width: 230px;
+      height: 88px;
+      left: 129.555692667988px;
+      top: 12.4652173913034px;
+    }
+
+    .logo-text {
+      font-size: 70px;
+      color: rgb(254, 251, 245);
+      font-family: Lobster;
+    }
+
+    #about {
+      position: absolute;
+      width: 90px;
+      height: 40px;
+      left: 1450px;
+      top: 89px;
+    }
+
+    #contact_us {
+      position: absolute;
+      width: 140px;
+      height: 42px;
+      left: 1581px;
+      top: 90px;
+    }
+
+    #slogan {
+      position: absolute;
+      width: 500px;
+      height: 28px;
+      left: 363px;
+      top: 86px;
+    }
+
+    .headerbar-text {
+      font-size: 35px;
+      color: rgb(254, 251, 245);
+      font-family: Lobster;
+    }
+
+    #box {
+      position: absolute;
+      width: 1620px;
+      height: 10000px;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
+      box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
+      left: 114px;
+      top: 132px;
+      background-image: none;
+      background-color: rgb(254, 251, 245);
+    }
+
+    .list-element {
+      position: absolute;
+      text-align: left;
+      color: rgb(0, 0, 0);
+      height: 70px;
+      width: 531.359375px;
+      top: 55px;
+      left: 544px;
+      background-image: none;
+      background-color: rgb(254, 251, 245);
+    }
+
+    .list-name {
+      font-size: 40px;
+      font-family: Montserrat;
+      text-shadow: rgb(221, 221, 221) 2px 2px;
+    }
+
+    .list-bottom-line {
+      height: 23px;
+      width: 531.359375px;
+      background-image: none;
+      background-color: rgb(254, 251, 245);
+    }
+
+    .list-change {
+      color: rgb(34, 34, 34);
+      font-family: Montserrat;
+      line-height: 17.7272720336914px;
+      widows: 1;
+      font-size: 20px;
+      background-color: rgb(255, 255, 255);
+      width: auto;
+    }
+
+    .list-link {
+      font-size: 18px;
+      border-color: rgb(0, 0, 238);
+      color: rgb(0, 0, 238);
+      line-height: 17.7272720336914px;
+      outline-color: rgb(0, 0, 238);
+      text-decoration: underline;
+      widows: 1;
+      width: auto;
+    }
+
+    .list-link-text {
+      font-family: Montserrat;
+    }
+
+    #rank1 {
+      top: 55px;
+      left: 544px;
+    }
+
+    #rank2 {
+      top: 207px;
+      left: 544;
+    }
+
+    #rank3 {
+      top: 359px;
+      left: 544px;
+    }
+
+    #rank4 {
+      top: 511px;
+      left: 544px;
+    }
+
+    #rank5 {
+      top: 663px;
+      left: 544;
+    }
+
+    #rank6 {
+      top: 815px;
+      left: 544px;
+    }
+
+    #rank7 {
+      top: 967px;
+      left: 544px;
+    }
+
+    #rank8 {
+      top: 1119px;
+      left: 544;
+    }
+
+    #rank9 {
+      top: 1271px;
+      left: 544px;
+    }
+
+    #rank10 {
+      top: 1423px;
+      left: 544px;
+    }
