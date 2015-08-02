@@ -71,7 +71,9 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 end
 
-activate :livereload
+# Do this later for production
+# set :https, true
 
+activate :livereload
 activate :relative_assets
 set :relative_links, true

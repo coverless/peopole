@@ -143,7 +143,7 @@ def sortResults
   # Sorts the name by the number of occurences
   File.read("clean.txt")
     .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending, split so that article is disregarded
-    .first(101).each{ |entry| top100.push(entry) }
+    .first(100).each{ |entry| top100.push(entry) }
 
   # Get the articles for the top 100 links
   r = getRedditAPI()
@@ -161,7 +161,7 @@ def sortResults
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
       .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split(";")[0].to_i }
-      .first(101).each { |entry| f.write(entry + "\n") }
+      .first(100).each { |entry| f.write(entry + "\n") }
   end
 
   # Push the results to the repo
