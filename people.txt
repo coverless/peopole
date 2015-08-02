@@ -1,6 +1,6 @@
+A$AP Rocky
 A.J Langer
 A.J. McLean
-A$AP Rocky
 Aaliyah
 Aaron Carter
 Aaron Paul
@@ -126,9 +126,9 @@ Anna Paquin
 Anna Popplewell
 Anna Torv
 Anna Wintour
-Annabelle Wallis
 AnnaLynne McCord
 AnnaSophia Robb
+Annabelle Wallis
 Anne Archer
 Anne Hathaway
 Anne Heche
@@ -378,8 +378,8 @@ Claudia Schiffer
 Clemence Poesy
 Clint Eastwood
 Clive Owen
-Cobie Smulders
 CoCo
+Cobie Smulders
 Coco Jones
 Coco Rocha
 Cody Longo
@@ -412,10 +412,12 @@ Cuba Gooding Jr.
 Cybill Shepherd
 Cyndi Lauper
 Cynthia Nixon
+DJ AM
 Daisy Fuentes
 Daisy Lowe
 Dakota Fanning
 Dakota Johnson
+Dan Auerbach
 Dan Schneider
 Dan Stevens
 Dana Delany
@@ -499,7 +501,6 @@ Diego Luna
 Dina Manzo
 Diplo
 Dita Von Teese
-DJ AM
 Djimon Hounsou
 Doda
 Dolly Parton
@@ -618,6 +619,7 @@ Evander Holyfield
 Evangeline Lilly
 Ewan McGregor
 Ezra Miller
+FKA twigs
 Faith Hill
 Famke Janssen
 Fan Bingbing
@@ -626,7 +628,6 @@ Felicity Jones
 Fergie
 Fernando Torres
 Filippa Hamilton
-FKA twigs
 Flo Rida
 Florence Welch
 Forest Whitaker
@@ -687,7 +688,6 @@ Gustaf Skarsgard
 Guy Ritchie
 Gwen Stefani
 Gwyneth Paltrow
-Harry Judd
 Hailee Steinfeld
 Haley Webb
 Halle Berry
@@ -695,6 +695,7 @@ Halston Sage
 Hana Mae Lee
 Hank Baskett
 Harrison Ford
+Harry Judd
 Harry Styles
 Havana Brown
 Hayden Christensen
@@ -760,6 +761,7 @@ Izabel Goulart
 Izabella Miko
 Izabella Scorupco
 J. Alexander
+JC Chasez
 Jack Black
 Jack Johnson
 Jack Lemmon
@@ -832,7 +834,6 @@ Jay Lyon
 Jay-Z
 Jayma Mays
 Jaymi Hensley
-JC Chasez
 Jean Dujardin
 Jean Paul Gaultier
 Jean-Claude Van Damme
@@ -912,8 +913,8 @@ Jim Parsons
 Jim Sturgess
 Jimmy Fallon
 Jimmy Kimmel
-Joan Rivers
 JoAnna Garcia
+Joan Rivers
 Joanna Krupa
 Joanne Froggatt
 Joaquin Phoenix
@@ -1131,6 +1132,7 @@ Kyle Richards
 Kylie Jenner
 Kylie Minogue
 Kyra Sedgwick
+LL Cool J
 La La Vasquez
 Labrinth
 Lacey Chabert
@@ -1161,10 +1163,10 @@ Lauren Young
 Lauryn Hill
 Lawson
 Le Call
+LeAnn Rimes
 Lea Michele
 Leah Remini
 Leah Wood
-LeAnn Rimes
 Lebron James
 Lee Mead
 Lee Ryan
@@ -1209,7 +1211,6 @@ Liu Wen
 Liv Tyler
 Liz Hurley
 Lizzy Caplan
-LL Cool J
 Logan Lerman
 Lorenzo Lamas
 Louis Tomlinson
@@ -1464,8 +1465,8 @@ Olly Murs
 Oona Castilla Chaplin
 Oprah Winfrey
 Orlando Bloom
-Oscar de la Renta
 Oscar Pistorius
+Oscar de la Renta
 Outlawz
 Owen Wilson
 Ozzy Osbourne
@@ -1496,8 +1497,8 @@ Paul Walker
 Paul Wesley
 Paula Abdul
 Paula Patton
-Paz de la Huerta
 Paz Vega
+Paz de la Huerta
 Peaches Geldof
 Pearl Osbourne
 Pedro Almodovar
@@ -1642,9 +1643,9 @@ Rose McGowan
 Roselyn Sanchez
 Rosie Huntington-Whiteley
 Roxane Mesquida
+RuPaul
 Ruby Stewart
 Rumer Willis
-RuPaul
 Rupert Friend
 Rupert Grint
 Russell Brand

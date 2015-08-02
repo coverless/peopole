@@ -114,7 +114,7 @@ html, body {
 
     #box {
       position: absolute;
-      width: 1620px;
+      width: 90%;
       /*height: 10000px;*/
       -webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
       box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;

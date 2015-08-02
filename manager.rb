@@ -5,6 +5,8 @@ require 'json'
 
 
 # Takes toAdd.txt and adds it to people.txt, but not the duplicates!
+# TODO this is sketchy
+# Needs to sort people at the end
 def addPeople
   puts "Adding people from toAdd.txt"
 
@@ -15,8 +17,8 @@ def addPeople
   end
   f.close()
   # Make sure there is a new line on the last entry
-  toAdd[-1].gsub!("\n", "")
-  toAdd[-1] += "\n"
+  toadd[-1].gsub!("\n", "")
+  toadd[-1] += "\n"
 
   f = File.open("people.txt", "r")
   people = []
@@ -26,12 +28,12 @@ def addPeople
   f.close()
 
   # If people doesn't have this person then add them to the people list
-  toadd.each { |x| people.include?(x) ? next : people.push(x) }
+  toadd.each { |x| if people.include?(x) then toadd.delete(x); puts "#{x.strip()} is already part of the list!" else people.push(x) end }
   # Delete duplicates and sort
   people.uniq!
   people.sort!
   File.open("people.txt", "w") do |f|
-    people.each { |x| puts "added #{person}"; f.write(x) }
+    people.each { |x| if toadd.include?(x) then puts "Added #{x}" end; f.write(x) }
   end
 end
 

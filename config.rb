@@ -71,5 +71,7 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 end
 
+activate :livereload
+
 activate :relative_assets
 set :relative_links, true
