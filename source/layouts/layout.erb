@@ -8,8 +8,8 @@
 
     <!-- Use title if it's in the page YAML frontmatter -->
     <title><%= current_page.data.title || "peopole" %></title>
-    <!-- Took out "normalize" -->
-    <%= stylesheet_link_tag "all" %>
+    <!-- I don't know if we need "normalize" -->
+    <%= stylesheet_link_tag "all", "normalize" %>
     <%= javascript_include_tag  "all" %>
   </head>
 

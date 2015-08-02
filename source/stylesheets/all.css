@@ -125,12 +125,12 @@ html, body {
     }
 
     .list-element {
-      position: absolute;
-      text-align: left;
+      /*position: absolute;*/
+      /*text-align: left;*/
       color: rgb(0, 0, 0);
-      height: 70px;
+      /*height: 70px;
       width: 531.359375px;
-      top: 55px;
+      top: 55px;*/
       left: 544px;
       background-image: none;
       background-color: rgb(254, 251, 245);

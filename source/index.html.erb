@@ -26,8 +26,17 @@ title: peopole
     # f = File.open("#{File.expand_path("..", Dir.pwd)}/withArticles.txt", "r");
     f = File.open("#{Dir.pwd}/logs/2015-07-31.txt", "r");
     a = f.read().split("\n");
-    for entry in a do %>
-      <p> <%= entry %> </p>
+    count = 0;
+    for entry in a do count += 1;
+      clean = entry.split(":"); name = clean[0]; link = clean[1].split(";")[1];  %>
+      <div class="list-element">
+        <span class="list-name"> <%= count %> <%= name %> </span>
+        <div class="list-bottom-line"><span class="list-change">(▲7)</span>
+          <a href ="<%=link %>" target="_blank">
+            <a1 class="list-link-text">Whatever the articles is..</a1><a>
+        </div>
+
+      </div>
   <% end %>
 
 
