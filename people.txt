@@ -83,6 +83,7 @@ Amanda Bynes
 Amanda Holden
 Amanda Lepore
 Amanda Peet
+Amanda Seyfried
 Amber Heard
 Amber Le Bon
 Amber Riley
@@ -195,6 +196,7 @@ Benicio Del Toro
 Benjamin McKenzie
 Bernie Mac
 Bernie Sanders
+Bethe Correia
 Betsey Johnson
 Beyonce
 Bianca Lawson
@@ -390,7 +392,6 @@ Claudia Schiffer
 Clemence Poesy
 Clint Eastwood
 Clive Owen
-CoCo
 Cobie Smulders
 Coco Jones
 Coco Rocha
@@ -558,6 +559,7 @@ Eddie Huang
 Eddie Izzard
 Eddie Murphy
 Eddie Redmayne
+Eddie Vedder
 Edward Burns
 Edward Norton
 Eiza Gonzalez
@@ -691,6 +693,7 @@ Gerard Butler
 Geri Halliwell
 Gigi Hadid
 Gilles Marini
+Gillian Jacobs
 Gin Wigmore
 Ginnifer Goodwin
 Giorgio Armani
@@ -988,7 +991,6 @@ John Travolta
 Johnathon Schaech
 Johnny Depp
 Johnny Knoxville
-Jojo
 Jon Bon Jovi
 Jon Cryer
 Jon Hamm
@@ -1106,6 +1108,7 @@ Ken Jenkins
 Ken Paxton
 Kendall Jenner
 Kendra Wilkinson
+Kendrick Lamar
 Kenton Duty
 Kenza
 Keri Hilson
@@ -1197,7 +1200,6 @@ Lauren Graham
 Lauren Miller
 Lauren Young
 Lauryn Hill
-Lawson
 Le Call
 LeAnn Rimes
 LeBron James
@@ -1305,6 +1307,7 @@ Marion Cotillard
 Marisa Miller
 Marisa Tomei
 Mark Addy
+Mark Cuban
 Mark Gatiss
 Mark Knopfler
 Mark McGrath
@@ -1428,7 +1431,6 @@ Missy Elliott
 Misty Upham
 Mollie King
 Molly Sims
-Monica
 Monica Bellucci
 Monica Cruz
 Monica Lewinsky
@@ -1572,13 +1574,11 @@ Pierre Casiraghi
 Piers Morgan
 Piper Perabo
 Pippa Middleton
-Pitbull
 Pixie Geldof
 Pixie Lott
 Poppy Delevingne
 Portia de Rossi
 Posh24 Staff
-Pregnant
 Prince Carl Philip
 Prince George
 Prince Harry
@@ -1673,7 +1673,7 @@ Roman Polanski
 Romany Malco
 Ron Howard
 Ron Livingston
-Ronaldo
+Ronda Rousey
 Ronnie Wood
 Rooney Mara
 Rosamund Pike
@@ -1694,6 +1694,7 @@ Russell Brand
 Russell Crowe
 Russell Simmons
 Russell Westbrook
+Russell Wilson
 Rutina Wesley
 Ruud Gullit
 Ryan Adams
@@ -1786,7 +1787,6 @@ Shia LaBeouf
 Shiloh Jolie-Pitt
 Shirley MacLaine
 Shirley Manson
-Sia
 Sibel Kekilli
 Sienna Miller
 Sigourney Weaver
