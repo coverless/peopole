@@ -37,6 +37,7 @@ Alan Cumming
 Alan Dale
 Alan Rickman
 Alanis Morissette
+Albert Einstein
 Albert Finney
 Albert Hammond
 Alec Baldwin
@@ -71,8 +72,10 @@ Alicia Vikander
 Alison Brie
 Alison Eastwood
 Alison Pill
+Allen Crabbe
 Allen Leech
 Allison Janney
+Allison Stokke
 Allison Williams
 AlunaGeorge
 Alyson Hannigan
@@ -140,9 +143,11 @@ Anne Vyalitsyna
 Annie Lennox
 Anthony Andrews
 Anthony Davis
+Anthony Ervin
 Anthony Hopkins
 Anthony Kiedis
 Anthony Mackie
+Anthony Rizzo
 Antonio Banderas
 Ariana Grande
 Armie Hammer
@@ -203,6 +208,7 @@ Bianca Lawson
 Big Sean
 Bijou Phillips
 Bill Clinton
+Bill Cosby
 Bill Engvall
 Bill Gates
 Bill Lawrence
@@ -217,6 +223,7 @@ Billy Joel
 Billy Ray Cyrus
 Billy Zane
 Bindi Irwin
+Biuliana Rancic
 Bjork
 Bjorn Borg
 Blac Chyna
@@ -243,6 +250,7 @@ Bradley Cooper
 Brandon Davis
 Brandon Jenner
 Brandon Routh
+Brandon Roy
 Brandon T. Jackson
 Brenda Song
 Brenda Strong
@@ -260,6 +268,7 @@ Britney Spears
 Brittany Murphy
 Brittany Snow
 Brody Jenner
+Bronwyn Bishop
 Brooke Anderson
 Brooke Burke
 Brooke Hogan
@@ -286,7 +295,6 @@ Cameron Douglas
 Candace Cameron Bure
 Candice Accola
 Candice Swanepoel
-Cannes Film Festival
 Cara Delevingne
 Cara Santana
 Carey Hart
@@ -306,7 +314,6 @@ Carson Daly
 Carson Kressley
 Casey Affleck
 Cash Warren
-Cassie
 Cat Deeley
 Cate Blanchett
 Catherine Hardwicke
@@ -317,11 +324,13 @@ Chad Lowe
 Chad Michael Murray
 Chaka Khan
 Chance The Rapper
+Chandler Riggs
 Chanel Iman
 Channing Tatum
 Charice Pempengco
 Charisma Carpenter
 Charles Dance
+Charles Koch
 Charli XCX
 Charlie Hunnam
 Charlie Sheen
@@ -332,11 +341,11 @@ Charlotte Ronson
 Charlton Heston
 Chelsea Kane
 Cher
-Cher Lloyd
 Cheryl Burke
 Cheryl Cole
 Chief Keef
 China Chow
+Chip Kelly
 Chloe Bailey
 Chloe Grace Moretz
 Chloe Moretz
@@ -363,6 +372,7 @@ Christa B. Allen
 Christa Miller
 Christian Audigier
 Christian Bale
+Christian Benteke
 Christian Slater
 Christiano Ronaldo
 Christie Brinkley
@@ -378,7 +388,7 @@ Christopher Plummer
 Christopher Walken
 Christy Turlington
 Chyler Leigh
-Ciara
+Cilla Black
 Cillian Murphy
 Cindy Crawford
 Claire Cooper
@@ -502,6 +512,7 @@ Dennis Quaid
 Dennis Rodman
 Denzel Washington
 Derek Hough
+Derek Jeter
 Dermot Mulroney
 Derrick Rose
 Deryck Whibley
@@ -519,6 +530,7 @@ Diego Luna
 Dikembe Mutombo
 Dina Manzo
 Diplo
+Dirk Nowitzki
 Dita Von Teese
 Djimon Hounsou
 Doda
@@ -642,6 +654,7 @@ Evangeline Lilly
 Ewan McGregor
 Ezra Miller
 FKA twigs
+Fabio Fognini
 Faith Hill
 Famke Janssen
 Fan Bingbing
@@ -701,7 +714,6 @@ Giovanni Ribisi
 Gisele Bundchen
 Giuliana Rancic
 Glenn Close
-Golden Globe
 Goldie Hawn
 Gordon Ramsay
 Gotye
@@ -709,6 +721,7 @@ Grace Coddington
 Grace Jones
 Grayson Perry
 Gregg Popovich
+Gucci Mane
 Gustaf Skarsgard
 Guy Ritchie
 Gwen Stefani
@@ -771,9 +784,9 @@ Ian Harding
 Ian Somerhalder
 Ian Ziering
 Ice-T
+Iga Wyrwal
 Iggy Azalea
 Iliza Shlesinger
-Iman
 Irina Shayk
 Isaac Hempstead-Wright
 Isabel Lucas
@@ -840,6 +853,7 @@ Janelle Monae
 Janet Jackson
 Janice Dickinson
 January Jones
+Jared Fogle
 Jared Harris
 Jared Leto
 Jared Padalecki
@@ -1076,10 +1090,12 @@ Kathy Lee Gifford
 Katie Cassidy
 Katie Couric
 Katie Holmes
+Katie Ledecky
 Katie Price
 Katrina Bowden
 Katy Perry
 Kaya Scodelario
+Ke$ha
 Keanu Reeves
 Keegan Allen
 Keeley Hazell
@@ -1115,7 +1131,6 @@ Keri Hilson
 Keri Russell
 Kerr Smith
 Kerry Washington
-Kesha
 Kevin Bacon
 Kevin Connolly
 Kevin Costner
@@ -1132,6 +1147,7 @@ Kevin Spacey
 Kevin Zegers
 Keyshawn Johnson
 Khloe Kardashian
+Kid Cudi
 Kid Rock
 Kiefer Sutherland
 Kiernan Shipka
@@ -1164,6 +1180,7 @@ Kristy Swanson
 Krysten Ritter
 Kurt Cobain
 Kurt Russell
+Kyle Busch
 Kyle Howard
 Kyle MacLachlan
 Kyle Richards
@@ -1173,7 +1190,6 @@ Kyra Sedgwick
 LL Cool J
 La La Vasquez
 LaMarcus Aldridge
-Labrinth
 Lacey Chabert
 Lady Gaga
 Lady Starlight
@@ -1212,6 +1228,7 @@ Lee Ryan
 Lee Thompson Young
 Leif Garrett
 Leighton Meester
+Leland Yee
 Lena Dunham
 Lena Headey
 Lenny Kravitz
@@ -1225,6 +1242,7 @@ Liam Hemsworth
 Liam Neeson
 Liam Payne
 Liev Schreiber
+Lil B
 Lil Dicky
 Lil Kim
 Lil Mama
@@ -1263,6 +1281,7 @@ Lucy Liu
 Lucy Punch
 Luis Chavez
 Luis Figo
+Luis Suárez
 Luke Perry
 Luke Wilson
 Lupe Fiasco
@@ -1303,6 +1322,7 @@ Marilyn Manson
 Marilyn Monroe
 Marina Diamondis
 Mario Lopez
+Mario Sharapova
 Marion Cotillard
 Marisa Miller
 Marisa Tomei
@@ -1316,6 +1336,7 @@ Mark Ronson
 Mark Ruffalo
 Mark Wahlberg
 Mark Wright
+Mark Zuckerberg
 Marloes Horst
 Martha Stewart
 Martin Freeman
@@ -1352,6 +1373,7 @@ Maura Tierney
 Max George
 Max Thieriot
 May Andersen
+Maya Angelou
 Mayim Bialik
 Meagan Good
 Meek Mill
@@ -1403,7 +1425,6 @@ Michelle Pfeiffer
 Michelle Rodriguez
 Michelle Trachtenberg
 Michelle Williams
-Michelle Williams (singer)
 Michelle Yeoh
 Mick Jagger
 Mickey Rourke
@@ -1429,6 +1450,7 @@ Miranda Otto
 Mischa Barton
 Missy Elliott
 Misty Upham
+Mohammed Seisay
 Mollie King
 Molly Sims
 Monica Bellucci
@@ -1440,7 +1462,7 @@ Morgan Freeman
 Morgan Spurlock
 Morgan York
 Morris Chestnut
-Mya
+Mteichael Phelps
 Myleene Klass
 Nadia Bjorlin
 Naomi Campbell
@@ -1460,7 +1482,6 @@ Ne-Yo
 Neil Flynn
 Neil Patrick Harris
 Neil Perry
-Nelly
 Nelly Furtado
 Neve Campbell
 Niall Horan
@@ -1492,8 +1513,11 @@ Noel Gallagher
 Nonso Anozie
 Noomi Rapace
 Nora Arnezeder
+Norm Mcdonald
 Norman Reedus
 North West
+Novak Djokovic
+Obie Trice
 Octavia Spencer
 Oksana Grigorieva
 Olga Kurylenko
@@ -1509,7 +1533,6 @@ Oprah Winfrey
 Orlando Bloom
 Oscar Pistorius
 Oscar de la Renta
-Outlawz
 Owen Wilson
 Ozzy Osbourne
 P. Diddy
@@ -1582,7 +1605,6 @@ Posh24 Staff
 Prince Carl Philip
 Prince George
 Prince Harry
-Prince Michael Jackson
 Prince William
 Princess Beatrice
 Princess Diana
@@ -1608,6 +1630,7 @@ Rachelle Lefevre
 Raekwon
 Rafael Nadal
 Rainn Wilson
+Rand Paul
 Rande Gerber
 Randy Jackson
 Raul Gonzalez
@@ -1664,7 +1687,6 @@ Robin Thicke
 Robin Williams
 Robin Wright
 Robinson Cano
-Robyn
 Robyn Lawley
 Rod Stewart
 Roger Federer
@@ -1673,6 +1695,7 @@ Roman Polanski
 Romany Malco
 Ron Howard
 Ron Livingston
+Ron Paul
 Ronda Rousey
 Ronnie Wood
 Rooney Mara
@@ -1705,6 +1728,7 @@ Ryan Fletcher
 Ryan Gosling
 Ryan Kwanten
 Ryan Lewis
+Ryan Lochte
 Ryan Newman
 Ryan Phillippe
 Ryan Reynolds
@@ -1744,10 +1768,12 @@ Scooter Braun
 Scott Bakula
 Scott Caan
 Scott Disick
+Scott Dixon
 Scott Eastwood
 Scott Foley
 Scott Michael Foster
 Scott Patterson
+Scott Walker
 Sean Bean
 Sean Kingston
 Sean Lennon
@@ -1801,7 +1827,6 @@ Skeet Ulrich
 Skrillex
 Skylar Astin
 Skyler Samuels
-Slash
 Snooki
 Snoop Dogg
 Sofia Coppola
@@ -1821,17 +1846,20 @@ Stacy Keibler
 Stanley Tucci
 Stella McCartney
 Stellan Skarsgard
+Steph Curry
 Stephanie Pratt
 Stephen Baldwin
 Stephen Dillane
+Stephen Harper
 Stephen Moyer
 Stephenie Meyer
+Steve Ballmer
 Steve Carell
 Steve Jobs
+Steve Nash
 Steve-O
 Steven Adler
 Steven Bonnell
-Steven Harper
 Steven Hawking
 Steven Moffat
 Steven R. McQueen
@@ -1932,7 +1960,9 @@ Tory Burch
 Trace Adkins
 Trace Cyrus
 Tracy Anderson
+Tracy McGrady
 Tracy Morgan
+Travi$ Scott
 Travis Barker
 Trey Songz
 Trinidad James
@@ -1980,6 +2010,7 @@ Wanda Sykes
 Warren Beatty
 Wayne Rooney
 Wentworth Miller
+Wesley Matthews
 Wesley Snipes
 Whitney Houston
 Whitney Port
