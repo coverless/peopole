@@ -2,15 +2,6 @@
 title: peopole
 ---
 
-<!--
-<div class="welcome">
-  <h1>Middleman is Watching</h1>
-  <p class="doc">
-    <%= link_to "Read Online Documentation", "http://middlemanapp.com/" %>
-  </p>
-</div> -->
-
-
 <div id="logo"><span class="logo-text">peopole.</span></div>
 
 <div id="about"><span class="headerbar-text">about</span></div>
@@ -28,18 +19,14 @@ title: peopole
     a = f.read().split("\n");
     count = 0;
     for entry in a do count += 1;
-      clean = entry.split(":"); name = clean[0]; link = clean[1].split(";")[1];  %>
+      clean = entry.split(":", 2); name = clean[0]; link = clean[1].split(";")[1];  %>
       <div class="list-element">
         <span class="list-name"> <%= count %> <%= name %> </span>
         <div class="list-bottom-line"><span class="list-change">(▲7)</span>
           <a href ="<%=link %>" target="_blank">
             <a1 class="list-link-text">Whatever the articles is..</a1><a>
         </div>
-
       </div>
   <% end %>
-
-
-
 
 </div> <!-- End the 'box' div -->
