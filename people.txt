@@ -573,6 +573,7 @@ Eddie Murphy
 Eddie Redmayne
 Eddie Vedder
 Edward Burns
+Edward Heath
 Edward Norton
 Eiza Gonzalez
 Eli Manning
@@ -1022,6 +1023,7 @@ Joseph Gordon-Levitt
 Josh Bowman
 Josh Brolin
 Josh Cuthbert
+Josh Donaldson
 Josh Duhamel
 Josh Groban
 Josh Hartnett
@@ -1144,6 +1146,7 @@ Kevin Nealon
 Kevin Richardson
 Kevin Rudolf
 Kevin Spacey
+Kevin Vickers
 Kevin Zegers
 Keyshawn Johnson
 Khloe Kardashian
@@ -1482,6 +1485,7 @@ Ne-Yo
 Neil Flynn
 Neil Patrick Harris
 Neil Perry
+Neil Young
 Nelly Furtado
 Neve Campbell
 Niall Horan
@@ -1787,6 +1791,7 @@ Selena Gomez
 Selita Ebanks
 Selma Blair
 Sendhil Ramamurthy
+Sepp Blatter
 Serena Williams
 Sergio Ramos
 Seth Green
@@ -2005,6 +2010,7 @@ Vincent Gallo
 Viola Davis
 Vivica A. Fox
 Vivienne Westwood
+Vladimir Putin
 Walter Palmer
 Wanda Sykes
 Warren Beatty

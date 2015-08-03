@@ -8,8 +8,6 @@ require 'json'
 # TODO this is sketchy
 # Needs to sort people at the end
 def addPeople
-  puts "Adding people from toAdd.txt"
-
   f = File.open("toAdd.txt", "r")
   toadd = []
   f.each_line do |line|
@@ -27,13 +25,16 @@ def addPeople
   end
   f.close()
 
+  # need clone so that can do delete()?
+  adding = toadd.clone
+
   # If people doesn't have this person then add them to the people list
-  toadd.each { |x| if people.include?(x) then toadd.delete(x); puts "#{x.strip()} is already part of the list!" else people.push(x) end }
+  toadd.each { |x| if people.include?(x) then adding.delete(x); puts "#{x.strip()} is already part of the list!" else people.push(x) end }
   # Delete duplicates and sort
   people.uniq!
   people.sort!
   File.open("people.txt", "w") do |f|
-    people.each { |x| if toadd.include?(x) then puts "Added #{x}" end; f.write(x) }
+    people.each { |x| if adding.include?(x) then puts "Added #{x}" end; f.write(x) }
   end
 end
 
