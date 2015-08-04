@@ -23,9 +23,10 @@ end
 
 # Makes sure that we are not exceeding 60 requests per minute
 # Sleeps if we are going over
+# Rounds the output because otherwise team members cannot handle the accuracy!
 def checkRequests(start, endTime)
   if ((endTime - start) < 60)
-    puts "Waiting #{(start + 60) - endTime} seconds"
+    puts "\n* WAITING #{((start + 60) - endTime).round(2)} SECONDS *\n"
     sleep((start + 60) - endTime)
   end
 end
@@ -179,12 +180,13 @@ def getArticle(r, top100)
   missed = []
   start = Time.now; reqCount = 0
   for person in top100 do
+  position = 1
     begin
       search = person.split(":")[0]
       res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
       reqCount += 1
-      puts "Have searched the URL... Checking link"
-      puts res[0]
+      puts "Getting article for #{position}. #{person}"
+      position += 1
       url = res[0]["url"]
 
       f.write("#{person};#{url}\n")
