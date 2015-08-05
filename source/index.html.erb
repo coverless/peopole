@@ -13,9 +13,13 @@ title: peopole
 <div id="box">
 
   <!-- For each thing in the list add an entry -->
-  <!-- TODO -> change the file name -->
+  <!-- TODO -> THIS WILL BREAK IF WE HAVEN'T MADE THE FILE FOR THAT DAY -->
   <%
-    f = File.open("#{Dir.pwd}/logs/2015-08-04.txt", "r");
+    date = Time.new
+    day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
+    month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
+    results = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
+    f = File.open(results, "r");
     a = f.read().split("\n");
     count = 0;
     for entry in a do
