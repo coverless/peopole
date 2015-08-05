@@ -13,13 +13,21 @@ title: peopole
 <div id="box">
 
   <!-- For each thing in the list add an entry -->
-  <!-- TODO -> THIS WILL BREAK IF WE HAVEN'T MADE THE FILE FOR THAT DAY -->
+  <!-- TODO -> LOOKS UGLY AT THE MOMENT -->
   <%
     date = Time.new
     day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
     month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
     results = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
-    f = File.open(results, "r");
+    begin
+      f = File.open(results, "r");
+    rescue
+      yesterday = date - (60 * 60 * 24)
+      day = yesterday.day.to_s.length == 1 ? "0" + yesterday.day.to_s : yesterday.day.to_s
+      month = yesterday.month.to_s.length == 1 ? "0" + yesterday.month.to_s : yesterday.month.to_s
+      results = Dir.pwd + "/logs/#{yesterday.year}-#{month}-#{day}.txt"
+      f = File.open(results, "r");
+    end
     a = f.read().split("\n");
     count = 0;
     for entry in a do
