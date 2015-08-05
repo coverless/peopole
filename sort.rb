@@ -20,6 +20,7 @@ ENV['SSL_CERT_FILE'] = sslpath
 def getResults
   File.delete("results.txt") if File.exists?("results.txt")
   File.delete("withArticles.txt") if File.exists?("withArticles.txt")
+  elapsedStart = Time.now
   r = getRedditAPI()
   people = getPeople()
   missed = []
@@ -28,6 +29,8 @@ def getResults
   while missed.count > 0
     missed = performSearch(r, missed)
   end
+  elapsedEnd = Time.now
+  puts "\nTOTAL TIME #{((elapsedEnd - elapsedStart)/60).truncate} MINUTES\n\n"
   # Sort the results (calls sortResults)
   system("ruby sort.rb -t")
 end
