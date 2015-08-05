@@ -12,7 +12,7 @@ html, body {
 
     #logo {
       position: relative;
-      left:5%;
+      left:10%;
     }
 
     .logo-text {
@@ -24,19 +24,19 @@ html, body {
     #slogan {
       position: relative;
       display: inline-block;
-      left:5%;
+      left:10%;
     }
 
     #about {
-      position: relative;
+      position: absolute;
       display: inline-block;
-      left:70%;
+      left:65%;
     }
 
     #contact_us {
       position: relative;
       display: inline-block;
-      left:80%;
+      left:75%;
     }
 
     .headerbar-text {
@@ -46,8 +46,8 @@ html, body {
     }
 
     #box {
-      width: 90%;
-      margin-left: 5%;
+      width: 80%;
+      margin-left: 10%;
       -webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
       box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
       background-image: none;
@@ -57,7 +57,8 @@ html, body {
     .list-element {
       color: rgb(0, 0, 0);
       margin-left: 40%;
-      margin-bottom: 5%;
+      padding-top: 3%;
+      padding-bottom: 3%;
       background-image: none;
       background-color: rgb(254, 251, 245);
     }
