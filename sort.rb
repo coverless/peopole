@@ -9,111 +9,14 @@ require 'yaml'
 sslpath = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
 ENV['SSL_CERT_FILE'] = sslpath
 
-# Returns an authorized Reddit API
-def getRedditAPI
-  clientId = File.open("config.yml") { |f| YAML.load(f)["REDDITCLIENTID"]}
-  username = File.open("config.yml") { |f| YAML.load(f)["REDDITUSERNAME"]}
-  password = File.open("config.yml") { |f| YAML.load(f)["REDDITPASSWORD"]}
-  secret = File.open("config.yml") { |f| YAML.load(f)["REDDITSECRET"]}
-  r = Redd.it(:script, clientId, secret, username, password, :user_agent => "peopole v1.0.0" )
-  r.authorize!
-  puts "Redd is authenticated!"
-  return r
-end
 
-# Makes sure that we are not exceeding 60 requests per minute
-# Sleeps if we are going over
-# Rounds the output because otherwise team members cannot handle the accuracy!
-def checkRequests(start, endTime)
-  if ((endTime - start) < 60)
-    puts "\n* WAITING #{((start + 60) - endTime).round(2)} SECONDS *\n\n"
-    sleep((start + 60) - endTime)
-  end
-end
-
-# Returns an array (without \n) of all the people we are searching for
-# Used in getResults
-def getPeople()
-  people = []
-  peeps = File.open("people.txt").read
-  peeps.each_line do |line|
-    people.push(line.gsub!("\n", ""))
-  end
-  # This is ugly
-  return people
-end
-
-def countTitles(json, person)
-  c = 0
-  for i in 0..(json.count - 1)
-    # puts json[i]["title"]
-    if json[i]["title"].include?(person)
-      c += 1
-    end
-  end
-  return c
-end
-
-# Does the searching
-# Returns an array of people who erred
-# => r - the Reddit API wrapper
-# => people - the array of people to search
-# Writes to results.txt
-def performSearch(r, people)
-  missed = []
-  f = File.open("results.txt", "a")
-  start = Time.now; reqCount = 0
-  for person in people do
-    begin
-      totalCount = 0
-      # Quotes around the person so that M.I.A isn't top
-      res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
-      counter = res.count
-      reqCount += 1
-      # Check how many there actually are
-      # Don't even check if they don't have results
-      # TODO -> Find a better threshold
-      if res.count > 0
-        totalCount += countTitles(res, person)
-      end
-      # If there is more than one page
-      repeat = 1
-      while counter == (repeat * 100)
-        after = res[99]["name"]
-        res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
-        reqCount += 1
-        counter += res.count
-        repeat = repeat + 1
-        # Count the titles
-        totalCount += countTitles(res, person)
-      end
-
-      # Write the results
-      f.write("#{person}:#{totalCount}\n")
-      puts "#{person} #{totalCount}\n"
-      endTime = Time.now
-
-      # Make sure we do not do > 60 requests per minute
-      if reqCount == 60
-        # checkRequests will sleep if need be
-        checkRequests(start, endTime)
-        reqCount = 0
-        start = Time.now
-      end
-    rescue
-      puts "Presumably 503 Error on #{person}"
-      # need to push person with new line?
-      missed.push(person)
-      # puts "\n#{missed}\n\n"
-    end
-  end
-  f.close()
-  # Return the array of people who erred out
-  return missed
-end
-
-# Calls performSearch which writes to results.txt
-# AFTER -> Results is full with # of hits, but is not sorted at all
+############################################
+#              GET RESULTS (-g)            #
+# => Calls performSearch which writes to   #
+# results.txt                              #
+# => sortResults is called after and       #
+# writes the results to today's log        #
+############################################
 def getResults
   File.delete("results.txt") if File.exists?("results.txt")
   File.delete("withArticles.txt") if File.exists?("withArticles.txt")
@@ -125,30 +28,32 @@ def getResults
   while missed.count > 0
     missed = performSearch(r, missed)
   end
-  # Sort the results
+  # Sort the results (calls sortResults)
   system("ruby sort.rb -t")
 end
 
-# Sorts the results by # of hits
-# Uploads the daily results file to the repo
+############################################
+#            SORT RESULTS (-t)             #
+# => Sorts the results by # of hits        #
+# and writes the results to the log file   #
+# TODO -> make the upload automated        #
+############################################
 def sortResults
   # Replace numbers like 51,969 with 51969 (so that we can compare them)
   File.open("clean.txt", "w") do |c|
     File.foreach("results.txt") { |line| x = line.gsub(",", ""); c.write(x) }
   end
 
-  # The array of the top 100 people
   top100 = []
-
   # Obfuscated and unreadable to make it seem that I know hax
   # Sorts the name by the number of occurences
   File.read("clean.txt")
-    .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending, split so that article is disregarded
+    .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
     .first(100).each{ |entry| top100.push(entry) }
 
   # Get the articles for the top 100 links
+  # This makes a file with the person and articles (withArticles.txt)
   r = getRedditAPI()
-  # This makes a file with the person and articles
   missed = getArticle(r, top100)
   while missed.count > 0
     missed = getArticle(r, missed)
@@ -173,9 +78,70 @@ def sortResults
   # system("git push origin master")
 end
 
+
+##############################################
+#             PERFORM SEARCH                 #
+# => Used in getResults. Returns an array of #
+# people who erred. Keeps being called       #
+# "recursively" until no more people have    #
+# erred. Writes to results.txt               #
+# => r - the Reddit API wrapper              #
+# => people - the array of people to search  #
+##############################################
+def performSearch(r, people)
+  missed = []
+  f = File.open("results.txt", "a")
+  start = Time.now; reqCount = 0
+  for person in people do
+    begin
+      totalCount = 0
+      res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
+      counter = res.count
+      reqCount += 1
+      # Check how many there actually are
+      # Don't even check if they don't have results
+      # TODO -> Find a better threshold
+      if res.count > 0
+        totalCount += countTitles(res, person)
+      end
+      # If there is more than one page
+      repeat = 1
+      while counter == (repeat * 100)
+        after = res[99]["name"]
+        res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
+        reqCount += 1
+        counter += res.count
+        repeat = repeat + 1
+        totalCount += countTitles(res, person)
+      end
+
+      # Write the results
+      f.write("#{person}:#{totalCount}\n")
+      puts "#{person} #{totalCount}\n"
+      endTime = Time.now
+
+      # Make sure we do not do > 60 requests per minute
+      if reqCount == 60
+        # checkApiUsage will sleep if need be
+        checkApiUsage(start, endTime)
+        reqCount = 0
+        start = Time.now
+      end
+    rescue
+      puts "Presumably 503 Error on #{person}"
+      missed.push(person)
+      # puts "\n#{missed}\n\n"
+    end
+  end
+  f.close()
+  # Return the array of people who erred out
+  return missed
+end
+
+
+# TODO -> Use the Faroo/AlchemyAPI for this
 # Get the most relevant news article for the Top 100
 # Returns a list of people erred (similar logic to getResults)
-# TODO -> Use the Faroo/AlchemyAPI for this
 def getArticle(r, top100)
   f = File.open("withArticles.txt", "a")
   missed = []
@@ -194,8 +160,8 @@ def getArticle(r, top100)
       endTime = Time.now
       # Make sure we do not do > 60 requests per minute
       if reqCount == 60
-        # checkRequests will sleep if need be
-        checkRequests(start, endTime)
+        # checkApiUsage will sleep if need be
+        checkApiUsage(start, endTime)
         reqCount = 0
         start = Time.now
       end
@@ -208,21 +174,63 @@ def getArticle(r, top100)
   return missed
 end
 
-# Sort people.txt alphabetically
-def sortPeople
-  sorted = File.readlines("people.txt").sort
-  File.open("people.txt", "w") do |f|
-    sorted.each do |entry|
-      f.write(entry)
-    end
+############################################
+#            Boring Utility Stuff          #
+############################################
+
+# Returns an authorized Reddit API
+def getRedditAPI
+  clientId = File.open("config.yml") { |f| YAML.load(f)["REDDITCLIENTID"]}
+  username = File.open("config.yml") { |f| YAML.load(f)["REDDITUSERNAME"]}
+  password = File.open("config.yml") { |f| YAML.load(f)["REDDITPASSWORD"]}
+  secret = File.open("config.yml") { |f| YAML.load(f)["REDDITSECRET"]}
+  r = Redd.it(:script, clientId, secret, username, password, :user_agent => "peopole v1.0.0" )
+  r.authorize!
+  puts "Redd is authenticated!"
+  return r
+end
+
+# Sleeps if we make > 60 requests per minute
+# Rounds the output because otherwise team members cannot handle the accuracy!
+def checkApiUsage(start, endTime)
+  if ((endTime - start) < 60)
+    puts "\n* WAITING #{((start + 60) - endTime).round(2)} SECONDS *\n\n"
+    sleep((start + 60) - endTime)
   end
 end
 
+# Parses the returned JSON and only increments the count
+# for articles that include the person's name in the article title
+def countTitles(json, person)
+  c = 0
+  for i in 0..(json.count - 1)
+    if json[i]["title"].include?(person)
+      c += 1
+    end
+  end
+  return c
+end
+
+# Returns an array (without \n) of all the people we are searching for
+def getPeople()
+  people = []
+  peeps = File.open("people.txt").read
+  peeps.each_line do |line|
+    people.push(line.gsub!("\n", ""))
+  end
+  # This is ugly
+  return people
+end
+
+# Sort people.txt alphabetically
+def sortPeople
+  sorted = File.readlines("people.txt").sort
+  File.open("people.txt", "w") { |f| sorted.each do |entry| f.write(entry) end }
+end
 
 ######################
 ######## MAIN ########
 ######################
-
 if ARGV[0] == "-p"
   sortPeople
 elsif ARGV[0] == "-t"
