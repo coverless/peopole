@@ -26,7 +26,7 @@ end
 # Rounds the output because otherwise team members cannot handle the accuracy!
 def checkRequests(start, endTime)
   if ((endTime - start) < 60)
-    puts "\n* WAITING #{((start + 60) - endTime).round(2)} SECONDS *\n"
+    puts "\n* WAITING #{((start + 60) - endTime).round(2)} SECONDS *\n\n"
     sleep((start + 60) - endTime)
   end
 end
@@ -104,7 +104,7 @@ def performSearch(r, people)
       puts "Presumably 503 Error on #{person}"
       # need to push person with new line?
       missed.push(person)
-      puts "\n#{missed}\n\n"
+      # puts "\n#{missed}\n\n"
     end
   end
   f.close()
@@ -175,17 +175,18 @@ end
 
 # Get the most relevant news article for the Top 100
 # Returns a list of people erred (similar logic to getResults)
+# TODO -> Use the Faroo/AlchemyAPI for this
 def getArticle(r, top100)
   f = File.open("withArticles.txt", "a")
   missed = []
   start = Time.now; reqCount = 0
-  for person in top100 do
   position = 1
+  for person in top100 do
     begin
       search = person.split(":")[0]
       res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
       reqCount += 1
-      puts "Getting article for #{position}. #{person}"
+      puts "Getting article for #{position}. #{search}"
       position += 1
       url = res[0]["url"]
 

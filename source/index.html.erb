@@ -15,7 +15,7 @@ title: peopole
   <!-- For each thing in the list add an entry -->
   <!-- TODO -> change the file name -->
   <%
-    f = File.open("#{Dir.pwd}/logs/2015-08-03.txt", "r");
+    f = File.open("#{Dir.pwd}/logs/2015-08-04.txt", "r");
     a = f.read().split("\n");
     count = 0;
     for entry in a do
@@ -26,6 +26,7 @@ title: peopole
         <span class="list-name"> <%= count %>. <%= name %> </span>
         <div class="list-bottom-line"><span class="list-change">(▲7)</span>
           <a href ="<%=link %>" target="_blank">
+            <!-- TODO -> Make the link title relevant -->
             <a1 class="list-link-text">Whatever the articles is..</a1><a>
         </div>
       </div>
