@@ -13,31 +13,66 @@ title: peopole
 <div id="box">
 
   <!-- For each thing in the list add an entry -->
-  <!-- TODO -> LOOKS UGLY AT THE MOMENT -->
   <%
     date = Time.new
     day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
     month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
-    results = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
-    begin
-      f = File.open(results, "r");
-    rescue
-      yesterday = date - (60 * 60 * 24)
-      day = yesterday.day.to_s.length == 1 ? "0" + yesterday.day.to_s : yesterday.day.to_s
-      month = yesterday.month.to_s.length == 1 ? "0" + yesterday.month.to_s : yesterday.month.to_s
-      results = Dir.pwd + "/logs/#{yesterday.year}-#{month}-#{day}.txt"
-      f = File.open(results, "r");
+    todayResults = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
+    # Yesterday's date
+    yesterday = date - (60 * 60 * 24)
+    yday = yesterday.day.to_s.length == 1 ? "0" + yesterday.day.to_s : yesterday.day.to_s
+    ymonth = yesterday.month.to_s.length == 1 ? "0" + yesterday.month.to_s : yesterday.month.to_s
+    yesterdayResults = Dir.pwd + "/logs/#{yesterday.year}-#{ymonth}-#{yday}.txt"
+    if File.exist?(todayResults)
+      f = File.open(todayResults, "r")
+      yf = File.open(yesterdayResults, "r")
+    else
+      # We need yesterday's results
+      twoDays = yesterday - (60 * 60 * 24)
+      tday = twoDays.day.to_s.length == 1 ? "0" + twoDays.day.to_s : twoDays.day.to_s
+      tmonth = twoDays.month.to_s.length == 1 ? "0" + twoDays.month.to_s : twoDays.month.to_s
+      twoDaysResults = Dir.pwd + "/logs/#{yesterday.year}-#{tmonth}-#{tday}.txt"
+      f = File.open(yesterdayResults, "r")
+      yf = File.open(twoDaysResults, "r")
     end
     a = f.read().split("\n");
+    yesterInfo = yf.read().split("\n")
+
+    # Make the people yesterday into array with the index being their spot
+    change = []
+    index = 0
+    for thing in yesterInfo do
+      change[index] = thing.split(";")[0]
+      index += 1
+    end
+
     count = 0;
     for entry in a do
       count += 1;
       clean = entry.split(";", 3); name = clean[0];
       title = clean[1]; link = clean[2];
+      if !change.index(name).nil?
+        yesterdayPosition = change.index(name) + 1
+      else
+        yesterdayPosition = 0
+      end
+      if yesterdayPosition == 0
+        status = "NEW"
+      elsif yesterdayPosition == count
+        status = "▬"
+      elsif yesterdayPosition > count
+        status = "▲#{yesterdayPosition - count}"
+      else
+        status ="▼#{count - yesterdayPosition}"
+      end
+
+      # Check the previous day's entry and calculate the difference
+
+
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
-        <div class="list-bottom-line"><span class="list-change">(▲7)</span>
+        <div class="list-bottom-line"><span class="list-change">(<%= status %>)</span>
           <a href ="<%= link %>" target="_blank">
             <!-- TODO -> Make the link title relevant -->
             <a1 class="list-link-text"><%= title %></a1><a>
