@@ -5,6 +5,7 @@
 require 'redd'
 require 'json'
 require 'yaml'
+require 'net/http'
 
 sslpath = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
 ENV['SSL_CERT_FILE'] = sslpath
@@ -146,28 +147,26 @@ end
 # Get the most relevant news article for the Top 100
 # Returns a list of people erred (similar logic to getResults)
 def getArticle(r, top100)
+  farooKey = File.open("config.yml") { |f| YAML.load(f)["FAROOKEY"]}
   f = File.open("withArticles.txt", "a")
   missed = []
-  start = Time.now; reqCount = 0
   position = 1
   for person in top100 do
     begin
       search = person.split(":")[0]
-      res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
-      reqCount += 1
+      u = URI.encode("http://www.faroo.com/api?q=#{search}&src=news&key=#{farooKey}&f=json")
+      uri = URI.parse(u)
+      response = Net::HTTP.get(uri)
+      res = JSON.parse(response)
+      # TODO -> clean this up, and if there are no results this will break
+      title = res["results"][0]["title"]
+      article = res["results"][0]["url"]
+      # res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
       puts "Getting article for #{position}. #{search}"
       position += 1
-      url = res[0]["url"]
-
-      f.write("#{person};#{url}\n")
-      endTime = Time.now
-      # Make sure we do not do > 60 requests per minute
-      if reqCount == 60
-        # checkApiUsage will sleep if need be
-        checkApiUsage(start, endTime)
-        reqCount = 0
-        start = Time.now
-      end
+      f.write("#{search};#{title};#{article}\n")
+      # So we do not exceed the rate limit
+      sleep(2)
     rescue
       puts "503 on #{search}"
       missed.push(person)

@@ -32,14 +32,15 @@ title: peopole
     count = 0;
     for entry in a do
       count += 1;
-      clean = entry.split(":", 2); name = clean[0]; link = clean[1].split(";")[1];
+      clean = entry.split(";", 3); name = clean[0];
+      link = clean[1].split(";")[1]; title = clean[1].split(";")[0];
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
         <div class="list-bottom-line"><span class="list-change">(▲7)</span>
-          <a href ="<%=link %>" target="_blank">
+          <a href ="<%= link %>" target="_blank">
             <!-- TODO -> Make the link title relevant -->
-            <a1 class="list-link-text">Whatever the articles is..</a1><a>
+            <a1 class="list-link-text"><%= title %></a1><a>
         </div>
       </div>
   <% end %>
