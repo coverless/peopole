@@ -166,9 +166,11 @@ def getArticle(r, top100)
       position += 1
       f.write("#{search};#{title};#{article}\n")
       # So we do not exceed the rate limit
-      sleep(2)
-    rescue
-      puts "503 on #{search}"
+      sleep(3)
+    # TODO -> don't rescue from Exception
+    rescue Exception => e
+      puts e
+      # puts "503 on #{search}"
       missed.push(person)
     end
   end
@@ -244,4 +246,5 @@ else
   puts "\t-g (get the results)"
   puts "\t-t (sort the results by # of tweets and get the related article)"
   puts "\t-p (sort people.txt alphabetically)"
+  getArticle(getRedditAPI(), [])
 end

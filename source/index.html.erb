@@ -37,7 +37,6 @@ title: peopole
     end
     a = f.read().split("\n");
     yesterInfo = yf.read().split("\n")
-
     # Make the people yesterday into array with the index being their spot
     change = []
     index = 0
@@ -45,12 +44,17 @@ title: peopole
       change[index] = thing.split(";")[0]
       index += 1
     end
-
     count = 0;
     for entry in a do
       count += 1;
       clean = entry.split(";", 3); name = clean[0];
       title = clean[1]; link = clean[2];
+      # Truncate the title length if needed
+      # TODO -> truncate at the end of a word?
+      if title.length > 70
+        title = "#{title[0, 70]}..."
+      end
+      # Check the previous day's entry and calculate the difference
       if !change.index(name).nil?
         yesterdayPosition = change.index(name) + 1
       else
@@ -65,10 +69,6 @@ title: peopole
       else
         status ="▼#{count - yesterdayPosition}"
       end
-
-      # Check the previous day's entry and calculate the difference
-
-
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
