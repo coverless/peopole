@@ -2,7 +2,8 @@
 
 /* CURTIS' CSS CODE */
 html, body {
-      /* the 100%s and 0 were implicit */
+      /* so we don't have that weird horizontal scroll bar */
+      overflow-x: hidden;
     }
 
     body {
@@ -22,21 +23,23 @@ html, body {
     }
 
     #slogan {
-      position: relative;
+      position: absolute;
       display: inline-block;
-      left:10%;
+      left:13%;
     }
 
     #about {
       position: absolute;
       display: inline-block;
       left:65%;
+      /*text-decoration: underline;*/
     }
 
     #contact_us {
       position: relative;
       display: inline-block;
       left:75%;
+      /*text-decoration: underline;*/
     }
 
     .headerbar-text {
