@@ -25,6 +25,9 @@ html, body {
     #slogan {
       position: relative;
       display: inline-block;
+      width: 80%;
+      margin-left: 15%;
+      white-space: nowrap;
       /*left:13%;*/
       /*margin-left: 12%;*/
     }
@@ -54,6 +57,7 @@ html, body {
     #banner {
       width: 80%;
       margin-left: 10%;
+      white-space: nowrap;
     }
 
     #box {
