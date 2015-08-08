@@ -10,7 +10,6 @@ require 'net/http'
 sslpath = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
 ENV['SSL_CERT_FILE'] = sslpath
 
-
 ############################################
 #              GET RESULTS (-g)            #
 # => Calls performSearch which writes to   #
@@ -82,7 +81,6 @@ def sortResults
   # system("git push origin master")
 end
 
-
 ##############################################
 #             PERFORM SEARCH                 #
 # => Used in getResults. Returns an array of #
@@ -141,7 +139,6 @@ def performSearch(r, people)
   # Return the array of people who erred out
   return missed
 end
-
 
 # TODO -> Use the Faroo/AlchemyAPI for this
 # Get the most relevant news article for the Top 100
@@ -241,10 +238,11 @@ elsif ARGV[0] == "-t"
   sortResults
 elsif ARGV[0] == "-g"
   getResults
+elsif ARGV[0] == "-force"
+  getArticle(getRedditAPI(), [])
 else
   puts "\nUSAGE: run 'ruby sort' with one of the following parameters"
   puts "\t-g (get the results)"
   puts "\t-t (sort the results by # of tweets and get the related article)"
   puts "\t-p (sort people.txt alphabetically)"
-  getArticle(getRedditAPI(), [])
 end

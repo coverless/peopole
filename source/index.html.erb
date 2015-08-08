@@ -4,14 +4,17 @@ title: peopole
 
 <div id="logo"><span class="logo-text">peopole.</span></div>
 
+<div id="banner">
+
+<div id="slogan"><span class="headerbar-text">the most talked about people today</span></div>
+
 <div id="about"><span class="headerbar-text">about</span></div>
 
 <div id="contact_us"><span class="headerbar-text">contact us</span></div>
 
-<div id="slogan"><span class="headerbar-text">the most talked about people today</span></div>
+</div><!-- End of banner -->
 
 <div id="box">
-
   <!-- For each thing in the list add an entry -->
   <%
     date = Time.new
@@ -41,7 +44,13 @@ title: peopole
     change = []
     index = 0
     for thing in yesterInfo do
-      change[index] = thing.split(";")[0]
+      # Get rid of the beginning of file encoding
+      # Only if there is weird encoding when we copy/paste!
+      if index == 0
+        change[index] = thing.split(";")[0][0..-1]
+      else
+        change[index] = thing.split(";")[0]
+      end
       index += 1
     end
     count = 0;
@@ -49,6 +58,10 @@ title: peopole
       count += 1;
       clean = entry.split(";", 3); name = clean[0];
       title = clean[1]; link = clean[2];
+      # Get rid of beginning encoding
+      if count == 1
+        name = clean[0][0..-1]
+      end
       # Truncate the title length if needed
       # TODO -> truncate at the end of a word?
       if title.length > 70
@@ -73,11 +86,21 @@ title: peopole
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
         <div class="list-bottom-line"><span class="list-change">(<%= status %>)</span>
-          <a href ="<%= link %>" target="_blank">
+          <a href ="<%= link %>" target="_blank"/>
             <!-- TODO -> Make the link title relevant -->
-            <a1 class="list-link-text"><%= title %></a1><a>
+            <a1 class="list-link-text"><%= title %></a1>
+          <a>
         </div>
       </div>
   <% end %>
 
 </div> <!-- End the 'box' div -->
+</a>
+
+<!-- TODO -> move this into the JS file -->
+<script type="text/javascript">
+  fitText(document.getElementById('logo'), 1.0, { minFontSize: '50px', maxFontSize: '120px' })
+  fitText(document.getElementById('slogan'), 0.5, { minFontSize: '20px', maxFontSize: '40px' })
+  fitText(document.getElementById('about'), 0.5, { minFontSize: '20px', maxFontSize: '40px' })
+  fitText(document.getElementById('contact_us'), 0.5, { minFontSize: '20px', maxFontSize: '40px' })
+</script>

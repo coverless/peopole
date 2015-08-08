@@ -17,41 +17,50 @@ html, body {
     }
 
     .logo-text {
-      font-size: 70px;
+      /*font-size: 70px;*/
       color: rgb(254, 251, 245);
       font-family: Lobster;
     }
 
     #slogan {
-      position: absolute;
+      position: relative;
       display: inline-block;
-      left:13%;
+      /*left:13%;*/
+      /*margin-left: 12%;*/
     }
 
     #about {
-      position: absolute;
+      position: relative;
       display: inline-block;
-      left:65%;
+      /*left:50%;*/
+      /*padding-left: 10%;*/
       /*text-decoration: underline;*/
     }
 
     #contact_us {
       position: relative;
       display: inline-block;
-      left:75%;
+      /*left:55%;*/
+      /*padding-left: 10%;*/
       /*text-decoration: underline;*/
     }
 
     .headerbar-text {
-      font-size: 35px;
+      /*font-size: 35px;*/
       color: rgb(254, 251, 245);
       font-family: Lobster;
+    }
+
+    #banner {
+      width: 80%;
+      margin-left: 10%;
     }
 
     #box {
       width: 80%;
       margin-left: 10%;
-      -webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
+      /*display: inline-block;*/
+      /*-webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;*/
       box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
       background-image: none;
       background-color: rgb(254, 251, 245);
