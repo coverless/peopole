@@ -100,6 +100,14 @@ html, body {
       width: auto;
     }
 
+    .green {
+      color: rgb(0, 204, 0)
+    }
+
+    .red {
+      color: rgb(204, 0, 0)
+    }
+
     .list-link {
       font-size: 18px;
       border-color: rgb(0, 0, 238);

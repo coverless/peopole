@@ -75,17 +75,21 @@ title: peopole
       end
       if yesterdayPosition == 0
         status = "NEW"
-      elsif yesterdayPosition == count
-        status = "▬"
+        css = "green"
       elsif yesterdayPosition > count
         status = "▲#{yesterdayPosition - count}"
-      else
+        css = "green"
+      elsif yesterdayPosition < count
         status ="▼#{count - yesterdayPosition}"
+        css = "red"
+      else
+        status = "▬"
+        css = ""
       end
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
-        <div class="list-bottom-line"><span class="list-change">(<%= status %>)</span>
+        <div class="list-bottom-line"><span class="list-change <%= css %>">(<%= status %>)</span>
           <a href ="<%= link %>" target="_blank"/>
             <!-- TODO -> Make the link title relevant -->
             <a1 class="list-link-text"><%= title %></a1>
