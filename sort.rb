@@ -140,9 +140,16 @@ def performSearch(r, people)
   return missed
 end
 
-# TODO -> Use the Faroo/AlchemyAPI for this
-# Get the most relevant news article for the Top 100
-# Returns a list of people erred (similar logic to getResults)
+##############################################
+#               GET ARTICLES                 #
+# => Used in getResults. Returns an array of #
+# people who erred. Keeps being called       #
+# "recursively" until no more people have    #
+# erred. Writes to withArticles.txt          #
+# => r - the Reddit API wrapper              #
+# => people - the array of people to search  #
+##############################################
+# TODO -> Breaks order if a person errs
 def getArticle(r, top100)
   farooKey = File.open("config.yml") { |f| YAML.load(f)["FAROOKEY"]}
   f = File.open("withArticles.txt", "a")
