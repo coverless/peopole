@@ -74,11 +74,10 @@ def sortResults
   end
 
   # Push the results to the repo
-  # Using this would cause commit errors until we take 'logs/' out of the .gitignore
   # TODO - Need to automate providing uname/pwd
-  # system("git add #{resultsFile}")
-  # system("git commit -m '#{resultsFile}'")
-  # system("git push origin master")
+  system("git add #{resultsFile}")
+  system("git commit -m '#{date.year}-#{month}-#{day}'")
+  system("git push origin master")
 end
 
 ##############################################
