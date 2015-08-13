@@ -66,6 +66,7 @@ def sortResults
   date = Time.new
   day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
   month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
+  # TODO -> put date in a variable
   resultsFile = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
@@ -73,11 +74,13 @@ def sortResults
       .first(100).each { |entry| f.write(entry + "\n") }
   end
 
-  # Push the results to the repo
+  # Push the results to the repo and update the site
+  # The working directory needs to be clean for this to work!
   # TODO - Need to automate providing uname/pwd
   system("git add #{resultsFile}")
   system("git commit -m '#{date.year}-#{month}-#{day}'")
   system("git push origin master")
+  system("bundle exec rake publish")
 end
 
 ##############################################
