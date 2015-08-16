@@ -70,7 +70,7 @@ def sortResults
   resultsFile = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
-      .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split("§")[0].to_i }
+      .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split("`")[0].to_i }
       .first(100).each { |entry| f.write(entry + "\n") }
   end
 
@@ -170,7 +170,7 @@ def getArticle(r, top100)
       # res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
       puts "Getting article for #{position}. #{search}"
       position += 1
-      f.write("#{search}§#{title}§#{article}\n")
+      f.write("#{search}`#{title}`#{article}\n")
       # So we do not exceed the rate limit
       sleep(3)
     # TODO -> don't rescue from Exception
