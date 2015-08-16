@@ -47,16 +47,16 @@ title: peopole
       # Get rid of the beginning of file encoding
       # Only if there is weird encoding when we copy/paste!
       if index == 0
-        change[index] = thing.split(";")[0][0..-1]
+        change[index] = thing.split("§")[0][0..-1]
       else
-        change[index] = thing.split(";")[0]
+        change[index] = thing.split("§")[0]
       end
       index += 1
     end
     count = 0;
     for entry in a do
       count += 1;
-      clean = entry.split(";", 3); name = clean[0];
+      clean = entry.split("§", 3); name = clean[0];
       title = clean[1]; link = clean[2];
       # Get rid of beginning encoding
       if count == 1
