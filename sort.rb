@@ -165,8 +165,8 @@ def getArticle(r, top100)
       response = Net::HTTP.get(uri)
       res = JSON.parse(response)
       # TODO -> clean this up, and if there are no results this will break
-      title = res["results"][0]["title"]
-      article = res["results"][0]["url"]
+      title = res["results"][0]["title"].chomp
+      article = res["results"][0]["url"].chomp
       # res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
       puts "Getting article for #{position}. #{search}"
       position += 1
