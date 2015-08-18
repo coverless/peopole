@@ -1,7 +1,5 @@
 # peopole: The People Power Ranker
 
-(Not finalized)
-
 #### Team: Coverless Software
 
 Curtis Matthias - Lead Designer / Senior Developer
@@ -16,7 +14,7 @@ The top 100 people are ranked in decending order based on how many times they ha
 
 When clicking on any of the people ranked, peopole provides the user with the top news article about that person.
 
-Every day when a new list of people is generated the user will see thier ranking compared to yesterdays ranking providing a "power ranking" feel.
+Every day when a new list of people is generated the user will see their ranking compared to yesterday's ranking providing a "power ranking" feel.
 
 #### Implementation:
 We use [Middleman](https://middlemanapp.com/) to build the [live site](http://coverless.github.io/peopole)
