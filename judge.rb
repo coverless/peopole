@@ -363,7 +363,7 @@ elsif ARGV[0] == "-d"
 elsif ARGV[0] == "-force"
   getArticle(getRedditAPI(), [])
 else
-  puts "\nUSAGE: run 'ruby sort' with one of the following parameters"
+  puts "\nUSAGE: run 'ruby judge' with one of the following parameters"
   puts "\t-g (get the results)"
   puts "\t-t (sort the results by # of tweets and get the related article)"
   puts "\t-p (sort people.txt alphabetically)"
