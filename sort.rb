@@ -184,6 +184,113 @@ def getArticle(r, top100)
   return missed
 end
 
+##############################################
+#               ADD PEOPLE                   #
+# => Adds people from toAdd.txt to           #
+# people.txt. Does not add duplicates        #
+##############################################
+# TODO this is sketchy. Needs to sort people at the end?
+def addPeople
+  f = File.open("toAdd.txt", "r")
+  toadd = []
+  f.each_line do |line|
+    toadd.push(line)
+  end
+  f.close()
+  # Make sure there is a new line on the last entry
+  toadd[-1].gsub!("\n", "")
+  toadd[-1] += "\n"
+
+  f = File.open("people.txt", "r")
+  people = []
+  f.each_line do |line|
+    people.push(line)
+  end
+  f.close()
+  # need clone so that can do delete()?
+  adding = toadd.clone
+  # If people doesn't have this person then add them to the people list
+  toadd.each { |x| if people.include?(x) then adding.delete(x); puts "#{x.strip()} is already part of the list!" else people.push(x) end }
+  # Delete duplicates and sort
+  people.uniq!
+  people.sort!
+  File.open("people.txt", "w") do |f|
+    people.each { |x| if adding.include?(x) then puts "Added #{x}" end; f.write(x) }
+  end
+end
+
+##############################################
+#            CLEAN UP PEOPLE                 #
+# => Deletes anyone who hasn't been          #
+# mentioned in one month                     #
+##############################################
+def cleanUpPeople
+  # people is the array of all people in the file
+  people = getPeople()
+  r = getRedditAPI()
+  madeTheCut = []
+  c = File.open("cut.txt", "w")
+  start = Time.now; reqCount = 0
+  for person in people do
+    begin
+      res = JSON.parse(r.search("#{person}", :t => "month").to_json)
+      if res.count == 0
+        puts "#{person} has NOT made the cut!"
+        c.write("#{person}\n")
+        next
+      else
+        puts "#{person} has MADE the cut!"
+        madeTheCut.push(person)
+      end
+
+      # Make sure we do not do > 60 requests per minute
+      if reqCount == 60
+        # checkApiUsage will sleep if need be
+        checkApiUsage(start, endTime)
+        reqCount = 0
+        start = Time.now
+      end
+    rescue
+      puts "#{person} failed... pretending they passed"
+      madeTheCut.push(person)
+    end
+  end
+  c.close()
+  # Add the people who have made the cut
+  File.open("people.txt", "w") do |f|
+    madeTheCut.each { |x| f.write("#{x}\n")}
+  end
+end
+
+##############################################
+#              DELETE PEOPLE                 #
+# => Deletes from people.txt (toDelete.txt)  #
+##############################################
+# TODO - don't care about case
+def deletePeople
+  del = []
+  File.open("toDelete.txt", "r") do |f|
+    f.each_line do |line|
+      del.push(line.strip)
+    end
+  end
+  people = getPeople()
+  # The people who should not be deleted
+  updated = []
+  people.each do |entry|
+    if del.include? (entry)
+      # They should be deleted
+      puts "Deleting #{entry}"
+      next
+    else
+      updated.push(entry)
+    end
+  end
+  File.open("people.txt", "w") do |f|
+    updated.each { |x| f.write("#{x}\n")}
+  end
+end
+
 ############################################
 #            Boring Utility Stuff          #
 ############################################
@@ -247,6 +354,12 @@ elsif ARGV[0] == "-t"
   sortResults
 elsif ARGV[0] == "-g"
   getResults
+elsif ARGV[0] == "-a"
+  addPeople
+elsif ARGV[0] == "-c"
+  cleanUpPeople
+elsif ARGV[0] == "-d"
+  deletePeople
 elsif ARGV[0] == "-force"
   getArticle(getRedditAPI(), [])
 else
@@ -254,4 +367,7 @@ else
   puts "\t-g (get the results)"
   puts "\t-t (sort the results by # of tweets and get the related article)"
   puts "\t-p (sort people.txt alphabetically)"
+  puts "\t-a (add people from toAdd.txt)"
+  puts "\t-c (cleanup people with no results in the last month )"
+  puts "\t-d (delete people from toDelete.txt)"
 end
