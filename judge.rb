@@ -32,7 +32,7 @@ def getResults
   elapsedEnd = Time.now
   puts "\nTOTAL TIME #{((elapsedEnd - elapsedStart)/60).truncate} MINUTES\n\n"
   # Sort the results (calls sortResults)
-  system("ruby sort.rb -t")
+  system("ruby judge.rb -t")
 end
 
 ############################################
