@@ -271,14 +271,14 @@ def deletePeople
   del = []
   File.open("toDelete.txt", "r") do |f|
     f.each_line do |line|
-      del.push(line.strip)
+      del.push(line.strip.downcase)
     end
   end
   people = getPeople()
   # The people who should not be deleted
   updated = []
   people.each do |entry|
-    if del.include? (entry)
+    if del.include? (entry.downcase)
       # They should be deleted
       puts "Deleting #{entry}"
       next
