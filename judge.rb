@@ -134,11 +134,9 @@ def performSearch(r, people)
     rescue
       puts "Presumably 503 Error on #{person}"
       missed.push(person)
-      # puts "\n#{missed}\n\n"
     end
   end
   f.close()
-  # Return the array of people who erred out
   return missed
 end
 
@@ -167,16 +165,14 @@ def getArticle(r, top100)
       # TODO -> clean this up, and if there are no results this will break
       title = res["results"][0]["title"].chomp
       article = res["results"][0]["url"].chomp
-      # res = JSON.parse(r.search("#{search}", :limit => 1, :sort => "top", :t => "week").to_json)
       puts "Getting article for #{position}. #{search}"
       position += 1
       f.write("#{search}`#{title}`#{article}\n")
-      # So we do not exceed the rate limit
+      # So we do not exceed the rate limit and Faroo doesn't flip
       sleep(3)
     # TODO -> don't rescue from Exception
     rescue Exception => e
       puts e
-      # puts "503 on #{search}"
       missed.push(person)
     end
   end
@@ -242,7 +238,6 @@ def cleanUpPeople
         puts "#{person} has MADE the cut!"
         madeTheCut.push(person)
       end
-
       # Make sure we do not do > 60 requests per minute
       if reqCount == 60
         # checkApiUsage will sleep if need be
