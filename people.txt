@@ -9,6 +9,7 @@ Aaron Staton
 Aaron Taylor-Johnson
 Abbey Lincoln
 Abbie Cornish
+Abdel Fattah el-Sisi
 Abigail Breslin
 Adam Brody
 Adam Devine
@@ -363,6 +364,7 @@ Chris Colfer
 Chris Crocker
 Chris Evans
 Chris Hemsworth
+Chris Hyndman
 Chris Kelly
 Chris Klein
 Chris Lowell
@@ -688,6 +690,7 @@ Forest Whitaker
 Frances Bean Cobain
 Frances McDormand
 Frances O'Connor
+Frank Klopas
 Frank Langella
 Frank Ocean
 Frankie Muniz
@@ -823,6 +826,7 @@ Izabel Goulart
 Izabella Miko
 Izabella Scorupco
 J. Alexander
+J.Cole
 JC Chasez
 Jabari Parker
 Jack Black
@@ -842,6 +846,7 @@ Jaden Smith
 Jahlil Okafor
 Jaime King
 Jaime Pressly
+Jake Bailey
 Jake Bugg
 Jake Gyllenhaal
 Jake T. Austin
@@ -961,6 +966,7 @@ Jessica Brown Findlay
 Jessica Chastain
 Jessica Hardy
 Jessica Hart
+Jessica Jones
 Jessica Lange
 Jessica Lowndes
 Jessica Lucas
@@ -1044,6 +1050,7 @@ Jonny Lee Miller
 Jordan Francis
 Jordana Brewster
 Jordin Sparks
+Jose Bautista
 Joseph Gordon-Levitt
 Josh Bowman
 Josh Brolin
@@ -1063,7 +1070,6 @@ Josh Strickland
 Joshua Jackson
 Josie Loren
 Joss Stone
-José Bautista
 Jourdan Dunn
 Joy Bryant
 Joy Lauren
@@ -1234,6 +1240,7 @@ Lamar Odom
 Lana Del Rey
 Lance Armstrong
 Lance Bass
+Larry Hernandez
 Larry King
 Laura Bailey
 Laura Dern
@@ -1282,11 +1289,13 @@ Lil Dicky
 Lil Kim
 Lil Mama
 Lil Wayne
+Lilly Singh
 Lily Aldridge
 Lily Allen
 Lily Cole
 Lily Collins
 Lily Donaldson
+Lincoln Chafee
 Linda Cardellini
 Linda Evangelista
 Lindsay Ellingson
@@ -1317,7 +1326,6 @@ Lucy Liu
 Lucy Punch
 Luis Chavez
 Luis Figo
-Luis Suárez
 Luke Perry
 Luke Wilson
 Lupe Fiasco
@@ -1389,6 +1397,7 @@ Mary-Louise Parker
 Masi Oka
 Matt Barr
 Matt Bomer
+Matt Cullen
 Matt Dallas
 Matt Damon
 Matt Dillon
@@ -1450,6 +1459,7 @@ Michael Jackson
 Michael Jordan
 Michael Kors
 Michael Lohan
+Michael O'Leary
 Michael Phelps
 Michael Schumacher
 Michael Shannon
@@ -1591,6 +1601,7 @@ Paris Hilton
 Paris Jackson
 Parker Posey
 Pasquale Rotella
+Patrice Bernier
 Patricia Arquette
 Patricia Clarkson
 Patricia Field
@@ -1615,7 +1626,6 @@ Paz de la Huerta
 Peaches Geldof
 Pearl Osbourne
 Pedro Almodovar
-Pelé
 Penelope Cruz
 Penelope Disick
 Penelope Wilton
@@ -1669,6 +1679,7 @@ Rachel Crow
 Rachel Hunter
 Rachel McAdams
 Rachel Nichols
+Rachel Notley
 Rachel Roy
 Rachel Stevens
 Rachel Weisz
@@ -1786,11 +1797,11 @@ Ryan Newman
 Ryan Phillippe
 Ryan Reynolds
 Ryan Seacrest
-Rémi Gaillard
 Sacha Baron Cohen
 Sally Field
 Sally Hawkins
 Salma Hayek
+Sam Brownback
 Sam Palladio
 Sam Witwer
 Sam Worthington
@@ -1974,7 +1985,6 @@ Thierry Mugler
 Thomas Brodie-Sangster
 Thomas Howes
 Thomas Mulcair
-Thomas Müller
 Tia Carrere
 Tiffani Thiessen
 Tiger Woods
@@ -2004,6 +2014,7 @@ Tom Hiddleston
 Tom Holland
 Tom Jones
 Tom Kaulitz
+Tom Mulcair
 Tom Odell
 Tom Parker
 Tom Sturridge
@@ -2071,6 +2082,7 @@ Viola Davis
 Vivica A. Fox
 Vivienne Westwood
 Vladimir Putin
+Waka Flocka Flame
 Walter Palmer
 Wanda Sykes
 Warren Beatty
