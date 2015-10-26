@@ -18,7 +18,7 @@ html, body {
 
     .logo-text {
       /*font-size: 70px;*/
-      color: rgb(254, 251, 245);
+      color: rgb(255, 255, 255);
       font-family: Lobster;
     }
 
@@ -50,7 +50,7 @@ html, body {
 
     .headerbar-text {
       /*font-size: 35px;*/
-      color: rgb(254, 251, 245);
+      color: rgb(255, 255, 255);
       font-family: Lobster;
     }
 
@@ -67,7 +67,7 @@ html, body {
       /*-webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;*/
       box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
       background-image: none;
-      background-color: rgb(254, 251, 245);
+      background-color: rgb(255, 255, 255);
     }
 
     .list-element {
@@ -76,7 +76,7 @@ html, body {
       padding-top: 3%;
       padding-bottom: 3%;
       background-image: none;
-      background-color: rgb(254, 251, 245);
+      background-color: rgb(255, 255, 255);
     }
 
     .list-name {
@@ -87,7 +87,7 @@ html, body {
 
     .list-bottom-line {
       background-image: none;
-      background-color: rgb(254, 251, 245);
+      background-color: rgb(255, 255, 255);
     }
 
     .list-change {
