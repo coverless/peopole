@@ -21,6 +21,7 @@ Adam Sandler
 Adam Senn
 Adele
 Adrian Grenier
+Adrian Peterson
 Adriana Lima
 Adrianne Curry
 Adrianne Palicki
@@ -194,6 +195,7 @@ Behati Prinsloo
 Bella Hadid
 Bella Thorne
 Ben Affleck
+Ben Carson
 Ben Gibbard
 Ben Harper
 Ben Lovett
@@ -241,6 +243,7 @@ Bob Ross
 Bob Saget
 Bobbi Kristina Brown
 Bobby Brown
+Bobby Jindal
 Bonnie Tyler
 Bonnie Wright
 Bono
@@ -308,6 +311,7 @@ Carey Mulligan
 Carice van Houten
 Carine Roitfeld
 Carla Gugino
+Carly Fiorina
 Carly Rae Jepsen
 Carmen Electra
 Caroline Flack
@@ -474,6 +478,7 @@ Danny Masterson
 Danny Sexbang
 Darin Brooks
 Darius Campbell
+Darnell Nurse
 Darren Criss
 Daryl Hannah
 Dave Chappelle
@@ -635,6 +640,7 @@ Emily Ratajkowski
 Eminem
 Emma Bunton
 Emma Roberts
+Emma Slater
 Emma Stone
 Emma Thompson
 Emma Watson
@@ -683,6 +689,7 @@ Felix Kjellberg
 Fergie
 Fernando Torres
 Filippa Hamilton
+Flip Saunders
 Flo Rida
 Florence Welch
 Floyd Mayweather
@@ -722,12 +729,14 @@ George Clooney
 George Lopez
 George Lucas
 George Michael
+George Pataki
 George Shelley
 George W Bush
 George W. Bush
 Georgia May Jagger
 Gerard Butler
 Geri Halliwell
+Germaine Greer
 Gigi Hadid
 Gilles Marini
 Gillian Jacobs
@@ -763,6 +772,7 @@ Harry Styles
 Havana Brown
 Hayden Christensen
 Hayden Panettiere
+Hayes Grier
 Hayley Williams
 Haylie Duff
 Heath Ledger
@@ -980,9 +990,11 @@ Jessica White
 Jessie J
 Jesus Luz
 Jill Scott
+Jill Stein
 Jim Belushi
 Jim Carrey
 Jim Carter
+Jim Gilmore
 Jim Parsons
 Jim Sturgess
 Jimi Hendrix
@@ -1024,6 +1036,7 @@ John F Kennedy Jr
 John Galliano
 John Grimes
 John John Florence
+John Kasich
 John Krasinski
 John Legend
 John Leguizamo
@@ -1046,6 +1059,7 @@ Jonathan Bennett
 Jonathan Jackson
 Jonathan Rhys Meyers
 Jonathan Sadowski
+Jonathan Toews
 Jonny Lee Miller
 Jordan Francis
 Jordana Brewster
@@ -1257,6 +1271,7 @@ Lauren Graham
 Lauren Miller
 Lauren Young
 Lauryn Hill
+Lawrence Lessig
 Le Call
 LeAnn Rimes
 LeBron James
@@ -1301,6 +1316,7 @@ Linda Evangelista
 Lindsay Ellingson
 Lindsay Lohan
 Lindsay Price
+Lindsey Graham
 Lindsey Shaw
 Lindsey Vonn
 Link Neal
@@ -1358,6 +1374,7 @@ Marc Anthony
 Marc Cherry
 Marc Jacobs
 Marcia Cross
+Marco Rubio
 Marcus Mumford
 Margarita Levieva
 Margot Robbie
@@ -1388,8 +1405,10 @@ Marloes Horst
 Martha Stewart
 Martin Freeman
 Martin Kristen
+Martin O'Malley
 Martin Scorsese
 Martina McBride
+Marvin Gaye
 Mary Carey
 Mary J. Blige
 Mary-Kate Olsen
@@ -1418,6 +1437,7 @@ Matthew Morrison
 Matthew Settle
 Matthew Williamson
 Maura Tierney
+Max Domi
 Max George
 Max Thieriot
 May Andersen
@@ -1436,6 +1456,7 @@ Mel Gibson
 Melania Trump
 Melanie Griffith
 Melinda Clarke
+Melissa Benoist
 Melissa George
 Melissa Gorga
 Melissa Joan Hart
@@ -1481,6 +1502,7 @@ Michelle Yeoh
 Mick Jagger
 Mickey Rourke
 Mika
+Mike Huckabee
 Mike Myers
 Mike O'Malley
 Mike Rosenberg
@@ -1721,6 +1743,7 @@ Richard T. Jones
 Richie Rich
 Rick Hilton
 Rick Ross
+Rick Santorum
 Rick Solomon
 Rick Springfield
 Ricky Gervais
@@ -1793,6 +1816,7 @@ Ryan Higa
 Ryan Kwanten
 Ryan Lewis
 Ryan Lochte
+Ryan Mallett
 Ryan Newman
 Ryan Phillippe
 Ryan Reynolds

@@ -77,7 +77,7 @@ def sortResults
   # The working directory needs to be clean for this to work!
   # TODO - Need to automate providing uname/pwd
   system("git add #{resultsFile}")
-  system("git commit -m '#{date.year}-#{month}-#{day}'")
+  system("git commit -m #{date.year}-#{month}-#{day}")
   system("git push origin master")
   system("bundle exec rake publish")
 end
