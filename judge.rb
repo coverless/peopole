@@ -64,9 +64,8 @@ def sortResults
 
   # Format date to YYYY-MM-DD
   date = Time.new
-  day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
-  month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
-  # TODO -> put date in a variable
+  day = getDate(date.day)
+  month = getDate(date.month)
   resultsFile = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
@@ -82,6 +81,12 @@ def sortResults
   system("git push origin master")
   system("bundle exec rake publish")
 end
+
+# Makes date, give it two digits if it needs it
+def getDate(date)
+  date < 10 ? "0#{date}" : date
+end
+
 
 ##############################################
 #             PERFORM SEARCH                 #
