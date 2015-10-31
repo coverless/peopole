@@ -33,10 +33,12 @@ GEM
     eventmachine (1.0.7)
     execjs (2.5.2)
     ffi (1.9.10-x64-mingw32)
+    ffi (1.9.10-x86-mingw32)
     haml (4.0.6)
       tilt
     hike (1.2.3)
     hitimes (1.2.2)
+    hitimes (1.2.2-x86-mingw32)
     hooks (0.4.0)
       uber (~> 0.0.4)
     http_parser.rb (0.6.0)
@@ -116,13 +118,17 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2015.7)
+      tzinfo (>= 1.0.0)
     uber (0.0.13)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    wdm (0.1.1)
 
 PLATFORMS
   x64-mingw32
+  x86-mingw32
 
 DEPENDENCIES
   middleman (~> 3.3.12)

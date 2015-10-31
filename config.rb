@@ -36,16 +36,24 @@
 # activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
-# configure :development do
-#   activate :livereload
-# end
+configure :development do
+  activate :livereload
+end
 
 # Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+helpers do
+   def createDate(day, month, year)
+     day = formatDate(day)
+     month = formatDate(month)
+     # What is better Ruby, implicit or return?
+     return Dir.pwd + "/logs/#{year}-#{month}-#{day}.txt"
+   end
+
+   # Duplicated from judge.rb
+   def formatDate(date)
+     date < 10 ? "0#{date}" : date
+   end
+end
 
 set :css_dir, 'stylesheets'
 

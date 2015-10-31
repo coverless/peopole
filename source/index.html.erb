@@ -16,25 +16,19 @@ title: peopole
 
 <div id="box">
   <!-- For each thing in the list add an entry -->
+  <!-- Helper methods found in config.rb -->
   <%
     date = Time.new
-    day = date.day.to_s.length == 1 ? "0" + date.day.to_s : date.day.to_s
-    month = date.month.to_s.length == 1 ? "0" + date.month.to_s : date.month.to_s
-    todayResults = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
-    # Yesterday's date
+    todayResults = createDate(date.day, date.month, date.year)
     yesterday = date - (60 * 60 * 24)
-    yday = yesterday.day.to_s.length == 1 ? "0" + yesterday.day.to_s : yesterday.day.to_s
-    ymonth = yesterday.month.to_s.length == 1 ? "0" + yesterday.month.to_s : yesterday.month.to_s
-    yesterdayResults = Dir.pwd + "/logs/#{yesterday.year}-#{ymonth}-#{yday}.txt"
+    yesterdayResults = createDate(yesterday.day, yesterday.month, yesterday.year)
     if File.exist?(todayResults)
       f = File.open(todayResults, "r")
       yf = File.open(yesterdayResults, "r")
     else
       # We need yesterday's results
       twoDays = yesterday - (60 * 60 * 24)
-      tday = twoDays.day.to_s.length == 1 ? "0" + twoDays.day.to_s : twoDays.day.to_s
-      tmonth = twoDays.month.to_s.length == 1 ? "0" + twoDays.month.to_s : twoDays.month.to_s
-      twoDaysResults = Dir.pwd + "/logs/#{yesterday.year}-#{tmonth}-#{tday}.txt"
+      twoDaysResults = createDate(twoDays.day, twoDays.month, twoDays.year)
       f = File.open(yesterdayResults, "r")
       yf = File.open(twoDaysResults, "r")
     end
@@ -57,15 +51,15 @@ title: peopole
     for entry in a do
       count += 1;
       clean = entry.split("`", 3); name = clean[0];
-      title = clean[1]; link = clean[2];
+      title = clean[1]; link = clean[2]; displayTitle = title;
       # Get rid of beginning encoding
       if count == 1
         name = clean[0][0..-1]
       end
       # Truncate the title length if needed
       # TODO -> truncate at the end of a word?
-      if title.length > 70
-        title = "#{title[0, 70]}..."
+      if displayTitle.length > 70
+        displayTitle = "#{title[0, 70]}..."
       end
       # Check the previous day's entry and calculate the difference
       if !change.index(name).nil?
@@ -90,8 +84,8 @@ title: peopole
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
         <div class="list-bottom-line"><span class="list-change <%= css %>">(<%= status %>)</span>
-          <a href ="<%= link %>" target="_blank"/>
-            <a1 class="list-link-text"><%= title %></a1>
+          <a href ="<%= link %>" title="<%= title%>" target="_blank"/>
+            <a1 class="list-link-text"><%= displayTitle %></a1>
           <a>
         </div>
       </div>
