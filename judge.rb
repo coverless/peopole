@@ -10,6 +10,9 @@ require 'net/http'
 sslpath = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
 ENV['SSL_CERT_FILE'] = sslpath
 
+# The maximum number of requests we can send in a minute
+REDDIT_API_LIMIT = 60
+
 ############################################
 #              GET RESULTS (-g)            #
 # => Calls performSearch which writes to   #
@@ -47,9 +50,9 @@ def sortResults
     File.foreach("results.txt") { |line| x = line.gsub(",", ""); c.write(x) }
   end
 
-  top100 = []
   # Obfuscated and unreadable to make it seem that I know hax
   # Sorts the name by the number of occurences
+  top100 = []
   File.read("clean.txt")
     .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
     .first(100).each{ |entry| top100.push(entry) }
@@ -80,11 +83,6 @@ def sortResults
   system("git commit -m #{date.year}-#{month}-#{day}")
   system("git push origin master")
   system("bundle exec rake publish")
-end
-
-# Makes date, give it two digits if it needs it
-def getDate(date)
-  date < 10 ? "0#{date}" : date
 end
 
 
@@ -130,11 +128,9 @@ def performSearch(r, people)
       endTime = Time.now
 
       # Make sure we do not do > 60 requests per minute
-      if reqCount == 60
-        # checkApiUsage will sleep if need be
-        checkApiUsage(start, endTime)
-        reqCount = 0
-        start = Time.now
+      # checkApiUsage will sleep if need be
+      if reqCount == REDDIT_API_LIMIT
+        reqCount, start = checkApiUsage(start, endTime)
       end
     rescue
       puts "Presumably 503 Error on #{person}"
@@ -244,11 +240,9 @@ def cleanUpPeople
         madeTheCut.push(person)
       end
       # Make sure we do not do > 60 requests per minute
-      if reqCount == 60
-        # checkApiUsage will sleep if need be
-        checkApiUsage(start, endTime)
-        reqCount = 0
-        start = Time.now
+      # checkApiUsage will sleep if need be
+      if reqCount == REDDIT_API_LIMIT
+        reqCount, start = checkApiUsage(start, endTime)
       end
     rescue
       puts "#{person} failed... pretending they passed"
@@ -279,7 +273,6 @@ def deletePeople
   updated = []
   people.each do |entry|
     if del.include? (entry.downcase)
-      # They should be deleted
       puts "Deleting #{entry}"
       next
     else
@@ -307,12 +300,14 @@ def getRedditAPI
   return r
 end
 
-# Sleeps if we make > 60 requests per minute
+# Sleeps if we make > REDDIT_API_LIMIT per minute
 # Rounds the output because otherwise team members cannot handle the accuracy!
 def checkApiUsage(start, endTime)
   if ((endTime - start) < 60)
     puts "\n* WAITING #{((start + 60) - endTime).round(2)} SECONDS *\n\n"
     sleep((start + 60) - endTime)
+    # Reset the 'counting' values
+    return 0, Time.now
   end
 end
 
@@ -328,6 +323,11 @@ def countTitles(json, person)
   return c
 end
 
+# Makes date, give it two digits if it needs it
+def getDate(date)
+  date < 10 ? "0#{date}" : date
+end
+
 # Returns an array (without \n) of all the people we are searching for
 def getPeople()
   people = []
@@ -335,7 +335,6 @@ def getPeople()
   peeps.each_line do |line|
     people.push(line.gsub!("\n", ""))
   end
-  # This is ugly
   return people
 end
 
