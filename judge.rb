@@ -306,9 +306,9 @@ def checkApiUsage(start, endTime)
   if ((endTime - start) < 60)
     puts "\n* WAITING #{((start + 60) - endTime).round(2)} SECONDS *\n\n"
     sleep((start + 60) - endTime)
-    # Reset the 'counting' values
-    return 0, Time.now
   end
+  # Reset the 'counting' values
+  return 0, Time.now
 end
 
 # Parses the returned JSON and only increments the count
