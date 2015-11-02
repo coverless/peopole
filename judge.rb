@@ -69,7 +69,7 @@ def sortResults
   date = Time.new
   day = getDate(date.day)
   month = getDate(date.month)
-  resultsFile = Dir.pwd + "/logs/#{date.year}-#{month}-#{day}.txt"
+  resultsFile = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
       .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split("`")[0].to_i }
@@ -103,23 +103,20 @@ def performSearch(r, people)
     begin
       totalCount = 0
       res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
-      counter = res.count
       reqCount += 1
-      # Check how many there actually are
-      # Don't even check if they don't have results
-      # TODO -> Find a better threshold
-      if res.count > 0
+      counter = res.count
+      if !counter.zero?
         totalCount += countTitles(res, person)
-      end
-      # If there is more than one page
-      repeat = 1
-      while counter == (repeat * 100)
-        after = res[99]["name"]
-        res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
-        reqCount += 1
-        counter += res.count
-        repeat = repeat + 1
-        totalCount += countTitles(res, person)
+        repeat = 1
+        # For more than one page
+        while counter == (repeat * 100)
+          after = res[99]["name"]
+          res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
+          reqCount += 1
+          counter += res.count
+          repeat = repeat + 1
+          totalCount += countTitles(res, person)
+        end
       end
 
       # Write the results
@@ -239,7 +236,7 @@ def cleanUpPeople
         puts "#{person} has MADE the cut!"
         madeTheCut.push(person)
       end
-      # Make sure we do not do > 60 requests per minute
+      # Make sure we do not do > REDDIT_API_LIMIT requests per minute
       # checkApiUsage will sleep if need be
       if reqCount == REDDIT_API_LIMIT
         reqCount, start = checkApiUsage(start, endTime)
