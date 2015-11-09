@@ -106,7 +106,8 @@ def performSearch(r, people)
       reqCount += 1
       counter = res.count
       if !counter.zero?
-        totalCount += countTitles(res, person)
+        nameMatches = getNames(person)
+        totalCount += countTitles(res, nameMatches)
         repeat = 1
         # For more than one page
         while counter == (repeat * 100)
@@ -115,7 +116,7 @@ def performSearch(r, people)
           reqCount += 1
           counter += res.count
           repeat = repeat + 1
-          totalCount += countTitles(res, person)
+          totalCount += countTitles(res, nameMatches)
         end
       end
 
@@ -161,8 +162,21 @@ def getArticle(r, top100)
       response = Net::HTTP.get(uri)
       res = JSON.parse(response)
       # TODO -> clean this up, and if there are no results this will break
-      title = res["results"][0]["title"].chomp
-      article = res["results"][0]["url"].chomp
+      name = getNames(search)
+      for a in res["results"]
+        for n in name
+          if n.match(a["title"])
+            title = a["title"].chomp
+            article = a["url"].chomp
+            break
+          end
+        end
+        if title
+          break
+        end
+      end
+      #title = res["results"][0]["title"].chomp
+      #article = res["results"][0]["url"].chomp
       puts "Getting article for #{position}. #{search}"
       position += 1
       f.write("#{search}`#{title}`#{article}\n")
@@ -313,11 +327,28 @@ end
 def countTitles(json, person)
   c = 0
   for i in 0..(json.count - 1)
-    if json[i]["title"].include?(person)
-      c += 1
+    for m in person
+      if m.match(json[i]["title"])
+        c += 1
+        break
+      end
     end
   end
   return c
+end
+
+# We can add specific rules as methods later (the Dr. Dre case)
+def getNames(person)
+  # Make sure that there is non alphanumeric after their name
+  result = [/#{person}\W/]
+  # Deal with the possessive case
+  if person[-1] == "s"
+    result.push(/#{person}'\W/)
+  else
+    result.push(/#{person}'s\W/)
+  end
+  print result
+  return result
 end
 
 # Makes date, give it two digits if it needs it
