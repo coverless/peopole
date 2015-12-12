@@ -55,7 +55,7 @@ def sortResults
   top100 = []
   File.read("clean.txt")
     .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
-    .first(100).each{ |entry| top100.push(entry) }
+    .first(50).each{ |entry| top100.push(entry) }
 
   # Get the articles for the top 100 links
   # This makes a file with the person and articles (withArticles.txt)
@@ -73,7 +73,7 @@ def sortResults
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
       .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split("`")[0].to_i }
-      .first(100).each { |entry| f.write(entry + "\n") }
+      .first(50).each { |entry| f.write(entry + "\n") }
   end
 
   # Push the results to the repo and update the site
