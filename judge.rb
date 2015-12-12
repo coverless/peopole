@@ -52,15 +52,15 @@ def sortResults
 
   # Obfuscated and unreadable to make it seem that I know hax
   # Sorts the name by the number of occurences
-  top100 = []
+  top50 = []
   File.read("clean.txt")
     .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
-    .first(50).each{ |entry| top100.push(entry) }
+    .first(50).each{ |entry| top50.push(entry) }
 
-  # Get the articles for the top 100 links
+  # Get the articles for the top 50 links
   # This makes a file with the person and articles (withArticles.txt)
   r = getRedditAPI()
-  missed = getArticle(r, top100)
+  missed = getArticle(r, top50)
   while missed.count > 0
     missed = getArticle(r, missed)
   end
@@ -149,12 +149,12 @@ end
 # => people - the array of people to search  #
 ##############################################
 # TODO -> Breaks order if a person errs
-def getArticle(r, top100)
+def getArticle(r, top50)
   farooKey = File.open("config.yml") { |f| YAML.load(f)["FAROOKEY"]}
   f = File.open("withArticles.txt", "a")
   missed = []
   position = 1
-  for person in top100 do
+  for person in top50 do
     begin
       search = person.split(":")[0]
       u = URI.encode("http://www.faroo.com/api?q=#{search}&src=news&key=#{farooKey}&f=json")
