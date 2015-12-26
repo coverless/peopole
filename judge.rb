@@ -102,10 +102,12 @@ def performSearch(r, people)
   for person in people do
     begin
       totalCount = 0
+      puts "\nSearching..."
       res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
       reqCount += 1
       counter = res.count
       if !counter.zero?
+        puts "There are results ... Getting valid hits"
         nameMatches = getNames(person)
         totalCount += countTitles(res, nameMatches)
         repeat = 1
@@ -122,7 +124,7 @@ def performSearch(r, people)
 
       # Write the results
       f.write("#{person}:#{totalCount}\n")
-      puts "#{person} #{totalCount}\n"
+      puts "#{person} #{totalCount}\n\n"
       endTime = Time.now
 
       # Make sure we do not do > 60 requests per minute
@@ -339,6 +341,7 @@ end
 
 # We can add specific rules as methods later (the Dr. Dre case)
 def getNames(person)
+  puts "In get names..."
   # Make sure that there is non alphanumeric after their name
   result = [/#{person}\W/]
   # Deal with the possessive case
@@ -347,7 +350,6 @@ def getNames(person)
   else
     result.push(/#{person}'s\W/)
   end
-  print result
   return result
 end
 
