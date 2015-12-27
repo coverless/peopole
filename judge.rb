@@ -7,8 +7,7 @@ require 'json'
 require 'yaml'
 require 'net/http'
 
-sslpath = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
-ENV['SSL_CERT_FILE'] = sslpath
+ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
 
 # The maximum number of requests we can send in a minute
 REDDIT_API_LIMIT = 60
@@ -21,12 +20,10 @@ REDDIT_API_LIMIT = 60
 # writes the results to today's log        #
 ############################################
 def getResults
-  File.delete("results.txt") if File.exists?("results.txt")
-  File.delete("withArticles.txt") if File.exists?("withArticles.txt")
+  ["results.txt", "withArticles.txt"].each { |x| File.delete(x) if File.exists?(x) }
   elapsedStart = Time.now
   r = getRedditAPI()
   people = getPeople()
-  missed = []
   missed = performSearch(r, people)
   puts "Finished first round!"
   while missed.count > 0
@@ -51,7 +48,7 @@ def sortResults
   end
 
   # Obfuscated and unreadable to make it seem that I know hax
-  # Sorts the name by the number of occurences
+  # Sorts the name by the number of hits
   top50 = []
   File.read("clean.txt")
     .split("\n").sort_by{ |x| both = x.split(":"); -both[1].to_i }  # -both so it is descending
@@ -159,7 +156,7 @@ def getArticle(r, top50)
   for person in top50 do
     begin
       search = person.split(":")[0]
-      u = URI.encode("http://www.faroo.com/api?q=#{search}&src=news&key=#{farooKey}&f=json")
+      u = URI.encode("http://www.faroo.com/api?q=#{search}&src=news&key=#{farooKey}")
       uri = URI.parse(u)
       response = Net::HTTP.get(uri)
       res = JSON.parse(response)
@@ -177,8 +174,6 @@ def getArticle(r, top50)
           break
         end
       end
-      #title = res["results"][0]["title"].chomp
-      #article = res["results"][0]["url"].chomp
       puts "Getting article for #{position}. #{search}"
       position += 1
       f.write("#{search}`#{title}`#{article}\n")
@@ -222,8 +217,7 @@ def addPeople
   # If people doesn't have this person then add them to the people list
   toadd.each { |x| if people.include?(x) then adding.delete(x); puts "#{x.strip()} is already part of the list!" else people.push(x) end }
   # Delete duplicates and sort
-  people.uniq!
-  people.sort!
+  people.uniq!.sort!
   File.open("people.txt", "w") do |f|
     people.each { |x| if adding.include?(x) then puts "Added #{x}" end; f.write(x) }
   end
@@ -234,6 +228,7 @@ end
 # => Deletes anyone who hasn't been          #
 # mentioned in one month                     #
 ##############################################
+# TODO - We may never use this
 def cleanUpPeople
   # people is the array of all people in the file
   people = getPeople()
@@ -244,14 +239,8 @@ def cleanUpPeople
   for person in people do
     begin
       res = JSON.parse(r.search("#{person}", :t => "month").to_json)
-      if res.count == 0
-        puts "#{person} has NOT made the cut!"
-        c.write("#{person}\n")
-        next
-      else
-        puts "#{person} has MADE the cut!"
-        madeTheCut.push(person)
-      end
+      res.count.zero? ? (puts "#{person} has NOT made the cut!";c.write("#{person}\n");next)
+       : (puts "#{person} has MADE the cut!";madeTheCut.push(person))
       # Make sure we do not do > REDDIT_API_LIMIT requests per minute
       # checkApiUsage will sleep if need be
       if reqCount == REDDIT_API_LIMIT
@@ -285,12 +274,7 @@ def deletePeople
   # The people who should not be deleted
   updated = []
   people.each do |entry|
-    if del.include? (entry.downcase)
-      puts "Deleting #{entry}"
-      next
-    else
-      updated.push(entry)
-    end
+    del.include?(entry.downcase) ? (puts "Deleting #{entry}";next) : updated.push(entry)
   end
   File.open("people.txt", "w") do |f|
     updated.each { |x| f.write("#{x}\n")}
@@ -303,10 +287,11 @@ end
 
 # Returns an authorized Reddit API
 def getRedditAPI
-  clientId = File.open("config.yml") { |f| YAML.load(f)["REDDITCLIENTID"]}
-  username = File.open("config.yml") { |f| YAML.load(f)["REDDITUSERNAME"]}
-  password = File.open("config.yml") { |f| YAML.load(f)["REDDITPASSWORD"]}
-  secret = File.open("config.yml") { |f| YAML.load(f)["REDDITSECRET"]}
+  values = []
+  ["REDDITCLIENTID", "REDDITUSERNAME", "REDDITPASSWORD", "REDDITSECRET"].each do |x|
+    File.open("config.yml") { |f| values.push(YAML.load(f)[x]) }
+  end
+  clientId, username, password, secret = values
   r = Redd.it(:script, clientId, secret, username, password, :user_agent => "peopole v1.0.0" )
   r.authorize!
   puts "Redd is authenticated!"
@@ -328,14 +313,7 @@ end
 # for articles that include the person's name in the article title
 def countTitles(json, person)
   c = 0
-  for i in 0..(json.count - 1)
-    for m in person
-      if m.match(json[i]["title"])
-        c += 1
-        break
-      end
-    end
-  end
+  json.each { |title| person.any? { |m| if m.match(title["title"]) then c += 1 end } }
   return c
 end
 
@@ -345,11 +323,7 @@ def getNames(person)
   # Make sure that there is non alphanumeric after their name
   result = [/#{person}\W/]
   # Deal with the possessive case
-  if person[-1] == "s"
-    result.push(/#{person}'\W/)
-  else
-    result.push(/#{person}'s\W/)
-  end
+  person[-1] == "s" ? result.push(/#{person}'\W/) : result.push(/#{person}'s\W/)
   return result
 end
 
