@@ -7,7 +7,7 @@ require 'json'
 require 'yaml'
 require 'net/http'
 
-ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]}
+ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
 
 # The maximum number of requests we can send in a minute
 REDDIT_API_LIMIT = 60
