@@ -62,7 +62,9 @@ html, body {
 
     #box {
       width: 80%;
+      margin-top: 5px;
       margin-left: 10%;
+      padding-top: 25px;
       /*display: inline-block;*/
       /*-webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;*/
       box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
@@ -95,7 +97,7 @@ html, body {
       font-family: Montserrat;
       line-height: 17.7272720336914px;
       widows: 1;
-      font-size: 20px;
+      font-size: 18px;
       background-color: rgb(255, 255, 255);
       width: auto;
     }
