@@ -217,7 +217,7 @@ def addPeople
   # If people doesn't have this person then add them to the people list
   toadd.each { |x| if people.include?(x) then adding.delete(x); puts "#{x.strip()} is already part of the list!" else people.push(x) end }
   # Delete duplicates and sort
-  people.uniq!.sort!
+  people = people.uniq.sort
   File.open("people.txt", "w") do |f|
     people.each { |x| if adding.include?(x) then puts "Added #{x}" end; f.write(x) }
   end
