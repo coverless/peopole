@@ -4,6 +4,7 @@ A.J Langer
 A.J. McLean
 Aaliyah
 Aaron Carter
+Aaron Driver
 Aaron Paul
 Aaron Staton
 Aaron Taylor-Johnson
@@ -151,6 +152,7 @@ Anthony Kiedis
 Anthony Mackie
 Anthony Padilla
 Anthony Rizzo
+Anton Yelchin
 Antonio Banderas
 Ariana Grande
 Arin Hanson
@@ -434,6 +436,7 @@ Connor Paolo
 Conor Maynard
 Conrad Hilton
 Coolio
+Cory Booker
 Cory Monteith
 Cory Williams
 Courteney Cox
@@ -518,6 +521,7 @@ Deadmau5
 Dean McDermott
 Dean Winters
 Debbie Harry
+Debbie Wasserman Schultz
 Debby Ryan
 Deborra-Lee Furness
 Debra Messing
@@ -666,6 +670,7 @@ Esther Canadas
 Esther Dean
 Ethan Coen
 Ethan Hawke
+Ethan Klein
 Eva Amurri
 Eva Green
 Eva Herzigova
@@ -714,9 +719,12 @@ Garcelle Beauvais
 Gareth Gates
 Garrett Clayton
 Garrett Hedlund
+Garry Marshall
 Garth Brooks
 Gary Barlow
 Gary Coleman
+Gary Herbert
+Gary Johnson
 Gary Oldman
 Gavin DeGraw
 Gavin Rossdale
@@ -794,6 +802,7 @@ Henry Cavill
 Henry Czerny
 Henry Holland
 Henry Samuel
+Hila Klein
 Hilary Duff
 Hilary Swank
 Hillary Clinton
@@ -863,6 +872,7 @@ Jake Gyllenhaal
 Jake T. Austin
 James Arthur
 James Blunt
+James Comey
 James Cosmo
 James Franco
 James Gandolfini
@@ -1054,6 +1064,7 @@ Jon Bon Jovi
 Jon Cryer
 Jon Hamm
 Jon Jafari
+Jon Jones
 Jon Voight
 Jonah Hill
 Jonathan Bennett
@@ -1213,6 +1224,7 @@ Kim Richards
 Kim Sears
 Kimberly Perry
 Kimberly Wyatt
+Kimbo Slice
 Kirk Douglas
 Kirsten Dunst
 Kirstie Alley
@@ -1315,6 +1327,7 @@ Lincoln Chafee
 Linda Cardellini
 Linda Evangelista
 Lindsay Ellingson
+Lindsay Jennerich
 Lindsay Lohan
 Lindsay Price
 Lindsey Graham
@@ -1470,6 +1483,7 @@ Meryl Streep
 Mia Rose
 Mia Tyler
 Mia Wasikowska
+Micah Johnson
 Michael Bolton
 Michael Buckley
 Michael C. Hall
@@ -1506,6 +1520,7 @@ Mika
 Mike Huckabee
 Mike Myers
 Mike O'Malley
+Mike Pence
 Mike Rosenberg
 Mike Sorrentino
 Mike Tyson
@@ -1539,8 +1554,10 @@ Morgan York
 Morris Chestnut
 Mos Def
 Mteichael Phelps
+Muhammad Ali
 Myleene Klass
 Nadia Bjorlin
+Nadia Comaneci
 Naomi Campbell
 Naomi Watts
 Nas
@@ -1624,10 +1641,12 @@ Paris Hilton
 Paris Jackson
 Parker Posey
 Pasquale Rotella
+Pat Summitt
 Patrice Bernier
 Patricia Arquette
 Patricia Clarkson
 Patricia Field
+Patricia Obee
 Patrick Dempsey
 Patrick Duffy
 Patrick Swayze
@@ -1654,6 +1673,7 @@ Penelope Disick
 Penelope Wilton
 Penn Badgley
 Penny Lancaster
+Penny Oleksiak
 Perez Hilton
 Perrie Edwards
 Pete Doherty
@@ -1672,6 +1692,7 @@ Phil Morris
 Philip DeFranco
 Philip Winchester
 Phoebe Price
+Phoebe Snetsinger
 Phoebe Tonkin
 Pierce Brosnan
 Pierre Casiraghi
@@ -1710,6 +1731,7 @@ Rachel Zoe
 Rachelle Lefevre
 Raekwon
 Rafael Nadal
+Raheem Sterling
 Rainn Wilson
 Rand Paul
 Rande Gerber
@@ -1869,6 +1891,7 @@ Sean Combs
 Sean Kingston
 Sean Lennon
 Sean Maguire
+Sean Murray
 Sean Penn
 Sean Plott
 Sean Stewart
@@ -1919,6 +1942,7 @@ Simon Helberg
 Simon Lane
 Simon Pegg
 Simon Rex
+Simone Biles
 Sinead O'Connor
 Siouxsie Sioux
 Skeet Ulrich
@@ -2020,6 +2044,7 @@ Tim Allen
 Tim Burton
 Tim Duncan
 Tim Gunn
+Tim Kaine
 Tim McGraw
 Tim Robbins
 Timbaland
