@@ -2,6 +2,9 @@
 # Still in ruby, because we aren't bad
 require 'yaml'
 require 'twitter'
+require 'wikipedia'
+
+ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
 
 class TwitterAPI
   def initialize()
@@ -14,7 +17,7 @@ class TwitterAPI
     @client.update("Check out who is trending today on the new POLE https://coverless.github.io/peopole/")
   end
 
-  def get_twitter_profile_link(name)
+  def get_twitter_profile_url(name)
     page_number = 1
     while
       opts = { :page => page_number, :count => 20 }
@@ -30,7 +33,7 @@ class TwitterAPI
 
   def twitter_acct(name)
     begin
-      return get_twitter_profile_link(name)
+      return get_twitter_profile_url(name)
     rescue
       return "Apparently #{name} does not have a verified twitter account"
     end
@@ -51,4 +54,10 @@ class TwitterAPI
     end
   end
 
+end
+
+class WikipediaAPI
+  def get_wikipedia_url(name)
+    return Wikipedia.find(name).fullurl
+  end
 end
