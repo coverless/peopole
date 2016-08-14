@@ -3,14 +3,13 @@
 
 # Using the Redd API wrapper for reddit
 require 'date'
-require 'redd'
 require 'json'
-require 'yaml'
 require 'net/http'
+require 'redd'
+require 'yaml'
 require_relative 'harambe.rb'
 
 ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
-
 # The maximum number of requests we can send in a minute
 REDDIT_API_LIMIT = 60
 
@@ -77,7 +76,6 @@ def sortResults
 
   # Push the results to the repo and update the site
   # The working directory needs to be clean for this to work!
-  # TODO - Need to automate providing uname/pwd
   system("git add #{resultsFile}")
   system("git commit -m #{date.year}-#{month}-#{day}")
   system("git push origin master")
@@ -127,7 +125,6 @@ def performSearch(r, people)
       endTime = Time.now
 
       # Make sure we do not do > 60 requests per minute
-      # checkApiUsage will sleep if need be
       if reqCount == REDDIT_API_LIMIT
         reqCount, start = checkApiUsage(start, endTime)
       end
@@ -179,12 +176,11 @@ def getArticle(r, top50)
   for person in top50 do
     begin
       search = person.split(":")[0]
-      u = URI.encode("http://www.faroo.com/api?q=#{search}&src=news&key=#{farooKey}")
-      uri = URI.parse(u)
-      response = Net::HTTP.get(uri)
-      res = JSON.parse(response)
+      uri = URI.parse(URI.encode("http://www.faroo.com/api?q=#{search}&src=news&key=#{farooKey}"))
+      res = JSON.parse(Net::HTTP.get(uri))
       # TODO -> clean this up, and if there are no results this will break
       name = getNames(search)
+      title = ""
       for a in res["results"]
         for n in name
           if n.match(a["title"])

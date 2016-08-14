@@ -15,9 +15,10 @@ class TwitterAPI
     @client.update("Check out who is trending today on the new POLE https://coverless.github.io/peopole/")
   end
 
+  # Right now don't go further than page 4 for API usage
   def get_twitter_profile_url(name)
     page_number = 1
-    while
+    while (page_number < 4)
       opts = { :page => page_number, :count => 20 }
       results = @client.user_search("\"#{name}\"", opts)
       for entry in results
