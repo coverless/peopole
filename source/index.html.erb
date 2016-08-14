@@ -50,7 +50,7 @@ title: peopole
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
-        <% if (!twitter.empty?) %>
+        <% if (twitter) %>
           <% link_to twitter, target: "_blank" do %><%= image_tag "twitter_icon.png", :class => "social_media_icon"%><% end %>
         <% end %>
         <% if (!wikipedia.empty?) %>
