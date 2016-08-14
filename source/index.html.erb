@@ -26,6 +26,8 @@ title: peopole
       name = info["name"]
       title = info["article_title"]
       link = info["article_url"]
+      twitter = info["twitter"]
+      wikipedia = info["wikipedia"]
       rank = info["rank"]
       # possibly trim the title?
       if rank == "NEW"
@@ -48,6 +50,12 @@ title: peopole
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
+        <% if (!twitter.empty?) %>
+          <% link_to twitter, target: "_blank" do %><%= image_tag "twitter_icon.png", :class => "social_media_icon"%><% end %>
+        <% end %>
+        <% if (!wikipedia.empty?) %>
+          <% link_to wikipedia, target: "_blank" do %><%= image_tag "wikipedia_icon.png", :class => "social_media_icon" %><% end %>
+        <% end %>
         <div class="list-bottom-line"><span class="list-change <%= css %>">(<%= status %>)</span>
           <a href ="<%= link %>" title="<%= title%>" target="_blank"/>
             <a1 class="list-link-text"><%= title %></a1>

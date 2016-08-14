@@ -124,3 +124,8 @@ html, body {
     .list-link-text {
       font-family: Montserrat;
     }
+
+    .social_media_icon {
+      width: 40px;
+      height: 40px;
+    }
