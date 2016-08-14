@@ -69,7 +69,7 @@ def sortResults
   resultsFile = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
-      .split("\n").sort_by{ |x| both = x.split(":"); -both[1].split("`")[0].to_i }
+      .split("\n")
       .first(50).each { |entry| f.write(entry + "\n") }
   end
 
