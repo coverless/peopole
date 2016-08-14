@@ -8,8 +8,6 @@ ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"]
 
 class TwitterAPI
   def initialize()
-    # This shouldn't need to happen
-    ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
     @client = auth_twitter_api()
   end
 
@@ -31,11 +29,12 @@ class TwitterAPI
     end
   end
 
-  def twitter_acct(name)
+  def get_twitter_acct(name)
     begin
       return get_twitter_profile_url(name)
     rescue
-      return "Apparently #{name} does not have a verified twitter account"
+      puts "Apparently #{name} does not have a verified twitter account"
+      return ""
     end
   end
 
@@ -53,11 +52,10 @@ class TwitterAPI
       config.access_token_secret = twitterasecret
     end
   end
-
 end
 
 class WikipediaAPI
-  def get_wikipedia_url(name)
+  def get_wikipedia_page(name)
     return Wikipedia.find(name).fullurl
   end
 end

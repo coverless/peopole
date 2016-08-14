@@ -4,14 +4,9 @@ title: peopole
 
 <div id="logo"><span class="logo-text">peopole.</span></div>
 
-<!-- <div id="banner"> -->
-
 <div id="slogan"><span class="headerbar-text">the most talked about people today</span></div>
 
-<!--</div>--><!-- End of banner -->
-
 <div id="box">
-  <!-- For each thing in the list add an entry -->
   <!-- Helper methods found in config.rb -->
   <%
     date = Time.new
@@ -20,74 +15,48 @@ title: peopole
     yesterdayResults = createDate(yesterday.day, yesterday.month, yesterday.year)
     if File.exist?(todayResults)
       f = File.open(todayResults, "r")
-      yf = File.open(yesterdayResults, "r")
     else
-      # We need yesterday's results
-      twoDays = yesterday - (60 * 60 * 24)
-      twoDaysResults = createDate(twoDays.day, twoDays.month, twoDays.year)
       f = File.open(yesterdayResults, "r")
-      yf = File.open(twoDaysResults, "r")
     end
-    a = f.read().split("\n");
-    yesterInfo = yf.read().split("\n")
-    # Make the people yesterday into array with the index being their spot
-    change = []
-    index = 0
-    for thing in yesterInfo do
-      # Get rid of the beginning of file encoding
-      # Only if there is weird encoding when we copy/paste!
-      if index == 0
-        change[index] = thing.split("`")[0][0..-1]
-      else
-        change[index] = thing.split("`")[0]
-      end
-      index += 1
-    end
-    count = 0;
-    for entry in a do
-      count += 1;
-      clean = entry.split("`", 3); name = clean[0];
-      title = clean[1]; link = clean[2]; displayTitle = title;
-      # Get rid of beginning encoding
-      if count == 1
-        name = clean[0][0..-1]
-      end
-      # Truncate the title length if needed
-      # TODO -> truncate at the end of a word?
-      if displayTitle.length > 70
-        displayTitle = "#{title[0, 70]}..."
-      end
-      # Check the previous day's entry and calculate the difference
-      if !change.index(name).nil?
-        yesterdayPosition = change.index(name) + 1
-      else
-        yesterdayPosition = 0
-      end
-      if yesterdayPosition == 0
+    top50 = f.read().split("\n");
+    count = 0
+    for entry in top50 do
+      count += 1
+      info = JSON.parse(entry)
+      name = info["name"]
+      title = info["article_title"]
+      link = info["article_url"]
+      rank = info["rank"]
+      # possibly trim the title?
+      if rank == "NEW"
         status = "NEW"
         css = "green"
-      elsif yesterdayPosition > count
-        status = "▲#{yesterdayPosition - count}"
+      elsif rank > 0
+        status = "▲#{rank}"
         css = "green"
-      elsif yesterdayPosition < count
-        status ="▼#{count - yesterdayPosition}"
+      elsif rank < 0
+        status ="▼#{rank.to_s[1..-1]}"
         css = "red"
       else
         status = "▬"
         css = ""
       end
+
+      # if displayTitle.length > 70
+      #  displayTitle = "#{title[0, 70]}..."
+      # end
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
         <div class="list-bottom-line"><span class="list-change <%= css %>">(<%= status %>)</span>
           <a href ="<%= link %>" title="<%= title%>" target="_blank"/>
-            <a1 class="list-link-text"><%= displayTitle %></a1>
+            <a1 class="list-link-text"><%= title %></a1>
           <a>
         </div>
       </div>
   <% end %>
 
-</div> <!-- End the 'box' div -->
+</div>
 </a>
 
 <!-- TODO -> move this into the JS file -->

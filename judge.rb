@@ -2,10 +2,12 @@
 # Done in Ruby, because we aren't bad
 
 # Using the Redd API wrapper for reddit
+require 'date'
 require 'redd'
 require 'json'
 require 'yaml'
 require 'net/http'
+require_relative 'harambe.rb'
 
 ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
 
@@ -63,7 +65,7 @@ def sortResults
   end
 
   # Format date to YYYY-MM-DD
-  date = Time.new
+  date = Date.today
   day = getDate(date.day)
   month = getDate(date.month)
   resultsFile = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
@@ -114,7 +116,7 @@ def performSearch(r, people)
           res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day", :after => after).to_json)
           reqCount += 1
           counter += res.count
-          repeat = repeat + 1
+          repeat += 1
           totalCount += countTitles(res, nameMatches)
         end
       end
@@ -138,6 +140,24 @@ def performSearch(r, people)
   return missed
 end
 
+def get_ranking(ranking, name)
+  puts "IN GET RANKING"
+  date = Date.today
+  yesterday = date - 1
+  day = getDate(yesterday.day)
+  month = getDate(yesterday.month)
+  yesterday_file = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
+  count = 1
+  File.open(yesterday_file, "r").each do |line|
+    e = JSON.parse(line)
+    if (e['name'] == name)
+      return count - ranking
+    end
+    count += 1
+  end
+  return "NEW"
+end
+
 ##############################################
 #               GET ARTICLES                 #
 # => Used in getResults. Returns an array of #
@@ -147,12 +167,15 @@ end
 # => r - the Reddit API wrapper              #
 # => people - the array of people to search  #
 ##############################################
-# TODO -> Breaks order if a person errs
+# TODO -> Breaks order if a person errs! Also breaks their relative ranking!
 def getArticle(r, top50)
   farooKey = File.open("config.yml") { |f| YAML.load(f)["FAROOKEY"]}
   f = File.open("withArticles.txt", "a")
   missed = []
   position = 1
+  twitter = TwitterAPI.new
+  wikipedia = WikipediaAPI.new
+  ranking = 1
   for person in top50 do
     begin
       search = person.split(":")[0]
@@ -176,8 +199,17 @@ def getArticle(r, top50)
       end
       puts "Getting article for #{position}. #{search}"
       position += 1
-      f.write("#{search}`#{title}`#{article}\n")
+      information = {}
+      information["name"] = search
+      information["article_title"] = title
+      information["article_url"] = article
+      information["twitter"] = twitter.get_twitter_acct(search)
+      information["wikipedia"] = wikipedia.get_wikipedia_page(search)
+      information["rank"] = get_ranking(ranking, search)
+      to_file = information.to_json
+      f.write("#{to_file}\n")
       # So we do not exceed the rate limit and Faroo doesn't flip
+      ranking += 1
       sleep(3)
     # TODO -> don't rescue from Exception
     rescue Exception => e
