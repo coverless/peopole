@@ -31,6 +31,11 @@ html, body {
       font-family: Lobster;
     }
 
+    .header-link:hover, .header-link:visited, .header-link:link, .header-link:active {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+    }
+
     #slogan {
       position: relative;
       display: inline-block;
@@ -126,4 +131,25 @@ html, body {
       width: 25px;
       height: 25px;
       padding-right: 5px;
+    }
+
+    .about-text-box {
+      margin-top: 3%;
+      margin-right: 15%;
+      margin-left: 15%;
+      padding-bottom: 10px;
+    }
+
+    .about-headers {
+      font-size: 24px;
+      font-family: Montserrat;
+      color: rgb(0, 0, 0)
+    }
+
+    .about-text {
+      margin-top: 20px;
+      padding-bottom: 50px;
+      font-size: 16px;
+      font-family: Montserrat;
+      color: rgb(0, 0, 0)
     }
