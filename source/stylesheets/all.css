@@ -3,11 +3,21 @@
 /* CURTIS' CSS CODE */
 html, body {
       /* so we don't have that weird horizontal scroll bar */
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     body {
       background-image: none;
+      background-color: rgb(2, 164, 125);
+    }
+
+    #headerbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      width: 100%;
+      padding-bottom: 5px;
       background-color: rgb(2, 164, 125);
     }
 
@@ -51,14 +61,11 @@ html, body {
 
     #box {
       width: 80%;
-      margin-top: 5px;
       margin-left: 10%;
-      padding-top: 25px;
-      box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
+      padding-top: 195px;
+      /*box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;*/
       background-image: none;
       background-color: rgb(255, 255, 255);
-      overflow: auto;
-      height: 90vh;
     }
 
     .list-element {
