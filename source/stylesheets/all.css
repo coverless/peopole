@@ -3,7 +3,7 @@
 /* CURTIS' CSS CODE */
 html, body {
       /* so we don't have that weird horizontal scroll bar */
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     body {
@@ -57,6 +57,8 @@ html, body {
       box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
       background-image: none;
       background-color: rgb(255, 255, 255);
+      overflow: auto;
+      height: 80vh;
     }
 
     .list-element {
