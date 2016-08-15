@@ -17,7 +17,6 @@ html, body {
     }
 
     .logo-text {
-      /*font-size: 70px;*/
       color: rgb(255, 255, 255);
       font-family: Lobster;
     }
@@ -25,39 +24,29 @@ html, body {
     #slogan {
       position: relative;
       display: inline-block;
-      width: 80%;
       margin-left: 15%;
-      white-space: nowrap;
-      /*left:13%;*/
-      /*margin-left: 12%;*/
+      width: 42%;
+      vertical-align:top;
+      white-space: normal;
     }
 
     #about {
-      position: relative;
       display: inline-block;
-      /*left:50%;*/
-      /*padding-left: 10%;*/
-      /*text-decoration: underline;*/
+      vertical-align:top;
+      width: 5%;
+      padding-left: 13%;
     }
 
-    #contact_us {
-      position: relative;
+    #contact {
       display: inline-block;
-      /*left:55%;*/
-      /*padding-left: 10%;*/
-      /*text-decoration: underline;*/
+      vertical-align:top;
+      width: 15%;
+      padding-left: 5%;
     }
 
     .headerbar-text {
-      /*font-size: 35px;*/
       color: rgb(255, 255, 255);
       font-family: Lobster;
-    }
-
-    #banner {
-      width: 80%;
-      margin-left: 10%;
-      white-space: nowrap;
     }
 
     #box {
@@ -65,8 +54,6 @@ html, body {
       margin-top: 5px;
       margin-left: 10%;
       padding-top: 25px;
-      /*display: inline-block;*/
-      /*-webkit-box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;*/
       box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;
       background-image: none;
       background-color: rgb(255, 255, 255);
@@ -84,6 +71,7 @@ html, body {
     .list-name {
       font-size: 40px;
       font-family: Montserrat;
+      padding-right: 10px;
       text-shadow: rgb(221, 221, 221) 2px 2px;
     }
 
@@ -126,6 +114,7 @@ html, body {
     }
 
     .social_media_icon {
-      width: 40px;
-      height: 40px;
+      width: 25px;
+      height: 25px;
+      padding-right: 5px;
     }
