@@ -180,7 +180,6 @@ def getArticle(r, top50)
       res = JSON.parse(Net::HTTP.get(uri))
       # TODO -> clean this up, and if there are no results this will break
       name = getNames(search)
-      title = ""
       for a in res["results"]
         for n in name
           if n.match(a["title"])
