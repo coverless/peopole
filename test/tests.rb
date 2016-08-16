@@ -17,4 +17,10 @@ class PeopoleTests < Test::Unit::TestCase
     assert_equal("https://en.wikipedia.org/wiki/Edsger_W._Dijkstra", actual)
   end
 
+  def test_get_facebook_page()
+    facebook = FacebookAPI.new
+    actual = facebook.get_facebook_page("Paul Allen")
+    assert_equal("http://facebook.com/164891550225739", actual)
+  end
+
 end
