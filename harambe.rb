@@ -3,8 +3,37 @@
 require 'yaml'
 require 'twitter'
 require 'wikipedia'
+require 'koala'
 
 ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
+
+class FacebookAPI
+  def initialize
+    @oauth = auth_facebook_api()
+    @access_token = @oauth.get_app_access_token
+    @graph = Koala::Facebook::API.new(@access_token)
+  end
+
+  def get_facebook_page(name)
+    begin
+      res = @graph.search(name, type: :page)
+      return "http://facebook.com/#{res[0]["id"]}"
+    rescue
+      return ""
+    end
+  end
+
+  private
+  def auth_facebook_api()
+    values = []
+    ["FACEBOOKAPPID", "FACEBOOKSECRET"].each do |x|
+      File.open("config.yml") { |f| values.push(YAML.load(f)[x]) }
+    end
+    facebookappid, facebooksecret = values
+    return Koala::Facebook::OAuth.new(facebookappid, facebooksecret)
+  end
+
+end
 
 class TwitterAPI
   def initialize()

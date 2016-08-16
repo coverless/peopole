@@ -170,6 +170,7 @@ def getArticle(r, top50)
   f = File.open("withArticles.txt", "a")
   missed = []
   position = 1
+  facebook = FacebookAPI.new
   twitter = TwitterAPI.new
   wikipedia = WikipediaAPI.new
   ranking = 1
@@ -198,6 +199,7 @@ def getArticle(r, top50)
       information["name"] = search
       information["article_title"] = title
       information["article_url"] = article
+      information["facebook"] = facebook.get_facebook_page(search)
       information["twitter"] = twitter.get_twitter_acct(search)
       information["wikipedia"] = wikipedia.get_wikipedia_page(search)
       information["rank"] = get_ranking(ranking, search)
