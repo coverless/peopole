@@ -6,6 +6,16 @@ gem "middleman-gh-pages"
 
 gem "middleman", "~>3.3.12"
 
+gem "redd"
+
+gem "twitter"
+
+gem "wikipedia"
+
+gem "htmlentities"
+
+gem "hpricot"
+
 # Live-reloading plugin
 gem "middleman-livereload", "~> 3.3.0"
 
