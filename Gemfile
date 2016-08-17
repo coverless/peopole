@@ -12,6 +12,8 @@ gem "twitter"
 
 gem "wikipedia"
 
+gem "koala"
+
 gem "htmlentities"
 
 gem "hpricot"
