@@ -35,7 +35,9 @@ title: peopole
       twitter = info["twitter"]
       wikipedia = info["wikipedia"]
       rank = info["rank"]
-      # possibly trim the title?
+      if title.length > 70
+        title = "#{title[0, 70]}..."
+      end
       if rank == "NEW"
         status = "NEW"
         css = "green"
@@ -50,9 +52,6 @@ title: peopole
         css = ""
       end
 
-      # if displayTitle.length > 70
-      #  displayTitle = "#{title[0, 70]}..."
-      # end
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
