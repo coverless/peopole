@@ -175,7 +175,7 @@ GEM
     unf_ext (0.0.7.2-x64-mingw32)
     unf_ext (0.0.7.2-x86-mingw32)
     wdm (0.1.1)
-    wikipedia (0.2)
+    wikipedia-client (1.6.2)
 
 PLATFORMS
   x64-mingw32
@@ -192,7 +192,7 @@ DEPENDENCIES
   twitter
   tzinfo-data
   wdm (~> 0.1.0)
-  wikipedia
+  wikipedia-client
 
 BUNDLED WITH
    1.12.5

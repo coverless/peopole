@@ -10,7 +10,7 @@ gem "redd"
 
 gem "twitter"
 
-gem "wikipedia"
+gem "wikipedia-client"
 
 gem "koala"
 
