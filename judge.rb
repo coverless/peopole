@@ -201,7 +201,7 @@ def getArticle(r, top50)
       information["article_url"] = article
       information["facebook"] = facebook.get_facebook_page(search)
       information["twitter"] = twitter.get_twitter_acct(search)
-      information["wikipedia"] = wikipedia.get_wikipedia_page(search)
+      # information["wikipedia"] = wikipedia.get_wikipedia_page(search)
       information["rank"] = get_ranking(ranking, search)
       to_file = information.to_json
       f.write("#{to_file}\n")
