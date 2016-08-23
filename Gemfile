@@ -6,6 +6,8 @@ gem "middleman-gh-pages"
 
 gem "middleman", "~>3.3.12"
 
+gem "sqlite3"
+
 gem "redd"
 
 gem "twitter"
