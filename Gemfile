@@ -6,11 +6,15 @@ gem "middleman-gh-pages"
 
 gem "middleman", "~>3.3.12"
 
+gem "sqlite3"
+
 gem "redd"
 
 gem "twitter"
 
-gem "wikipedia"
+gem "wikipedia-client"
+
+gem "koala"
 
 gem "htmlentities"
 
