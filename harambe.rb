@@ -38,6 +38,7 @@ end
 class TwitterAPI
   def initialize()
     @client = auth_twitter_api()
+    @requests_sent = 0
   end
 
   def tweet_the_pole()
@@ -46,16 +47,25 @@ class TwitterAPI
 
   # Right now don't go further than page 4 for API usage
   def get_twitter_profile_url(name)
+    # In the future we will not need to throttle this API
+    if @requests_sent == 0
+      @start = Time.now
+    end
     page_number = 1
     while (page_number < 4)
       opts = { :page => page_number, :count => 20 }
       results = @client.user_search("\"#{name}\"", opts)
+      @requests_sent += 1
       for entry in results
         if entry.verified?
           return "https://twitter.com/#{entry.screen_name}"
         end
       end
       page_number += 1
+      if @requests_sent == 180
+        @endTime = Time.now
+        @requests_sent, @start = check_usage(@start, @endTime)
+      end
     end
   end
 
@@ -82,6 +92,15 @@ class TwitterAPI
       config.access_token_secret = twitterasecret
     end
   end
+
+  def check_usage(start, endTime)
+    if ((endTime - start) < 900)
+      puts "\n* WAITING #{((start + 900) - endTime).round(2)} SECONDS *\n\n"
+      sleep((start+900) - endTime)
+    end
+    return 0, Time.now
+  end
+
 end
 
 class WikipediaAPI

@@ -203,16 +203,16 @@ def getArticle(r, top50)
       information["article_url"] = article
       # Later on, we should search for the ones that don't have values
       # Right now we only search if none of them are populated
-      facebook, twitter, wikipedia = db.get_person_links(search)
-      if !facebook && !twitter && !wikipedia
-        facebook = facebook.get_facebook_page(search)
-        twitter = twitter.get_twitter_acct(search)
-        wikipedia = wikipedia.get_wikipedia_page(search)
-        db.add_person_links(search, facebook, twitter, wikipedia)
+      fpage, tpage, wpage = db.get_person_links(search)
+      if fpage.nil? && tpage.nil? && wpage.nil?
+        fpage = facebook.get_facebook_page(search)
+        tpage = twitter.get_twitter_acct(search)
+        wpage = wikipedia.get_wikipedia_page(search)
+        db.add_person_links(search, fpage, tpage, wpage)
       end
-      information["facebook"] = facebook
-      information["twitter"] = twitter
-      information["wikipedia"] = wikipedia
+      information["facebook"] = fpage
+      information["twitter"] = tpage
+      information["wikipedia"] = wpage
       information["rank"] = get_ranking(ranking, search)
       to_file = information.to_json
       f.write("#{to_file}\n")
@@ -359,7 +359,6 @@ end
 
 # We can add specific rules as methods later (the Dr. Dre case)
 def getNames(person)
-  puts "In get names..."
   # Make sure that there is non alphanumeric after their name
   result = [/#{person}\W/]
   # Deal with the possessive case
