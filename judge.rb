@@ -7,6 +7,7 @@ require 'json'
 require 'net/http'
 require 'redd'
 require 'yaml'
+require_relative 'dirtybit.rb'
 require_relative 'harambe.rb'
 
 ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
@@ -170,6 +171,7 @@ def getArticle(r, top50)
   f = File.open("withArticles.txt", "a")
   missed = []
   position = 1
+  db = DB.new
   facebook = FacebookAPI.new
   twitter = TwitterAPI.new
   wikipedia = WikipediaAPI.new
@@ -199,9 +201,18 @@ def getArticle(r, top50)
       information["name"] = search
       information["article_title"] = title
       information["article_url"] = article
-      information["facebook"] = facebook.get_facebook_page(search)
-      information["twitter"] = twitter.get_twitter_acct(search)
-      # information["wikipedia"] = wikipedia.get_wikipedia_page(search)
+      # Later on, we should search for the ones that don't have values
+      # Right now we only search if none of them are populated
+      facebook, twitter, wikipedia = db.get_person_links(search)
+      if !facebook && !twitter && !wikipedia
+        facebook = facebook.get_facebook_page(search)
+        twitter = twitter.get_twitter_acct(search)
+        wikipedia = wikipedia.get_wikipedia_page(search)
+        db.add_person_links(search, facebook, twitter, wikipedia)
+      end
+      information["facebook"] = facebook
+      information["twitter"] = twitter
+      information["wikipedia"] = wikipedia
       information["rank"] = get_ranking(ranking, search)
       to_file = information.to_json
       f.write("#{to_file}\n")
