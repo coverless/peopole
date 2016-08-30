@@ -139,7 +139,6 @@ def performSearch(r, people)
 end
 
 def get_ranking(ranking, name)
-  puts "IN GET RANKING"
   date = Date.today
   yesterday = date - 1
   day = getDate(yesterday.day)

@@ -105,7 +105,8 @@ class TwitterAPI
 end
 
 class WikipediaAPI
-  # Need to make this more robust
+  # Tossing in this fat HACK since I am so frustrated with the SSL errors
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   def get_wikipedia_page(name)
     uri = URI.parse(URI.encode("https://en.wikipedia.org/w/api.php?action=opensearch&search=#{name}&limit=1&namespace=0"))
     res = JSON.parse(Net::HTTP.get(uri))
