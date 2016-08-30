@@ -2,8 +2,9 @@
 # Still in ruby, because we aren't bad
 require 'yaml'
 require 'twitter'
-require 'wikipedia'
 require 'koala'
+require 'net/http'
+require 'json'
 
 ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
 
@@ -104,7 +105,10 @@ class TwitterAPI
 end
 
 class WikipediaAPI
+  # Need to make this more robust
   def get_wikipedia_page(name)
-    return Wikipedia.find(name).fullurl
+    uri = URI.parse(URI.encode("https://en.wikipedia.org/w/api.php?action=opensearch&search=#{name}&limit=1&namespace=0"))
+    res = JSON.parse(Net::HTTP.get(uri))
+    return res[3][0]
   end
 end
