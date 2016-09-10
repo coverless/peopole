@@ -15,4 +15,9 @@ class DB
     puts "INSERT #{f} #{t} #{w}"
     @db.execute("update people set facebook=(?), twitter=(?), wikipedia=(?) where name=(?)", [f, t, w, name])
   end
+
+  def add_today_column(today)
+    @db.execute("alter table ranking add column #{today}-title;")
+    @db.execute("alter table ranking add column #{today}-url;")
+  end
 end

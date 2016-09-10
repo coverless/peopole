@@ -64,11 +64,13 @@ def sortResults
     missed = getArticle(r, missed)
   end
 
+  db = DB.new
   # Format date to YYYY-MM-DD
   date = Date.today
   day = getDate(date.day)
   month = getDate(date.month)
   resultsFile = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
+  db.add_today_column("#{date.year}-#{month}-#{day}")
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
       .split("\n")
