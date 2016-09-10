@@ -1,10 +1,10 @@
 # Hopefully this will deal with most of the other APIs
 # Still in ruby, because we aren't bad
-require 'yaml'
-require 'twitter'
+require 'json'
 require 'koala'
 require 'net/http'
-require 'json'
+require 'twitter'
+require 'yaml'
 
 ENV['SSL_CERT_FILE'] = File.open("config.yml") { |f| YAML.load(f)["SSLCERTPATH"] }
 
