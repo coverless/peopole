@@ -17,11 +17,6 @@ class DB
   end
 
   def add_today_column(today)
-    rows = @db.execute <<-SQL
-      create table if not exists ranking (
-        rowid integer primary key
-      ) without rowid;
-    SQL
     # TODO properly sanitize strings
     begin
       @db.execute("alter table ranking add column #{today}_title varchar(256);")
