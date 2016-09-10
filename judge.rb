@@ -101,7 +101,6 @@ def performSearch(r, people)
   for person in people do
     begin
       totalCount = 0
-      puts "\nSearching..."
       res = JSON.parse(r.search("#{person}", :limit => 100, :sort => "top", :t => "day").to_json)
       reqCount += 1
       counter = res.count
