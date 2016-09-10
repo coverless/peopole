@@ -27,7 +27,6 @@ def getResults
   r = getRedditAPI()
   people = getPeople()
   missed = performSearch(r, people)
-  puts "Finished first round!"
   while missed.count > 0
     missed = performSearch(r, missed)
   end
