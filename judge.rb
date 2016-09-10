@@ -1,3 +1,4 @@
+#!C:\Ruby23\bin ruby
 # Contains the functionality of peopole
 # Done in Ruby, because we aren't bad
 
