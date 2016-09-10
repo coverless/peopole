@@ -17,7 +17,7 @@ class DB
   end
 
   def add_today_column(today)
-    @db.execute("alter table ranking add column #{today}-title;")
-    @db.execute("alter table ranking add column #{today}-url;")
+    @db.execute("alter table ranking add column (?)-title;", ["#{today}"])
+    @db.execute("alter table ranking add column (?)-url;", ["#{today}"])
   end
 end

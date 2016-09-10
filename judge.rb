@@ -70,7 +70,7 @@ def sortResults
   day = getDate(date.day)
   month = getDate(date.month)
   resultsFile = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
-  
+
   puts Dir.pwd
   sleep(15)
 
@@ -136,6 +136,7 @@ def performSearch(r, people)
       end
     rescue
       puts "Presumably 503 Error on #{person}"
+      sleep(2)
       missed.push(person)
     end
   end
