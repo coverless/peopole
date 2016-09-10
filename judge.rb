@@ -70,6 +70,10 @@ def sortResults
   day = getDate(date.day)
   month = getDate(date.month)
   resultsFile = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
+  
+  puts Dir.pwd
+  sleep(15)
+
   db.add_today_column("#{date.year}-#{month}-#{day}")
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
