@@ -45,7 +45,8 @@ class TwitterAPI
   end
 
   def tweet_the_pole
-    @client.update('Check out who is trending today on the new POLE https://coverless.github.io/peopole/')
+    @client.update('Check out who is trending today on the new POLE '\
+    'https://coverless.github.io/peopole/')
   end
 
   # Right now don't go further than page 4 for API usage
@@ -73,7 +74,7 @@ class TwitterAPI
   def auth_twitter_api
     values = []
     %w(TWITTERCONSUMERKEY TWITTERCONSUMERSECRET
-    TWITTERACCESSTOKEN TWITTERACCESSTOKENSECRET).each do |x|
+       TWITTERACCESSTOKEN TWITTERACCESSTOKENSECRET).each do |x|
       File.open('config.yml') { |f| values.push(YAML.load(f)[x]) }
     end
     Twitter::REST::Client.new do |config|
