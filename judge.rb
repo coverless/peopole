@@ -152,23 +152,6 @@ def performSearch(r, people)
   return missed
 end
 
-def get_ranking(ranking, name)
-  date = Date.today
-  yesterday = date - 1
-  day = getDate(yesterday.day)
-  month = getDate(yesterday.month)
-  yesterday_file = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
-  count = 1
-  File.open(yesterday_file, "r").each do |line|
-    e = JSON.parse(line)
-    if (e['name'] == name)
-      return count - ranking
-    end
-    count += 1
-  end
-  return "NEW"
-end
-
 ##############################################
 #               GET ARTICLES                 #
 # => Used in getResults. Returns an array of #
@@ -226,7 +209,6 @@ def getArticle(r, top50)
       information["facebook"] = fpage
       information["twitter"] = tpage
       information["wikipedia"] = wpage
-      # information["rank"] = get_ranking(ranking, search)
       to_file = information.to_json
       f.write("#{to_file}\n")
       # So we do not exceed the rate limit and Faroo doesn't flip

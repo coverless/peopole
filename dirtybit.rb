@@ -40,7 +40,6 @@ class DB
   def get_relative_rank(name)
     today_rank = @db.execute("select rank from ranking where day = ? and name = ? limit 1", @today, name)
     yesterday_rank = @db.execute("select rank from ranking where day = ? and name = ? limit 1", @yesterday, name)
-    puts yesterday_rank
     if yesterday_rank.size > 0
       rank =  yesterday_rank[0].first - today_rank[0].first
       if rank > 0
