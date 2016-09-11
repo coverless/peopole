@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+/* CURTIS' CSS CODE */
+html, body {
+      /* so we don't have that weird horizontal scroll bar */
+      overflow-x: hidden;
+    }
+
+    body {
+      background-image: none;
+      background-color: rgb(2, 164, 125);
+    }
+
+    #headerbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      width: 100%;
+      padding-bottom: 5px;
+      background-color: rgb(2, 164, 125);
+    }
+
+    #logo {
+      position: relative;
+      left:10%;
+    }
+
+    .logo-text {
+      color: rgb(255, 255, 255);
+      font-family: Lobster;
+    }
+
+    .header-link:hover, .header-link:visited, .header-link:link, .header-link:active {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+    }
+
+    #slogan {
+      position: relative;
+      display: inline-block;
+      margin-left: 15%;
+      width: 42%;
+      vertical-align:top;
+      white-space: normal;
+    }
+
+    #about {
+      display: inline-block;
+      vertical-align:top;
+      width: 5%;
+      padding-left: 13%;
+    }
+
+    #contact {
+      display: inline-block;
+      vertical-align:top;
+      width: 13%;
+      padding-left: 5%;
+    }
+
+    .headerbar-text {
+      color: rgb(255, 255, 255);
+      font-family: Lobster;
+    }
+
+    #box {
+      width: 80%;
+      margin-left: 10%;
+      padding-top: 195px;
+      /*box-shadow: rgba(0, 0, 0, 0.74902) 7px 7px 48px 4px;*/
+      background-image: none;
+      background-color: rgb(255, 255, 255);
+    }
+
+    .list-element {
+      color: rgb(0, 0, 0);
+      margin-left: 30%;
+      padding-top: 3%;
+      padding-bottom: 3%;
+      background-image: none;
+      background-color: rgb(255, 255, 255);
+    }
+
+    .list-name {
+      font-size: 40px;
+      font-family: Montserrat;
+      padding-right: 10px;
+      text-shadow: rgb(221, 221, 221) 2px 2px;
+    }
+
+    .list-bottom-line {
+      background-image: none;
+      background-color: rgb(255, 255, 255);
+    }
+
+    .list-change {
+      color: rgb(34, 34, 34);
+      font-family: Montserrat;
+      line-height: 17.7272720336914px;
+      widows: 1;
+      font-size: 18px;
+      background-color: rgb(255, 255, 255);
+      width: auto;
+    }
+
+    .green {
+      color: rgb(0, 187, 0)
+    }
+
+    .red {
+      color: rgb(204, 0, 0)
+    }
+
+    .list-link {
+      font-size: 18px;
+      border-color: rgb(0, 0, 238);
+      color: rgb(0, 0, 238);
+      line-height: 17.7272720336914px;
+      outline-color: rgb(0, 0, 238);
+      text-decoration: underline;
+      widows: 1;
+      width: auto;
+    }
+
+    .list-link-text {
+      font-family: Montserrat;
+    }
+
+    .social_media_icon {
+      width: 25px;
+      height: 25px;
+      padding-right: 5px;
+    }
+
+    .about-text-box {
+      margin-top: 3%;
+      margin-right: 15%;
+      margin-left: 15%;
+      padding-bottom: 11px;
+    }
+
+    .about-headers {
+      font-size: 24px;
+      font-family: Montserrat;
+      color: rgb(0, 0, 0)
+    }
+
+    .about-text {
+      margin-top: 20px;
+      padding-bottom: 75px;
+      font-size: 16px;
+      font-family: Montserrat;
+      color: rgb(0, 0, 0)
+    }
