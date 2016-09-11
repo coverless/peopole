@@ -69,12 +69,21 @@ def sortResults
   date = Date.today
   day = getDate(date.day)
   month = getDate(date.month)
-  resultsFile = File.join(Dir.pwd, "logs", "#{date.year}-#{month}-#{day}.txt")
-  db.add_today_column("#{date.year}-#{month}-#{day}")
+  today = "#{date.year}-#{month}-#{day}"
+  today_db = "#{date.year}_#{month}_#{day}"
+  resultsFile = File.join(Dir.pwd, "logs", "#{today}.txt")
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
       .split("\n")
-      .first(50).each { |entry| f.write(entry + "\n") }
+      .first(50).each { |entry|
+        f.write(entry + "\n")
+        db.add_ranking(
+          today_db,
+          JSON.parse(entry)["name"],
+          JSON.parse(entry)["article_title"],
+          JSON.parse(entry)["article_url"]
+        )
+      }
   end
 
   # Push the results to the repo and update the site

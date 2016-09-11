@@ -16,13 +16,8 @@ class DB
     @db.execute("update people set facebook=(?), twitter=(?), wikipedia=(?) where name=(?)", [f, t, w, name])
   end
 
-  def add_today_column(today)
-    # TODO properly sanitize strings
-    begin
-      @db.execute("alter table ranking add column #{today}_title varchar(256);")
-      @db.execute("alter table ranking add column #{today}_url varchar(256);")
-    rescue
-      puts "Columns already exist... we are fine"
-    end
+  def add_ranking(today, name, title, url)
+    @db.execute("insert into ranking (name, title, url, day) values (?, ?, ?, ?);",
+    [name, title, url, today])
   end
 end
