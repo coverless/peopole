@@ -32,6 +32,10 @@ class DB
     @db.execute("update people set facebook=(?), twitter=(?), wikipedia=(?) where name=(?)", [f, t, w, name])
   end
 
+  def delete_today()
+    @db.execute("delete from ranking where day = ?", @today)
+  end
+
   def add_ranking(name, title, url, rank)
     @db.execute("insert into ranking (name, title, url, day, rank) values (?, ?, ?, ?, ?);",
     [name, title, url, @today, rank])

@@ -65,18 +65,12 @@ def sortResults
   end
 
   db = DB.new
-  # Format date to YYYY-MM-DD
-  # date = Date.today
-  # day = getDate(date.day)
-  # month = getDate(date.month)
-  # today = "#{date.year}-#{month}-#{day}"
-  # resultsFile = File.join(Dir.pwd, "logs", "#{today}.txt")
   rank = 1
-  # File.open(resultsFile, "w") do |f|
+  db.delete_today()
   File.read("withArticles.txt")
     .split("\n")
     .first(50).each do |entry|
-      f.write(entry + "\n")
+      # f.write(entry + "\n")
       db.add_ranking(
         JSON.parse(entry)["name"],
         JSON.parse(entry)["article_title"],
@@ -85,13 +79,7 @@ def sortResults
       )
       rank += 1
     end
-  # end
-
-  # Push the results to the repo and update the site
   # The working directory needs to be clean for this to work!
-  # system("git add #{resultsFile}")
-  # system("git commit -m #{date.year}-#{month}-#{day}")
-  # system("git push origin master")
   system("bundle exec rake publish")
 end
 
