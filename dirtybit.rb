@@ -16,8 +16,19 @@ class DB
     @db.execute("update people set facebook=(?), twitter=(?), wikipedia=(?) where name=(?)", [f, t, w, name])
   end
 
-  def add_ranking(today, name, title, url)
-    @db.execute("insert into ranking (name, title, url, day) values (?, ?, ?, ?);",
+  def add_ranking(today, name, title, url, rank)
+    @db.execute("insert into ranking (name, title, url, day, rank) values (?, ?, ?, ?, ?);",
     [name, title, url, today])
   end
+
+  def get_relative_rank(name, today, yesterday)
+    today_rank = @db.execute("select rank from ranking where day = ? and name = ?", today, name)
+    yesterday_rank = @db.execute("select rank from ranking where day = ? and name = ?", yesterday, name)
+    if !yesterday_rank.nil?
+      return yesterday_rank - today_rank
+    else
+      return "NEW"
+    end
+  end
+
 end

@@ -72,6 +72,7 @@ def sortResults
   today = "#{date.year}-#{month}-#{day}"
   today_db = "#{date.year}_#{month}_#{day}"
   resultsFile = File.join(Dir.pwd, "logs", "#{today}.txt")
+  count = 1
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
       .split("\n")
@@ -81,8 +82,10 @@ def sortResults
           today_db,
           JSON.parse(entry)["name"],
           JSON.parse(entry)["article_title"],
-          JSON.parse(entry)["article_url"]
+          JSON.parse(entry)["article_url"],
+          count
         )
+        count += 1
       }
   end
 
