@@ -15,36 +15,14 @@ title: peopole
   <!-- Helper methods found in config.rb -->
   <%
     count = 1
-    # TODO do this in db
-    date = Date.today
-    day = formatDate(date.day)
-    month = formatDate(date.month)
-    y_date = Date.today - 1
-    y_date_day = formatDate(y_date.day)
-    y_date_month = formatDate(y_date.month)
-    today_db = "#{date.year}_#{month}_#{day}"
-    yesterday_db = "#{y_date.year}_#{y_date_month}_#{y_date_day}"
     while count <= 50 do
-      arr = get_person_today_helper(today_db, count)
+      arr = get_person_today_helper(count)
       name, title, link = arr[0][0], arr[0][1], arr[0][2]
-      rank = get_relative_rank_helper(name, today_db, yesterday_db)
+      status, css = get_relative_rank_helper(name)
       arr = get_person_links_helper(name)
       facebook, twitter, wikipedia = arr[0], arr[1], arr[2]
       if title.length > 70
         title = "#{title[0, 70]}..."
-      end
-      if rank == "NEW"
-        status = "NEW"
-        css = "green"
-      elsif rank > 0
-        status = "▲#{rank}"
-        css = "green"
-      elsif rank < 0
-        status ="▼#{rank.to_s[1..-1]}"
-        css = "red"
-      else
-        status = "▬"
-        css = ""
       end
   %>
       <div class="list-element">
