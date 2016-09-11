@@ -32,9 +32,9 @@ class DB
     @db.execute("update people set facebook=(?), twitter=(?), wikipedia=(?) where name=(?)", [f, t, w, name])
   end
 
-  def add_ranking(today, name, title, url, rank)
+  def add_ranking(name, title, url, rank)
     @db.execute("insert into ranking (name, title, url, day, rank) values (?, ?, ?, ?, ?);",
-    [name, title, url, today, rank])
+    [name, title, url, @today, rank])
   end
 
   def get_relative_rank(name)
