@@ -72,21 +72,21 @@ def sortResults
   today = "#{date.year}-#{month}-#{day}"
   today_db = "#{date.year}_#{month}_#{day}"
   resultsFile = File.join(Dir.pwd, "logs", "#{today}.txt")
-  count = 1
+  rank = 1
   File.open(resultsFile, "w") do |f|
     File.read("withArticles.txt")
       .split("\n")
-      .first(50).each { |entry|
+      .first(50).each do |entry|
         f.write(entry + "\n")
         db.add_ranking(
           today_db,
           JSON.parse(entry)["name"],
           JSON.parse(entry)["article_title"],
           JSON.parse(entry)["article_url"],
-          count
+          rank
         )
-        count += 1
-      }
+        rank += 1
+      end
   end
 
   # Push the results to the repo and update the site
@@ -226,7 +226,7 @@ def getArticle(r, top50)
       information["facebook"] = fpage
       information["twitter"] = tpage
       information["wikipedia"] = wpage
-      information["rank"] = get_ranking(ranking, search)
+      # information["rank"] = get_ranking(ranking, search)
       to_file = information.to_json
       f.write("#{to_file}\n")
       # So we do not exceed the rate limit and Faroo doesn't flip

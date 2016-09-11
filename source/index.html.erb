@@ -14,27 +14,22 @@ title: peopole
 <div id="box">
   <!-- Helper methods found in config.rb -->
   <%
-    date = Time.new
-    todayResults = createDate(date.day, date.month, date.year)
-    yesterday = date - (60 * 60 * 24)
-    yesterdayResults = createDate(yesterday.day, yesterday.month, yesterday.year)
-    if File.exist?(todayResults)
-      f = File.open(todayResults, "r")
-    else
-      f = File.open(yesterdayResults, "r")
-    end
-    top50 = f.read().split("\n");
-    count = 0
-    for entry in top50 do
-      count += 1
-      info = JSON.parse(entry)
-      name = info["name"]
-      title = info["article_title"]
-      link = info["article_url"]
-      facebook = info["facebook"]
-      twitter = info["twitter"]
-      wikipedia = info["wikipedia"]
-      rank = info["rank"]
+    count = 1
+    # TODO do this in db
+    date = Date.today
+    day = formatDate(date.day)
+    month = formatDate(date.month)
+    y_date = Date.today - 1
+    y_date_day = formatDate(y_date.day)
+    y_date_month = formatDate(y_date.month)
+    today_db = "#{date.year}_#{month}_#{day}"
+    yesterday_db = "#{y_date.year}_#{y_date_month}_#{y_date_day}"
+    while count <= 50 do
+      arr = get_person_today_helper(today_db, count)
+      name, title, link = arr[0][0], arr[0][1], arr[0][2]
+      rank = get_relative_rank_helper(name, today_db, yesterday_db)
+      arr = get_person_links_helper(name)
+      facebook, twitter, wikipedia = arr[0], arr[1], arr[2]
       if title.length > 70
         title = "#{title[0, 70]}..."
       end
@@ -51,7 +46,6 @@ title: peopole
         status = "▬"
         css = ""
       end
-
   %>
       <div class="list-element">
         <span class="list-name"> <%= count %>. <%= name %> </span>
@@ -70,7 +64,7 @@ title: peopole
           <a>
         </div>
       </div>
-  <% end %>
+  <% count +=1; end %>
 
 </div>
 </a>

@@ -40,8 +40,25 @@ configure :development do
   activate :livereload
 end
 
+require_relative 'dirtybit.rb'
 # Methods defined in the helpers block are available in templates
 helpers do
+
+  def get_person_today_helper(day, rank)
+    db = DB.new
+    return db.get_person_today(day, rank)
+  end
+
+  def get_relative_rank_helper(name, today, yesterday)
+    db = DB.new
+    return db.get_relative_rank(name, today, yesterday)
+  end
+
+  def get_person_links_helper(name)
+    db = DB.new
+    return db.get_person_links(name)
+  end
+
    def createDate(day, month, year)
      day = formatDate(day)
      month = formatDate(month)
