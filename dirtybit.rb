@@ -50,7 +50,7 @@ class DB
       'where day = ? and name = ?;', @today, name)
     yesterday_rank = @db.execute('select rank from ranking '\
       'where day = ? and name = ?;', @yesterday, name)
-    return 'NEW', 'green' if yesterday_rank.empty
+    return 'NEW', 'green' if yesterday_rank.empty?
     get_rank_and_style(yesterday_rank[0].first - today_rank[0].first)
   end
 
