@@ -4,6 +4,7 @@
 
 # Using the Redd API wrapper for reddit
 require 'date'
+require 'fileutils'
 require 'json'
 require 'net/http'
 require 'redd'
@@ -80,7 +81,9 @@ def sortResults
       rank += 1
     end
   # The working directory needs to be clean for this to work!
-  system("bundle exec rake publish")
+  system('bundle exec rake publish')
+  # Delete after publish so that it works next time
+  system('rm -rf build')
 end
 
 
