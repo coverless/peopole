@@ -64,4 +64,13 @@ class DB
     @db.execute('select name, title, url from ranking '\
       'where day = ? and rank = ?;', @today, rank)
   end
+
+  def ignore_person_profile(name, profile)
+    @db.execute("update people set facebook=''"\
+    "where name=(?);", name) if profile == 'facebook'
+    @db.execute("update people set twitter=''"\
+    "where name=(?);", name) if profile == 'twitter'
+    @db.execute("update people set wikipedia=''"\
+    "where name=(?);", name) if profile == 'wikipedia'
+  end
 end

@@ -386,6 +386,9 @@ elsif ARGV[0] == "-c"
   cleanUpPeople
 elsif ARGV[0] == "-d"
   deletePeople
+elsif ARGV[0] == "-ignore"
+  db = DB.new
+  db.ignore_person_profile(ARGV[1], ARGV[2])
 elsif ARGV[0] == "-force"
   getArticle(getRedditAPI(), [])
 else
