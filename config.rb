@@ -43,33 +43,32 @@ end
 require_relative 'dirtybit.rb'
 # Methods defined in the helpers block are available in templates
 helpers do
-
   def get_person_today_helper(rank)
     db = DB.new
-    return db.get_person_today(rank)
+    db.get_person_today(rank)
   end
 
   def get_relative_rank_helper(name)
     db = DB.new
-    return db.get_relative_rank(name)
+    db.get_relative_rank(name)
   end
 
   def get_person_links_helper(name)
     db = DB.new
-    return db.get_person_links(name)
+    db.get_person_links(name)
   end
 
-   def createDate(day, month, year)
-     day = formatDate(day)
-     month = formatDate(month)
-     # What is better Ruby, implicit or return?
-     return Dir.pwd + "/logs/#{year}-#{month}-#{day}.txt"
-   end
+  def create_date(day, month, year)
+    day = formatDate(day)
+    month = formatDate(month)
+    # What is better Ruby, implicit or return?
+    "#{Dir.pwd}/logs/#{year}-#{month}-#{day}.txt"
+  end
 
-   # Duplicated from judge.rb
-   def formatDate(date)
-     date < 10 ? "0#{date}" : date
-   end
+  # Duplicated from judge.rb
+  def format_date(date)
+    date < 10 ? "0#{date}" : date
+  end
 end
 
 set :css_dir, 'stylesheets'
