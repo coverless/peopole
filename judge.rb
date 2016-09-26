@@ -71,7 +71,6 @@ def sortResults
   File.read("withArticles.txt")
     .split("\n")
     .first(50).each do |entry|
-      # f.write(entry + "\n")
       db.add_ranking(
         JSON.parse(entry)["name"],
         JSON.parse(entry)["article_title"],
@@ -168,6 +167,7 @@ def getArticle(r, top50)
       res = JSON.parse(Net::HTTP.get(uri))
       # TODO -> clean this up, and if there are no results this will break
       name = getNames(search)
+      title = ""
       for a in res["results"]
         for n in name
           if n.match(a["title"])
@@ -176,7 +176,7 @@ def getArticle(r, top50)
             break
           end
         end
-        if title
+        if !title.empty?
           break
         end
       end
@@ -184,7 +184,7 @@ def getArticle(r, top50)
       position += 1
       information = {}
       information["name"] = search
-      information["article_title"] = title
+      information["article_title"] = replace_bad_characters(title)
       information["article_url"] = article
       # Later on, we should search for the ones that don't have values
       # Right now we only search if none of them are populated
@@ -331,6 +331,12 @@ def checkApiUsage(start, endTime)
   end
   # Reset the 'counting' values
   return 0, Time.now
+end
+
+def replace_bad_characters(str)
+  replace = [ ['—', '-'], ['’', "'"], ['‘',"'"] ]
+  replace.each { |chars| str.gsub!(chars[0], chars[1]) }
+  return str
 end
 
 # Parses the returned JSON and only increments the count
