@@ -248,41 +248,6 @@ def addPeople
 end
 
 ##############################################
-#            CLEAN UP PEOPLE                 #
-# => Deletes anyone who hasn't been          #
-# mentioned in one month                     #
-##############################################
-# TODO - We may never use this
-def cleanUpPeople
-  # people is the array of all people in the file
-  people = getPeople()
-  r = getRedditAPI()
-  madeTheCut = []
-  c = File.open("cut.txt", "w")
-  start = Time.now; reqCount = 0
-  for person in people do
-    begin
-      res = JSON.parse(r.search("#{person}", :t => "month").to_json)
-      res.count.zero? ? (puts "#{person} has NOT made the cut!";c.write("#{person}\n");next)
-       : (puts "#{person} has MADE the cut!";madeTheCut.push(person))
-      # Make sure we do not do > REDDIT_API_LIMIT requests per minute
-      # checkApiUsage will sleep if need be
-      if reqCount == REDDIT_API_LIMIT
-        reqCount, start = checkApiUsage(start, endTime)
-      end
-    rescue
-      puts "#{person} failed... pretending they passed"
-      madeTheCut.push(person)
-    end
-  end
-  c.close()
-  # Add the people who have made the cut
-  File.open("people.txt", "w") do |f|
-    madeTheCut.each { |x| f.write("#{x}\n")}
-  end
-end
-
-##############################################
 #              DELETE PEOPLE                 #
 # => Deletes from people.txt (toDelete.txt)  #
 ##############################################
@@ -388,8 +353,6 @@ elsif ARGV[0] == "-g"
   getResults
 elsif ARGV[0] == "-a"
   addPeople
-elsif ARGV[0] == "-c"
-  cleanUpPeople
 elsif ARGV[0] == "-d"
   deletePeople
 elsif ARGV[0] == "-ignore"
@@ -403,6 +366,5 @@ else
   puts "\t-t (sort the results by # of tweets and get the related article)"
   puts "\t-p (sort people.txt alphabetically)"
   puts "\t-a (add people from toAdd.txt)"
-  puts "\t-c (cleanup people with no results in the last month )"
   puts "\t-d (delete people from toDelete.txt)"
 end
