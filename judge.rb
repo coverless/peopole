@@ -299,7 +299,7 @@ def checkApiUsage(start, endTime)
 end
 
 def replace_bad_characters(str)
-  replace = [ ['—', '-'], ['’', "'"], ['‘',"'"] ]
+  replace = [ ['—', '-'], ['–', '-'], ['’', "'"], ['‘',"'"] ]
   replace.each { |chars| str.gsub!(chars[0], chars[1]) }
   return str
 end
