@@ -4,7 +4,7 @@
 
 Curtis Matthias - Lead Designer / Senior Developer
 
-Sebastian Craig - Lead Developer / Software Architect
+Sebastian Craig - Lowly Programmer
 
 #### Elevator Pitch:
 peopole is a brand new way to visualize the news. Typically the average news reader will be presented with news stories which could be about anything, but when looking for current events on peopole the reader will be presented with the most talked about people in the news. By ranking the most talked about people peopole provides the reader with who is important and why they are currently in the spotlight.
