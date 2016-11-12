@@ -6,9 +6,11 @@ gem "middleman-gh-pages"
 
 gem "middleman", "~>3.3.12"
 
+gem 'twitter', '~> 5.16'
+
 gem "redd"
 
-gem "twitter"
+gem 'json', '~> 1.8.3'
 
 gem "wikipedia-client"
 
