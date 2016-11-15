@@ -176,6 +176,7 @@ def get_article(top50)
       # TODO; clean this up, and if there are no results this will break
       name = get_names(search)
       title = ''
+      article = ''
       res['results'].each do |a|
         name.each do |n|
           if n.match(a['title'])
