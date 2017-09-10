@@ -16,10 +16,5 @@ When clicking on any of the people ranked, peopole provides the user with the to
 
 Every day when a new list of people is generated the user will see their ranking compared to yesterday's ranking providing a "power ranking" feel.
 
-#### Implementation:
-We use [Middleman](https://middlemanapp.com/) to build the [live site](https://coverless.github.io/peopole)
-
-Relevant articles are found by using the [Faroo Web Search API](http://www.faroo.com/)
-
 ##### Contact us
 Send us angry hate mail at coverless.info@gmail.com
