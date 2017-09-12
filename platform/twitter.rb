@@ -23,7 +23,7 @@ module Platform
     # This is wrapped in something to check the rate limiting
     # It's not the prettiest but should stop us from breaking
     def account_for(person)
-      client.user_search(person).find(&:verified?).uri.to_s
+      client.user_search(person).find(&:verified?)&.uri.to_s
     rescue ::Twitter::Error::TooManyRequests => error
       puts 'Too many requests for twitter, sleeping for a bit...'
       sleep(error.rate_limit.reset_in + 1)
