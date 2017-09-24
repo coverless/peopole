@@ -1,0 +1,5 @@
+<ul>
+  <li class="list-element" *ngFor="let person of list; let i = index" [attr.data-index]="i">
+    <p class="list-name">{{i+1}}. {{ person.name }}</p>
+  </li>
+</ul>
