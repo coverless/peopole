@@ -33,7 +33,14 @@ module Platform
     def count_for(person)
       total_count = 0
       page_number = 0
-      results = client.search(person, result_type: :recent, count: 100)
+
+      begin
+        results = client.search(person, result_type: :recent, count: 100)
+      rescue ::Twitter::Error::TooManyRequests => error
+        handle_rate_limit(error)
+        retry
+      end
+
       while results.attrs[:statuses].count.positive? && page_number < MAX_PAGES
         statuses = results.attrs[:statuses]
         total_count += statuses.count
@@ -43,10 +50,7 @@ module Platform
             person, result_type: :recent, count: 100, max_id: min_id
           )
         rescue ::Twitter::Error::TooManyRequests => error
-          # This isn't great because what if the rate limiting breaks in
-          # the first request of this method?
-          puts 'Too many requests for twitter, sleeping for a bit...'
-          sleep(error.rate_limit.reset_in + 1)
+          handle_rate_limit(error)
           retry
         end
         page_number += 1
@@ -56,6 +60,11 @@ module Platform
     end
 
     private
+
+    def handle_rate_limit(error)
+      puts 'Too many requests for twitter, sleeping for a bit...'
+      sleep(error.rate_limit.reset_in + 1)
+    end
 
     def setup_twitter
       values = []
